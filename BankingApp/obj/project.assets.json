@@ -4442,23 +4442,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\manish.mishra\\.nuget\\packages\\": {},
+    "C:\\Users\\edwin.joseph\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\BankingApp.csproj",
+      "projectUniqueName": "D:\\BankingPayments\\BankingApp\\BankingApp\\BankingApp.csproj",
       "projectName": "BankingApp",
-      "projectPath": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\BankingApp.csproj",
-      "packagesPath": "C:\\Users\\manish.mishra\\.nuget\\packages\\",
-      "outputPath": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\obj\\",
+      "projectPath": "D:\\BankingPayments\\BankingApp\\BankingApp\\BankingApp.csproj",
+      "packagesPath": "C:\\Users\\edwin.joseph\\.nuget\\packages\\",
+      "outputPath": "D:\\BankingPayments\\BankingApp\\BankingApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\manish.mishra\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\edwin.joseph\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

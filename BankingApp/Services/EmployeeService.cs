@@ -22,13 +22,14 @@ namespace BankingApp.Services
         {
             return _employeeRepository.Add(employee);
         }
-        Employee IEmployeeService.UpdateEmployee(Employee employee)
+        Employee IEmployeeService.UpdateEmployee(int id ,Employee employee)
         {
             return _employeeRepository.Update(employee);
         }
-        void IEmployeeService.DeleteEmployee(int id)
+        bool IEmployeeService.DeleteEmployee(int id)
         {
             _employeeRepository.Delete(id);
+            return false;
         }
     }
 }

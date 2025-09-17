@@ -8,6 +8,6 @@ namespace BankingApp.Repositories
         Client GetById(int id);
         Client Add(Client Client);
         Client Update(Client Client);
-        void Delete(int id);
+        bool Delete(int id);
     }
 }

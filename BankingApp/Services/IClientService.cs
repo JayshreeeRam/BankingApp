@@ -7,7 +7,7 @@ namespace BankingApp.Services
         IEnumerable<Client> GetAll();
         Client GetById(int id);
         Client Add(Client Client);
-        Client Update(Client Client);
-        void Delete(int id);
+        Client Update( int id ,Client client);
+        bool Delete(int id);
     }
 }

@@ -16,9 +16,14 @@ namespace BankingApp.Services
         {
             return _ClientRepository.Add(Client);
         }
-        public void Delete(int id)
+         public bool Delete(int id)
         {
-            _ClientRepository.Delete(id);
+            var client = _ClientRepository.GetById(id);
+            if (client == null)
+              return false;
+  
+            _ClientRepository.Delete(id); // this returns void
+            return true;
         }
         public IEnumerable<Client> GetAll()
         {
@@ -28,7 +33,7 @@ namespace BankingApp.Services
         {
             return _ClientRepository.GetById(id);
         }
-        public Client Update(Client Client)
+        public Client Update(int id ,Client Client)
         {
             return _ClientRepository.Update(Client);
         }

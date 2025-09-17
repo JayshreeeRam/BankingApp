@@ -144,3 +144,15 @@ D:\Swabhav\Capstone Project\BankingApp\BankingApp\obj\Debug\net8.0\refint\Bankin
 D:\Swabhav\Capstone Project\BankingApp\BankingApp\obj\Debug\net8.0\BankingApp.pdb
 D:\Swabhav\Capstone Project\BankingApp\BankingApp\obj\Debug\net8.0\BankingApp.genruntimeconfig.cache
 D:\Swabhav\Capstone Project\BankingApp\BankingApp\obj\Debug\net8.0\ref\BankingApp.dll
+D:\BankingPayments\BankingApp\BankingApp\obj\Debug\net8.0\BankingApp.csproj.AssemblyReference.cache
+D:\BankingPayments\BankingApp\BankingApp\obj\Debug\net8.0\rpswa.dswa.cache.json
+D:\BankingPayments\BankingApp\BankingApp\obj\Debug\net8.0\BankingApp.GeneratedMSBuildEditorConfig.editorconfig
+D:\BankingPayments\BankingApp\BankingApp\obj\Debug\net8.0\BankingApp.AssemblyInfoInputs.cache
+D:\BankingPayments\BankingApp\BankingApp\obj\Debug\net8.0\BankingApp.AssemblyInfo.cs
+D:\BankingPayments\BankingApp\BankingApp\obj\Debug\net8.0\BankingApp.csproj.CoreCompileInputs.cache
+D:\BankingPayments\BankingApp\BankingApp\obj\Debug\net8.0\BankingApp.MvcApplicationPartsAssemblyInfo.cs
+D:\BankingPayments\BankingApp\BankingApp\obj\Debug\net8.0\BankingApp.MvcApplicationPartsAssemblyInfo.cache
+D:\BankingPayments\BankingApp\BankingApp\obj\Debug\net8.0\BankingApp.sourcelink.json
+D:\BankingPayments\BankingApp\BankingApp\obj\Debug\net8.0\BankingApp.dll
+D:\BankingPayments\BankingApp\BankingApp\obj\Debug\net8.0\refint\BankingApp.dll
+D:\BankingPayments\BankingApp\BankingApp\obj\Debug\net8.0\BankingApp.pdb
