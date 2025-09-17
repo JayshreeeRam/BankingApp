@@ -2,51 +2,55 @@
 
 namespace BankingApp.Repositories
 {
-    public class ClientRepository: IClientRepository
+    public class ClientRepository : IClientRepository
     {
         private readonly BankingContext _context;
-        
+
         public ClientRepository(BankingContext context)
         {
             _context = context;
         }
 
-
-        Client IClientRepository.Add(Client Client)
-        {
-            _context.Clients.Add(Client);
-            _context.SaveChanges();
-            return Client;
-        }
-        void IClientRepository.Delete(int id)
-        {
-            var Client = _context.Clients.Find(id);
-            if (Client != null)
-            {
-                _context.Clients.Remove(Client);
-                _context.SaveChanges();
-            }
-        }
-        IEnumerable<Client> IClientRepository.GetAll()
+        public IEnumerable<Client> GetAll()
         {
             return _context.Clients.ToList();
         }
-        Client IClientRepository.GetById(int id)
+
+        public Client GetById(int id)
         {
             return _context.Clients.Find(id);
         }
-        Client IClientRepository.Update(Client Client)
+
+        public Client Add(Client client)
         {
-            var existingClient = _context.Clients.Find(Client.ClientId);
-            if (existingClient != null)
-            {
-                existingClient.Address= Client.Address;
-                _context.SaveChanges();
-            }
-                return existingClient;
-          
-               
+            _context.Clients.Add(client);
+            _context.SaveChanges();
+            return client;
         }
 
- }
+        public Client Update(int id, Client client)
+        {
+            var existingClient = _context.Clients.Find(id);
+            if (existingClient != null)
+            {
+                existingClient.Name = client.Name;
+                existingClient.Address = client.Address;
+                // Add other fields if you have them
+                _context.SaveChanges();
+            }
+            return existingClient;
+        }
+
+        public bool Delete(int id)
+        {
+            var client = _context.Clients.Find(id);
+            if (client != null)
+            {
+                _context.Clients.Remove(client);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+    }
 }

@@ -1,0 +1,726 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Swabhav\\Capstone Project\\BankingApp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\repositories\\employeerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\repositories\\employeerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\models\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\models\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\models\\document.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\models\\document.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\repositories\\clientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\repositories\\clientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\repositories\\transactionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\repositories\\transactionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\services\\transactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\services\\transactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\dtos\\updatetransactiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\dtos\\updatetransactiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\dtos\\registertransactiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\dtos\\registertransactiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\dtos\\transactiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\dtos\\transactiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\services\\itransactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\services\\itransactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\repositories\\itransactionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\repositories\\itransactionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\models\\transaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\models\\transaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\controllers\\clientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\controllers\\clientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\services\\clientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\services\\clientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\services\\iclientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\services\\iclientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\repositories\\iclientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\repositories\\iclientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\repositories\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\repositories\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\services\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\services\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\services\\salarydisbursementservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\services\\salarydisbursementservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\repositories\\salarydisbursementrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\repositories\\salarydisbursementrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\enum\\documenttype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\enum\\documenttype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\models\\report.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\models\\report.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\models\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\models\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\enum\\reporttype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\enum\\reporttype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\models\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\models\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\models\\beneficiary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\models\\beneficiary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\models\\bank.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\models\\bank.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\repositories\\ipaymentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\repositories\\ipaymentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\services\\paymentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\services\\paymentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\repositories\\paymentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\repositories\\paymentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\services\\ipaymentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\services\\ipaymentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\services\\beneficiaryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\services\\beneficiaryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\services\\employeeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\services\\employeeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\services\\iemployeeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\services\\iemployeeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|d:\\swabhav\\capstone project\\bankingapp\\bankingapp\\repositories\\iemployeerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B34E3723-79A6-4323-9EBC-9C35CC163B16}|BankingApp\\BankingApp.csproj|solutionrelative:bankingapp\\repositories\\iemployeerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Program.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Program.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Program.cs",
+              "RelativeToolTip": "BankingApp\\Program.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAASwBcAAABdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-15T17:30:33.994Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\appsettings.json",
+              "RelativeDocumentMoniker": "BankingApp\\appsettings.json",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\appsettings.json",
+              "RelativeToolTip": "BankingApp\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAACWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-09-15T17:31:14.518Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Client.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Models\\Client.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Models\\Client.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Models\\Client.cs",
+              "RelativeToolTip": "BankingApp\\Models\\Client.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAYwC8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T09:35:52.884Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Document.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Models\\Document.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Models\\Document.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Models\\Document.cs",
+              "RelativeToolTip": "BankingApp\\Models\\Document.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAQwBcAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T17:32:46.314Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "EmployeeRepository.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Repositories\\EmployeeRepository.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Repositories\\EmployeeRepository.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Repositories\\EmployeeRepository.cs",
+              "RelativeToolTip": "BankingApp\\Repositories\\EmployeeRepository.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAvwBAAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-15T18:21:59.869Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "TransactionDto.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\DTOs\\TransactionDto.cs",
+              "RelativeDocumentMoniker": "BankingApp\\DTOs\\TransactionDto.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\DTOs\\TransactionDto.cs",
+              "RelativeToolTip": "BankingApp\\DTOs\\TransactionDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T18:19:29.105Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Data\\AppDbContext.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "BankingApp\\Data\\AppDbContext.cs",
+              "ViewState": "AgIAAG8AAAAAAAAAAAAAAFYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-15T17:32:47.233Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ClientRepository.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Repositories\\ClientRepository.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Repositories\\ClientRepository.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Repositories\\ClientRepository.cs",
+              "RelativeToolTip": "BankingApp\\Repositories\\ClientRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T05:36:12.456Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "TransactionRepository.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Repositories\\TransactionRepository.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Repositories\\TransactionRepository.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Repositories\\TransactionRepository.cs",
+              "RelativeToolTip": "BankingApp\\Repositories\\TransactionRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T10:33:42.51Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "TransactionService.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Services\\TransactionService.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Services\\TransactionService.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Services\\TransactionService.cs",
+              "RelativeToolTip": "BankingApp\\Services\\TransactionService.cs",
+              "ViewState": "AgIAAHgAAAAAAAAAAAAUwI0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T10:58:34.563Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "RegisterTransactionDto.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\DTOs\\RegisterTransactionDto.cs",
+              "RelativeDocumentMoniker": "BankingApp\\DTOs\\RegisterTransactionDto.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\DTOs\\RegisterTransactionDto.cs",
+              "RelativeToolTip": "BankingApp\\DTOs\\RegisterTransactionDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T18:19:54.243Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ITransactionRepository.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Repositories\\ITransactionRepository.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Repositories\\ITransactionRepository.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Repositories\\ITransactionRepository.cs",
+              "RelativeToolTip": "BankingApp\\Repositories\\ITransactionRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T18:16:46.311Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "UpdateTransactionDto.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\DTOs\\UpdateTransactionDto.cs",
+              "RelativeDocumentMoniker": "BankingApp\\DTOs\\UpdateTransactionDto.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\DTOs\\UpdateTransactionDto.cs",
+              "RelativeToolTip": "BankingApp\\DTOs\\UpdateTransactionDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T18:20:15.535Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Transaction.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Models\\Transaction.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Models\\Transaction.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Models\\Transaction.cs",
+              "RelativeToolTip": "BankingApp\\Models\\Transaction.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAgwBsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T10:57:18.39Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "IClientRepository.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Repositories\\IClientRepository.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Repositories\\IClientRepository.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Repositories\\IClientRepository.cs",
+              "RelativeToolTip": "BankingApp\\Repositories\\IClientRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T05:36:24.564Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ITransactionService.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Services\\ITransactionService.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Services\\ITransactionService.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Services\\ITransactionService.cs",
+              "RelativeToolTip": "BankingApp\\Services\\ITransactionService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T18:17:45.351Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "User.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Models\\User.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Models\\User.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Models\\User.cs",
+              "RelativeToolTip": "BankingApp\\Models\\User.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAswCIAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-15T17:51:25.112Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Controllers\\UserController.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Controllers\\UserController.cs",
+              "RelativeToolTip": "BankingApp\\Controllers\\UserController.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAADwvxYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T17:43:11.48Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ClientController.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Controllers\\ClientController.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Controllers\\ClientController.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Controllers\\ClientController.cs",
+              "RelativeToolTip": "BankingApp\\Controllers\\ClientController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T18:00:19.07Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "IClientService.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Services\\IClientService.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Services\\IClientService.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Services\\IClientService.cs",
+              "RelativeToolTip": "BankingApp\\Services\\IClientService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T17:59:48.158Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ClientService.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Services\\ClientService.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Services\\ClientService.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Services\\ClientService.cs",
+              "RelativeToolTip": "BankingApp\\Services\\ClientService.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAADwvygAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T18:00:02.82Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Repositories\\UserRepository.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Repositories\\UserRepository.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Repositories\\UserRepository.cs",
+              "RelativeToolTip": "BankingApp\\Repositories\\UserRepository.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAUwDcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-15T17:48:36.143Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "IUserService.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Services\\IUserService.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Services\\IUserService.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Services\\IUserService.cs",
+              "RelativeToolTip": "BankingApp\\Services\\IUserService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-15T18:06:12.117Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "IUserRepository.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Repositories\\IUserRepository.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Repositories\\IUserRepository.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Repositories\\IUserRepository.cs",
+              "RelativeToolTip": "BankingApp\\Repositories\\IUserRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-15T17:48:49.027Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Services\\UserService.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Services\\UserService.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Services\\UserService.cs",
+              "RelativeToolTip": "BankingApp\\Services\\UserService.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAADwvyEAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-15T18:05:54.106Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "SalaryDisbursementRepository.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Repositories\\SalaryDisbursementRepository.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Repositories\\SalaryDisbursementRepository.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Repositories\\SalaryDisbursementRepository.cs",
+              "RelativeToolTip": "BankingApp\\Repositories\\SalaryDisbursementRepository.cs",
+              "ViewState": "AgIAADIAAAAAAAAAAAA9wA4AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T09:13:45.107Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "SalaryDisbursementService.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Services\\SalaryDisbursementService.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Services\\SalaryDisbursementService.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Services\\SalaryDisbursementService.cs",
+              "RelativeToolTip": "BankingApp\\Services\\SalaryDisbursementService.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAgwCIAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T11:02:35.107Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "DocumentType.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Enum\\DocumentType.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Enum\\DocumentType.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Enum\\DocumentType.cs",
+              "RelativeToolTip": "BankingApp\\Enum\\DocumentType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T17:40:58.247Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Report.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Models\\Report.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Models\\Report.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Models\\Report.cs",
+              "RelativeToolTip": "BankingApp\\Models\\Report.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAAAAwAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T17:32:54.579Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "Payment.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Models\\Payment.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Models\\Payment.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Models\\Payment.cs",
+              "RelativeToolTip": "BankingApp\\Models\\Payment.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAA3wBgAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T08:58:59.234Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "ReportType.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Enum\\ReportType.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Enum\\ReportType.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Enum\\ReportType.cs",
+              "RelativeToolTip": "BankingApp\\Enum\\ReportType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T17:37:01.702Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "Beneficiary.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Models\\Beneficiary.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Models\\Beneficiary.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Models\\Beneficiary.cs",
+              "RelativeToolTip": "BankingApp\\Models\\Beneficiary.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAYwBIAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T09:12:57.065Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "Bank.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Models\\Bank.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Models\\Bank.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Models\\Bank.cs",
+              "RelativeToolTip": "BankingApp\\Models\\Bank.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAxwBMAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T10:09:06.148Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "Account.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Models\\Account.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Models\\Account.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Models\\Account.cs",
+              "RelativeToolTip": "BankingApp\\Models\\Account.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T11:01:09.359Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "IPaymentRepository.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Repositories\\IPaymentRepository.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Repositories\\IPaymentRepository.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Repositories\\IPaymentRepository.cs",
+              "RelativeToolTip": "BankingApp\\Repositories\\IPaymentRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T05:45:14.832Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "PaymentService.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Services\\PaymentService.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Services\\PaymentService.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Services\\PaymentService.cs",
+              "RelativeToolTip": "BankingApp\\Services\\PaymentService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T05:46:07.827Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "PaymentRepository.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Repositories\\PaymentRepository.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Repositories\\PaymentRepository.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Repositories\\PaymentRepository.cs",
+              "RelativeToolTip": "BankingApp\\Repositories\\PaymentRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T05:45:04.453Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "IPaymentService.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Services\\IPaymentService.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Services\\IPaymentService.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Services\\IPaymentService.cs",
+              "RelativeToolTip": "BankingApp\\Services\\IPaymentService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T05:46:20.244Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "BeneficiaryService.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Services\\BeneficiaryService.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Services\\BeneficiaryService.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Services\\BeneficiaryService.cs",
+              "RelativeToolTip": "BankingApp\\Services\\BeneficiaryService.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAAACIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T05:42:56.353Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "EmployeeService.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Services\\EmployeeService.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Services\\EmployeeService.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Services\\EmployeeService.cs",
+              "RelativeToolTip": "BankingApp\\Services\\EmployeeService.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAxwA4AAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-15T18:22:38.856Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "IEmployeeService.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Services\\IEmployeeService.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Services\\IEmployeeService.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Services\\IEmployeeService.cs",
+              "RelativeToolTip": "BankingApp\\Services\\IEmployeeService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-15T18:22:56.49Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "IEmployeeRepository.cs",
+              "DocumentMoniker": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Repositories\\IEmployeeRepository.cs",
+              "RelativeDocumentMoniker": "BankingApp\\Repositories\\IEmployeeRepository.cs",
+              "ToolTip": "D:\\Swabhav\\Capstone Project\\BankingApp\\BankingApp\\Repositories\\IEmployeeRepository.cs",
+              "RelativeToolTip": "BankingApp\\Repositories\\IEmployeeRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-15T18:22:26.092Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

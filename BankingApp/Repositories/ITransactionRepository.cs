@@ -1,14 +1,13 @@
 ﻿using BankingApp.Models;
 
-namespace BankingApp.Repositories
+namespace BankingApp.Repository
 {
     public interface ITransactionRepository
     {
-        List<Transaction> GetAll();
+        Transaction? GetById(int id);
+        IEnumerable<Transaction> GetByAccountId(int accountId);
         Transaction Add(Transaction transaction);
-        Transaction? Update(int id, Transaction transaction);
-        bool Delete(int id);
-        Transaction? Find(int id);
-        List<Transaction> GetByAccount(int accountId);
+        void Update(Transaction transaction);
+        void SoftDelete(Transaction transaction);
     }
 }

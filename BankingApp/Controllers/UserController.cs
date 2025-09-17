@@ -8,23 +8,23 @@ namespace BankingApp.Controllers
     [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly IUserService _service;
+        private readonly IUserService _userService;
 
-        public UserController(IUserService service)
+        public UserController(IUserService userService)
         {
-            _service = service;
+            _userService = userService;
         }
 
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Ok(_service.GetAllUsers());
+            return Ok(_userService.GetAllUsers());
         }
 
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var user = _service.GetUserById(id);
+            var user = _userService.GetUserById(id);
             if (user == null) return NotFound();
             return Ok(user);
         }
@@ -32,22 +32,22 @@ namespace BankingApp.Controllers
         [HttpPost]
         public IActionResult Create(User user)
         {
-            var newUser = _service.CreateUser(user);
+            var newUser = _userService.CreateUser(user);
             return CreatedAtAction(nameof(GetById), new { id = newUser.UserId }, newUser);
         }
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, User user)
         {
-            var updated = _service.UpdateUser(id, user);
-            if (updated == null) return NotFound();
-            return Ok(updated);
+            var updatedUser = _userService.UpdateUser(id, user);
+            if (updatedUser == null) return NotFound();
+            return Ok(updatedUser);
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var deleted = _service.DeleteUser(id);
+            var deleted = _userService.DeleteUser(id);
             if (!deleted) return NotFound();
             return NoContent();
         }

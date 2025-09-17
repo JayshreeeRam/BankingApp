@@ -6,8 +6,8 @@ namespace BankingApp.Repositories
     {
         IEnumerable<Client> GetAll();
         Client GetById(int id);
-        Client Add(Client Client);
-        Client Update(Client Client);
+        Client Add(Client client);
+        Client Update(int id, Client client);
         bool Delete(int id);
     }
 }

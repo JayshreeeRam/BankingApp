@@ -6,9 +6,9 @@ namespace BankingApp.Repositories
     {
         IEnumerable<User> GetAll();
         User GetById(int id);
-        User Add(User User);
-        User Update(User User);
-        void Delete(int id);
+        User Add(User user);
+        User Update(int id, User user);
+        bool Delete(int id);
 
 
 

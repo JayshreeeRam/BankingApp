@@ -4,10 +4,10 @@ namespace BankingApp.Services
 {
     public interface IClientService
     {
-        IEnumerable<Client> GetAll();
-        Client GetById(int id);
-        Client Add(Client Client);
-        Client Update( int id ,Client client);
-        bool Delete(int id);
+        IEnumerable<Client> GetAllClients();
+        Client GetClientById(int id);
+        Client CreateClient(Client client);
+        Client UpdateClient(int id, Client client);
+        bool DeleteClient(int id);
     }
 }

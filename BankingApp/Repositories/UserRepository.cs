@@ -18,14 +18,16 @@ namespace BankingApp.Repositories
             return User;
         }
 
-        void IUserRepository.Delete(int id)
+        bool IUserRepository.Delete(int id)
         {
             var user = _context.Users.Find(id);
             if (user != null)
             {
                 _context.Users.Remove(user);
                 _context.SaveChanges();
+                return true;
             }
+            return false;
         }
         IEnumerable<User> IUserRepository.GetAll()
         {
@@ -35,9 +37,9 @@ namespace BankingApp.Repositories
         {
             return _context.Users.Find(id);
         }
-        User IUserRepository.Update(User User)
+        User IUserRepository.Update(int id,User User)
         {
-            var existingUser = _context.Users.Find(User.UserId);
+            var existingUser = _context.Users.Find(id);
             if (existingUser != null)
             {
                 existingUser.Username = User.Username;

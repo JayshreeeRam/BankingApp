@@ -3,7 +3,7 @@ using BankingApp.Repositories;
 
 namespace BankingApp.Services
 {
-    public class UserService:IUserService
+    public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
         public UserService(IUserRepository userRepository)
@@ -22,13 +22,14 @@ namespace BankingApp.Services
         {
             return _userRepository.Add(user);
         }
-        public User UpdateUser(User user)
+        public User UpdateUser(int id, User user)
         {
-            return _userRepository.Update(user);
+            return _userRepository.Update(id, user);
         }
-        public void DeleteUser(int id)
+
+        public bool DeleteUser(int id)
         {
-            _userRepository.Delete(id);
+            return _userRepository.Delete(id);
         }
     }
 }

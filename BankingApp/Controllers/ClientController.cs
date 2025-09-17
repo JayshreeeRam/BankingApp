@@ -8,23 +8,23 @@ namespace BankingApp.Controllers
     [Route("api/[controller]")]
     public class ClientController : ControllerBase
     {
-        private readonly IClientService _service;
+        private readonly IClientService _clientService;
 
-        public ClientController(IClientService service)
+        public ClientController(IClientService clientService)
         {
-            _service = service;
+            _clientService = clientService;
         }
 
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Ok(_service.GetAll());
+            return Ok(_clientService.GetAllClients());
         }
 
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var client = _service.GetById(id);
+            var client = _clientService.GetClientById(id);
             if (client == null) return NotFound();
             return Ok(client);
         }
@@ -32,22 +32,22 @@ namespace BankingApp.Controllers
         [HttpPost]
         public IActionResult Create(Client client)
         {
-            var newClient = _service.Add(client);
+            var newClient = _clientService.CreateClient(client);
             return CreatedAtAction(nameof(GetById), new { id = newClient.ClientId }, newClient);
         }
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, Client client)
         {
-            var updated = _service.Update(id, client);
-            if (updated == null) return NotFound();
-            return Ok(updated);
+            var updatedClient = _clientService.UpdateClient(id, client);
+            if (updatedClient == null) return NotFound();
+            return Ok(updatedClient);
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var deleted = _service.Delete(id);
+            var deleted = _clientService.DeleteClient(id);
             if (!deleted) return NotFound();
             return NoContent();
         }

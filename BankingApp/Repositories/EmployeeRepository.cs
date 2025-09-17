@@ -12,7 +12,11 @@ namespace BankingApp.Repositories
         }
         Employee IEmployeeRepository.Add(Employee Employee)
         {
-                _context.Employees.Add(Employee);
+            if (Employee.BankId.HasValue && !_context.Banks.Any(b => b.BankId == Employee.BankId))
+            {
+                throw new InvalidOperationException("The specified BankId does not exist.");
+            }
+            _context.Employees.Add(Employee);
             _context.SaveChanges();
             return Employee;
         }

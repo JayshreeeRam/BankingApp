@@ -1,66 +1,42 @@
-﻿//using BankingApp.Data;
-//using BankingApp.Models;
-//using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Linq;
+using BankingApp.Models;
 
-//namespace BankingApp.Repositories
-//{
-//public class TransactionRepository : ITransactionRepository
-//{
-//    private readonly BankingContext _ctx;
+namespace BankingApp.Repository
+{
+    public class TransactionRepository : ITransactionRepository
+    {
+        private readonly BankingContext _context;
 
-//    public TransactionRepository(BankingContext ctx) => _ctx = ctx;
+        public TransactionRepository(BankingContext context)
+        {
+            _context = context;
+        }
 
-//        public List<Transaction> GetAll()
-//        {
-//            return _ctx.Transaction
-//                .Include(t => t.Account)
-//                .ToList();
-//        }
+        public Transaction? GetById(int id) =>
+            _context.Transactions.FirstOrDefault(t => t.TransactionId == id);
 
-//        public Transaction Add(Transaction transaction)
-//        {
-//            _ctx.Transaction.Add(transaction);
-//            _ctx.SaveChanges();
-//            return transaction;
-//        }
+        public IEnumerable<Transaction> GetByAccountId(int accountId) =>
+            _context.Transactions.Where(t => t.AccountId == accountId).ToList();
 
-//        public Transaction? Update(int id, Transaction transaction)
-//        {
-//            var existing = _ctx.Transaction.Find(id);
-//            if (existing == null) return null;
+        public Transaction Add(Transaction transaction)
+        {
+            _context.Transactions.Add(transaction);
+            _context.SaveChanges();
+            return transaction;
+        }
 
-//            existing.TransactionType = transaction.TransactionType;
-//            existing.TransactionDate = transaction.TransactionDate;
-//            existing.Amount = transaction.Amount;
-//            existing.Status = transaction.Status;
-//            existing.AccountId = transaction.AccountId;
+        public void Update(Transaction transaction)
+        {
+            _context.Transactions.Update(transaction);
+            _context.SaveChanges();
+        }
 
-//            _ctx.SaveChanges();
-//            return existing;
-//        }
-
-//        public bool Delete(int id)
-//        {
-//            var existing = _ctx.Transaction.Find(id);
-//            if (existing == null) return false;
-
-//            _ctx.Transaction.Remove(existing);
-//            _ctx.SaveChanges();
-//            return true;
-//        }
-
-//        public Transaction? Find(int id)
-//        {
-//            return _ctx.Transaction
-//                .Include(t => t.Account)
-//                .FirstOrDefault(t => t.TransactionId == id);
-//        }
-
-//        public List<Transaction> GetByAccount(int accountId)
-//        {
-//            return _ctx.Transaction
-//                .Where(t => t.AccountId == accountId)
-//                .ToList();
-//        }
-//    }
-//}
+        public void SoftDelete(Transaction transaction)
+        {
+            transaction.TransactionStatus = Enums.TransactionStatus.Success; // example soft delete
+            _context.Transactions.Update(transaction);
+            _context.SaveChanges();
+        }
+    }
+}
