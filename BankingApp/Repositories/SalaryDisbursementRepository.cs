@@ -1,65 +1,65 @@
 ﻿
 using BankingApp.Models;
+using BankingApp.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace BankingApp.Repositories
+namespace BankingApp.Repository
 {
     public class SalaryDisbursementRepository : ISalaryDisbursementRepository
     {
-        private readonly BankingContext _ctx;
+        private readonly BankingContext _context;
 
-        public SalaryDisbursementRepository(BankingContext ctx) => _ctx = ctx;
-
-        public List<SalaryDisbursement> GetAll()
+        public SalaryDisbursementRepository(BankingContext context)
         {
-            return _ctx.SalaryDisbursements
-                .Include(s => s.Employee)
-                .ToList();
+            _context = context;
         }
 
-        public SalaryDisbursement Add(SalaryDisbursement disbursement)
+        public IEnumerable<SalaryDisbursement> GetAll()
         {
-            _ctx.SalaryDisbursements.Add(disbursement);
-            _ctx.SaveChanges();
-            return disbursement;
+            return _context.SalaryDisbursements
+                           .Include(s => s.Employee)
+                           .ToList();
         }
 
-        public SalaryDisbursement? Update(int id, SalaryDisbursement disbursement)
+        public SalaryDisbursement? GetById(int id)
         {
-            var existing = _ctx.SalaryDisbursements.Find(id);
-            if (existing == null) return null;
+            return _context.SalaryDisbursements
+                           .Include(s => s.Employee)
+                           .FirstOrDefault(s => s.DisbursementId == id);
+        }
 
-            existing.Amount = disbursement.Amount;
-            existing.Date = disbursement.Date;
-            existing.BatchId = disbursement.BatchId;
-            existing.EmployeeId = disbursement.EmployeeId;
+        public SalaryDisbursement Add(SalaryDisbursement salary)
+        {
+            _context.SalaryDisbursements.Add(salary);
+            _context.SaveChanges();
+            return salary;
+        }
 
-            _ctx.SaveChanges();
+        public SalaryDisbursement Update(int id, SalaryDisbursement salary)
+        {
+            var existing = _context.SalaryDisbursements.Find(id);
+            if (existing == null) return null!;
+
+            existing.EmployeeId = salary.EmployeeId;
+            existing.Amount = salary.Amount;
+            existing.Date = salary.Date;
+            existing.Status = salary.Status;
+            existing.BatchId = salary.BatchId;
+
+            _context.SaveChanges();
             return existing;
         }
 
         public bool Delete(int id)
         {
-            var existing = _ctx.SalaryDisbursements.Find(id);
-            if (existing == null) return false;
+            var salary = _context.SalaryDisbursements.Find(id);
+            if (salary == null) return false;
 
-            _ctx.SalaryDisbursements.Remove(existing);
-            _ctx.SaveChanges();
+            _context.SalaryDisbursements.Remove(salary);
+            _context.SaveChanges();
             return true;
-        }
-
-        public SalaryDisbursement? Find(int id)
-        {
-            return _ctx.SalaryDisbursements
-                .Include(s => s.Employee)
-                .FirstOrDefault(s => s.DisbursementId == id);
-        }
-
-        public List<SalaryDisbursement> GetByEmployee(int employeeId)
-        {
-            return _ctx.SalaryDisbursements
-                .Where(s => s.EmployeeId == employeeId)
-                .ToList();
         }
     }
 }

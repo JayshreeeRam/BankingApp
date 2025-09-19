@@ -1,4 +1,4 @@
-using BankingApp.Models;
+using BankingApp.DTOs;
 using BankingApp.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,46 +8,56 @@ namespace BankingApp.Controllers
     [Route("api/[controller]")]
     public class ClientController : ControllerBase
     {
-        private readonly IClientService _clientService;
+        private readonly IClientService _service;
 
-        public ClientController(IClientService clientService)
+        public ClientController(IClientService service)
         {
-            _clientService = clientService;
+            _service = service;
         }
 
+        // GET: api/client
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Ok(_clientService.GetAllClients());
+            var clients = _service.GetAll();
+            return Ok(clients);
         }
 
+        // GET: api/client/{id}
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var client = _clientService.GetClientById(id);
+            var client = _service.GetById(id);
             if (client == null) return NotFound();
             return Ok(client);
         }
 
+        // POST: api/client
         [HttpPost]
-        public IActionResult Create(Client client)
+        public IActionResult Create([FromBody] CreateClientDto dto)
         {
-            var newClient = _clientService.CreateClient(client);
-            return CreatedAtAction(nameof(GetById), new { id = newClient.ClientId }, newClient);
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var created = _service.Add(dto);
+            return CreatedAtAction(nameof(GetById), new { id = created.ClientId }, created);
         }
 
+        // PUT: api/client/{id}
         [HttpPut("{id}")]
-        public IActionResult Update(int id, Client client)
+        public IActionResult Update(int id, [FromBody] UpdateClientDto dto)
         {
-            var updatedClient = _clientService.UpdateClient(id, client);
-            if (updatedClient == null) return NotFound();
-            return Ok(updatedClient);
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var updated = _service.Update(id, dto);
+            if (updated == null) return NotFound();
+            return Ok(updated);
         }
 
+        // DELETE: api/client/{id}
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var deleted = _clientService.DeleteClient(id);
+            var deleted = _service.Delete(id);
             if (!deleted) return NotFound();
             return NoContent();
         }

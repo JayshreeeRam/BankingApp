@@ -1,34 +1,93 @@
-﻿using BankingApp.Models;
-using BeneficiaryingApp.Repositories;
+﻿using BankingApp.DTOs;
+using BankingApp.Models;
+using BankingApp.Repository;
 
 namespace BankingApp.Services
 {
-    public class BeneficiaryService:IBeneficiaryService
+    public class BeneficiaryService : IBeneficiaryService
     {
-        private readonly IBeneficiaryRepository _beneficiaryRepository;
-        public BeneficiaryService(IBeneficiaryRepository beneficiaryRepository)
+        private readonly IBeneficiaryRepository _repo;
+
+        public BeneficiaryService(IBeneficiaryRepository repo)
         {
-            _beneficiaryRepository = beneficiaryRepository;
+            _repo = repo;
         }
-        public Beneficiary Add(Beneficiary beneficiary)
+
+        public IEnumerable<BeneficiaryDto> GetAll()
         {
-            return _beneficiaryRepository.Add(beneficiary);
+            return _repo.GetAll().Select(b => new BeneficiaryDto
+            {
+                BeneficiaryId = b.BeneficiaryId,
+                BankName = b.BankName,
+                AccountNo = b.AccountNo,
+                IFSCCode = b.IFSCCode!,
+                ClientId = b.ClientId
+            });
         }
-        public void Delete(int id)
+
+        public BeneficiaryDto? GetById(int id)
         {
-            _beneficiaryRepository.Delete(id);
+            var b = _repo.GetById(id);
+            if (b == null) return null;
+
+            return new BeneficiaryDto
+            {
+                BeneficiaryId = b.BeneficiaryId,
+                BankName = b.BankName,
+                AccountNo = b.AccountNo,
+                IFSCCode = b.IFSCCode!,
+                ClientId = b.ClientId
+            };
         }
-        public IEnumerable<Beneficiary> GetAll()
+
+        public BeneficiaryDto Add(BeneficiaryDto dto)
         {
-            return _beneficiaryRepository.GetAll();
+            var beneficiary = new Beneficiary
+            {
+                BankName = dto.BankName,
+                AccountNo = dto.AccountNo,
+                IFSCCode = dto.IFSCCode,
+                ClientId = dto.ClientId
+            };
+
+            var created = _repo.Add(beneficiary);
+
+            return new BeneficiaryDto
+            {
+                BeneficiaryId = created.BeneficiaryId,
+                BankName = created.BankName,
+                AccountNo = created.AccountNo,
+                IFSCCode = created.IFSCCode!,
+                ClientId = created.ClientId
+            };
         }
-        public Beneficiary GetById(int id)
+
+        public BeneficiaryDto? Update(int id, BeneficiaryDto dto)
         {
-            return _beneficiaryRepository.GetById(id);
+            var beneficiary = new Beneficiary
+            {
+                BankName = dto.BankName,
+                AccountNo = dto.AccountNo,
+                IFSCCode = dto.IFSCCode,
+                ClientId = dto.ClientId
+            };
+
+            var updated = _repo.Update(id, beneficiary);
+            if (updated == null) return null;
+
+            return new BeneficiaryDto
+            {
+                BeneficiaryId = updated.BeneficiaryId,
+                BankName = updated.BankName,
+                AccountNo = updated.AccountNo,
+                IFSCCode = updated.IFSCCode!,
+                ClientId = updated.ClientId
+            };
         }
-        public Beneficiary Update(Beneficiary beneficiary)
+
+        public bool Delete(int id)
         {
-            return _beneficiaryRepository.Update(beneficiary);
+            return _repo.Delete(id);
         }
     }
 }

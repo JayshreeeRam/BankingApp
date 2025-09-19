@@ -1,3 +1,4 @@
+using BankingApp.DTOs;
 using BankingApp.Models;
 using BankingApp.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -8,47 +9,51 @@ namespace BankingApp.Controllers
     [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly IUserService _userService;
+        private readonly IUserService _service;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService service)
         {
-            _userService = userService;
+            _service = service;
         }
 
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Ok(_userService.GetAllUsers());
+            return Ok(_service.GetAll());
         }
 
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var user = _userService.GetUserById(id);
+            var user = _service.GetById(id);
             if (user == null) return NotFound();
             return Ok(user);
         }
 
         [HttpPost]
-        public IActionResult Create(User user)
+        public IActionResult Add([FromBody] UserDto dto)
         {
-            var newUser = _userService.CreateUser(user);
-            return CreatedAtAction(nameof(GetById), new { id = newUser.UserId }, newUser);
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var created = _service.Add(dto);
+            return CreatedAtAction(nameof(GetById), new { id = created.UserId }, created);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, User user)
+        public IActionResult Update(int id, [FromBody] UserDto dto)
         {
-            var updatedUser = _userService.UpdateUser(id, user);
-            if (updatedUser == null) return NotFound();
-            return Ok(updatedUser);
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var updated = _service.Update(id, dto);
+            if (updated == null) return NotFound();
+            return Ok(updated);
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var deleted = _userService.DeleteUser(id);
-            if (!deleted) return NotFound();
+            var success = _service.Delete(id);
+            if (!success) return NotFound();
             return NoContent();
         }
     }

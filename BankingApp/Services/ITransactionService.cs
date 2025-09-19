@@ -1,13 +1,16 @@
 ﻿using BankingApp.DTOs;
+using BankingApp.Models;
 
 namespace BankingApp.Services
 {
     public interface ITransactionService
     {
-        TransactionDto Register(RegisterTransactionDto dto);
-        TransactionDto? UpdateTransaction(int id, UpdateTransactionDto dto);
-        bool SoftDeleteTransaction(int id);
+        IEnumerable<TransactionDto> GetAll();
         TransactionDto? GetById(int id);
-        IEnumerable<TransactionDto> GetByAccountId(int accountId);
+        Transaction Add(TransactionDto dto);
+        Transaction? Update(int id, TransactionDto dto);
+        bool Delete(int id);
+        IEnumerable<TransactionDto> GetByAccount(int accountId);
     }
+
 }

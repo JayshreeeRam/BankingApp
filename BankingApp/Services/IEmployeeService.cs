@@ -1,13 +1,13 @@
-﻿using BankingApp.Models;
+﻿using BankingApp.DTOs;
 
 namespace BankingApp.Services
 {
     public interface IEmployeeService
     {
-        IEnumerable<Employee> GetAllEmployees();
-        Employee GetEmployeeById(int id);
-        Employee CreateEmployee(Employee employee);
-        Employee UpdateEmployee(int id ,Employee employee);
-        bool DeleteEmployee(int id);
+        IEnumerable<EmployeeDto> GetAll();
+        EmployeeDto? GetById(int id);
+        EmployeeDto Add(EmployeeDto employeeDto);
+        EmployeeDto Update(int id, EmployeeDto employeeDto);
+        bool Delete(int id);
     }
 }

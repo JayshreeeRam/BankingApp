@@ -1,52 +1,57 @@
-﻿using BankingApp.Models;
-using BeneficiaryingApp.Repositories;
+﻿
+using BankingApp.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace BankingApp.Repositories
+namespace BankingApp.Repository
 {
-    public class BeneficiaryRepository:IBeneficiaryRepository
+    public class BeneficiaryRepository : IBeneficiaryRepository
     {
         private readonly BankingContext _context;
+
         public BeneficiaryRepository(BankingContext context)
         {
             _context = context;
         }
 
-        Beneficiary IBeneficiaryRepository.Add(Beneficiary beneficiary)
+        public IEnumerable<Beneficiary> GetAll()
+        {
+            return _context.Beneficiaries.AsNoTracking().ToList();
+        }
+
+        public Beneficiary? GetById(int id)
+        {
+            return _context.Beneficiaries.Find(id);
+        }
+
+        public Beneficiary Add(Beneficiary beneficiary)
         {
             _context.Beneficiaries.Add(beneficiary);
             _context.SaveChanges();
             return beneficiary;
         }
-        void IBeneficiaryRepository.Delete(int id)
+
+        public Beneficiary Update(int id, Beneficiary beneficiary)
+        {
+            var existing = _context.Beneficiaries.Find(id);
+            if (existing == null) return null!;
+
+            existing.BankName = beneficiary.BankName;
+            existing.AccountNo = beneficiary.AccountNo;
+            existing.IFSCCode = beneficiary.IFSCCode;
+            existing.ClientId = beneficiary.ClientId;
+
+            _context.SaveChanges();
+            return existing;
+        }
+
+        public bool Delete(int id)
         {
             var beneficiary = _context.Beneficiaries.Find(id);
-            if (beneficiary != null)
-            {
-                _context.Beneficiaries.Remove(beneficiary);
-                _context.SaveChanges();
-            }
-        }
-        IEnumerable<Beneficiary> IBeneficiaryRepository.GetAll()
-        {
-            return _context.Beneficiaries.ToList();
-        }
-        Beneficiary IBeneficiaryRepository.GetById(int id)
-        {
-            return _context.Beneficiaries.Find(id);
-        }
-        Beneficiary IBeneficiaryRepository.Update(Beneficiary beneficiary)
-        {
-            var existingBeneficiary = _context.Beneficiaries.Find(beneficiary.BeneficiaryId);
-            if (existingBeneficiary != null)
-            {
-                existingBeneficiary.BankName = beneficiary.BankName;
-                existingBeneficiary.AccountNo = beneficiary.AccountNo;
-                existingBeneficiary.BankName = beneficiary.BankName;
-                existingBeneficiary.IFSCCode = beneficiary.IFSCCode;
-                existingBeneficiary.ClientId = beneficiary.ClientId;
-                _context.SaveChanges();
-            }
-            return existingBeneficiary;
+            if (beneficiary == null) return false;
+
+            _context.Beneficiaries.Remove(beneficiary);
+            _context.SaveChanges();
+            return true;
         }
     }
 }

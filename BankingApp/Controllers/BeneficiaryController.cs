@@ -1,4 +1,4 @@
-using BankingApp.Models;
+using BankingApp.DTOs;
 using BankingApp.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,27 +16,30 @@ namespace BankingApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAll() => Ok(_service.GetAll());
+        public ActionResult<IEnumerable<BeneficiaryDto>> GetAll()
+        {
+            return Ok(_service.GetAll());
+        }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public ActionResult<BeneficiaryDto> GetById(int id)
         {
-            var b = _service.Find(id);
-            if (b == null) return NotFound();
-            return Ok(b);
+            var beneficiary = _service.GetById(id);
+            if (beneficiary == null) return NotFound();
+            return Ok(beneficiary);
         }
 
         [HttpPost]
-        public IActionResult Add(Beneficiary beneficiary)
+        public ActionResult<BeneficiaryDto> Create(BeneficiaryDto dto)
         {
-            var created = _service.Add(beneficiary);
+            var created = _service.Add(dto);
             return CreatedAtAction(nameof(GetById), new { id = created.BeneficiaryId }, created);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, Beneficiary beneficiary)
+        public ActionResult<BeneficiaryDto> Update(int id, BeneficiaryDto dto)
         {
-            var updated = _service.Update(id, beneficiary);
+            var updated = _service.Update(id, dto);
             if (updated == null) return NotFound();
             return Ok(updated);
         }

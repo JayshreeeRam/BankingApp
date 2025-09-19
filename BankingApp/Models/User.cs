@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection.Metadata;
+using System.Text.Json.Serialization;
 using BankingApp.Enums;
 
 namespace BankingApp.Models
@@ -33,8 +34,12 @@ namespace BankingApp.Models
 
 
         // Relationships
-        public ICollection<Client>? Clients { get; set; }
+        // FK → Client (nullable for roles other than Client)
+        //public int ? ClientId { get; set; }
+        //[ForeignKey(nameof(ClientId))]
+        //public Client? Client { get; set; }
         public ICollection<Document>? Documents { get; set; }
+        [JsonIgnore]
         public ICollection<Report>? Reports { get; set; }
 
     }

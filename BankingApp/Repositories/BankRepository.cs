@@ -1,26 +1,25 @@
 ﻿using BankingApp.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace BankingApp.Repositories
+namespace BankingApp.Repository
 {
     public class BankRepository : IBankRepository
     {
         private readonly BankingContext _context;
+
         public BankRepository(BankingContext context)
         {
             _context = context;
         }
+
         public IEnumerable<Bank> GetAll()
         {
-            return _context.Banks.ToList();
+            return _context.Banks.AsNoTracking().ToList();
         }
-        public Bank GetById(int id)
-        {
-            return _context.Banks
-                .Include(b => b.Clients)
-   
-                .FirstOrDefault(b => b.BankId == id);
 
+        public Bank? GetById(int id)
+        {
+            return _context.Banks.Find(id);
         }
 
         public Bank Add(Bank bank)
@@ -29,21 +28,27 @@ namespace BankingApp.Repositories
             _context.SaveChanges();
             return bank;
         }
-        public Bank Update(Bank bank)
+
+        public Bank Update(int id, Bank bank)
         {
-            _context.Banks.Update(bank);
+            var existing = _context.Banks.Find(id);
+            if (existing == null) return null!;
+
+            existing.Name = bank.Name;
+            existing.Address = bank.Address;
+
             _context.SaveChanges();
-            return bank;
+            return existing;
         }
-        public void Delete(int id)
+
+        public bool Delete(int id)
         {
             var bank = _context.Banks.Find(id);
-            if (bank != null)
-            {
-                _context.Banks.Remove(bank);
-                _context.SaveChanges();
-            }
+            if (bank == null) return false;
 
+            _context.Banks.Remove(bank);
+            _context.SaveChanges();
+            return true;
         }
     }
 }

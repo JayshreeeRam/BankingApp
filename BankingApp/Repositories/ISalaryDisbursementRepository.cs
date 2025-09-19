@@ -4,11 +4,11 @@ namespace BankingApp.Repositories
 {
     public interface ISalaryDisbursementRepository
     {
-        List<SalaryDisbursement> GetAll();
-        SalaryDisbursement Add(SalaryDisbursement disbursement);
-        SalaryDisbursement? Update(int id, SalaryDisbursement disbursement);
+        IEnumerable<SalaryDisbursement> GetAll();
+        SalaryDisbursement? GetById(int id);
+        SalaryDisbursement Add(SalaryDisbursement salary);
+        SalaryDisbursement Update(int id, SalaryDisbursement salary);
         bool Delete(int id);
-        SalaryDisbursement? Find(int id);
-        List<SalaryDisbursement> GetByEmployee(int employeeId);
+
     }
 }

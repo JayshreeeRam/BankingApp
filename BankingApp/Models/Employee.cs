@@ -13,13 +13,15 @@ namespace BankingApp.Models
         public string Name { get; set; } = null!;
 
         // FK → Bank
-        public int? BankId { get; set; }
+        public int BankId { get; set; }
         [ForeignKey(nameof(BankId))]
         public Bank? Bank { get; set; }
 
         // FK → Client
-        public int? ClientId { get; set; }
+        public int ClientId { get; set; }
         [ForeignKey(nameof(ClientId))]
         public Client? Client { get; set; }
+
+        public ICollection<SalaryDisbursement>? SalaryDisbursements { get; set; }
     }
 }

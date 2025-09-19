@@ -4,6 +4,7 @@
     {
         Active,
         Closed,
-        Frozen
+        Frozen,
+        Pending
     }
 }

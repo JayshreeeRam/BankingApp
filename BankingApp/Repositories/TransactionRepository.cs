@@ -1,9 +1,13 @@
-﻿using System;
-using System.Linq;
+﻿
 using BankingApp.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BankingApp.Repository
 {
+   
+
     public class TransactionRepository : ITransactionRepository
     {
         private readonly BankingContext _context;
@@ -13,11 +17,19 @@ namespace BankingApp.Repository
             _context = context;
         }
 
-        public Transaction? GetById(int id) =>
-            _context.Transactions.FirstOrDefault(t => t.TransactionId == id);
+        public IEnumerable<Transaction> GetAll()
+        {
+            return _context.Transactions
+                           .Include(t => t.Account) // navigation property
+                           .ToList();
+        }
 
-        public IEnumerable<Transaction> GetByAccountId(int accountId) =>
-            _context.Transactions.Where(t => t.AccountId == accountId).ToList();
+        public Transaction? GetById(int id)
+        {
+            return _context.Transactions
+                           .Include(t => t.Account)
+                           .FirstOrDefault(t => t.TransactionId == id);
+        }
 
         public Transaction Add(Transaction transaction)
         {
@@ -26,17 +38,32 @@ namespace BankingApp.Repository
             return transaction;
         }
 
-        public void Update(Transaction transaction)
+        public Transaction? Update(int id, Transaction transaction)
         {
-            _context.Transactions.Update(transaction);
+            var existing = _context.Transactions.Find(id);
+            if (existing == null) return null;
+
+            _context.Entry(existing).CurrentValues.SetValues(transaction);
             _context.SaveChanges();
+            return existing;
         }
 
-        public void SoftDelete(Transaction transaction)
+        public bool Delete(int id)
         {
-            transaction.TransactionStatus = Enums.TransactionStatus.Success; // example soft delete
-            _context.Transactions.Update(transaction);
+            var transaction = _context.Transactions.Find(id);
+            if (transaction == null) return false;
+
+            _context.Transactions.Remove(transaction);
             _context.SaveChanges();
+            return true;
+        }
+
+        public IEnumerable<Transaction> GetByAccount(int accountId)
+        {
+            return _context.Transactions
+                           .Where(t => t.AccountId == accountId)
+                           .Include(t => t.Account)
+                           .ToList();
         }
     }
 }

@@ -1,14 +1,14 @@
-﻿using BankingApp.Models;
+﻿using BankingApp.DTOs;
+using BankingApp.Models;
 
 namespace BankingApp.Services
 {
     public interface ISalaryDisbursementService
     {
-        List<SalaryDisbursement> GetAll();
-        SalaryDisbursement Add(SalaryDisbursement disbursement);
-        SalaryDisbursement? Update(int id, SalaryDisbursement disbursement);
+        IEnumerable<SalaryDisbursementDto> GetAll();
+        SalaryDisbursementDto? GetById(int id);
+        SalaryDisbursement Add(SalaryDisbursementDto dto);
+        SalaryDisbursement? Update(int id, SalaryDisbursementDto dto);
         bool Delete(int id);
-        SalaryDisbursement? Find(int id);
-        List<SalaryDisbursement> GetByEmployee(int employeeId);
     }
 }

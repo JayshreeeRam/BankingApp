@@ -1,13 +1,14 @@
-﻿using BankingApp.Models;
+﻿using BankingApp.DTOs;
+using BankingApp.Models;
 
 namespace BankingApp.Services
 {
     public interface IUserService
     {
-        IEnumerable<User> GetAllUsers();
-        User GetUserById(int id);
-        User CreateUser(User user);
-        User UpdateUser(int id,User user);
-        bool DeleteUser(int id);
+        IEnumerable<User> GetAll();
+        User? GetById(int id);
+        User Add(UserDto dto);
+        User? Update(int id, UserDto dto);
+        bool Delete(int id);
     }
 }

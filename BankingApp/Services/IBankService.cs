@@ -1,13 +1,13 @@
-﻿using BankingApp.Models;
+﻿using BankingApp.DTOs;
 
 namespace BankingApp.Services
 {
     public interface IBankService
     {
-        IEnumerable<Bank> GetAll();
-        Bank GetById(int id);
-        Bank Add(Bank bank);
-        Bank Update(Bank bank);
-        void Delete(int id);
+        IEnumerable<BankDto> GetAll();
+        BankDto? GetById(int id);
+        BankDto Add(BankDto bankDto);
+        BankDto? Update(int id, BankDto bankDto);
+        bool Delete(int id);
     }
 }

@@ -21,7 +21,7 @@ namespace BankingApp.Models
 
 
         // FK → Client
-        public int? ClientId { get; set; }
+        public int ClientId { get; set; }
         [ForeignKey(nameof(ClientId))]
         public Client? Client { get; set; }
     }

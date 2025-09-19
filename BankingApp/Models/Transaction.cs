@@ -12,7 +12,7 @@ namespace BankingApp.Models
 
         [Required]
         public int AccountId { get; set; }
-        //public Account? Account { get; set; }    // Navigation property
+        public Account? Account { get; set; }    // Navigation property
 
         [Required]
         public TransactionType TransactionType { get; set; } 

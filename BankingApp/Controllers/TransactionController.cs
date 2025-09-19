@@ -1,6 +1,7 @@
-using BankingApp.Models;
+using BankingApp.DTOs;
 using BankingApp.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace BankingApp.Controllers
 {
@@ -16,27 +17,38 @@ namespace BankingApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAll() => Ok(_service.GetAll());
+        public IActionResult GetAll()
+        {
+            return Ok(_service.GetAll());
+        }
 
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var t = _service.Find(id);
-            if (t == null) return NotFound();
-            return Ok(t);
+            var transaction = _service.GetById(id);
+            if (transaction == null) return NotFound();
+            return Ok(transaction);
+        }
+
+        [HttpGet("account/{accountId}")]
+        public IActionResult GetByAccount(int accountId)
+        {
+            return Ok(_service.GetByAccount(accountId));
         }
 
         [HttpPost]
-        public IActionResult Add(Transaction transaction)
+        public IActionResult Add([FromBody] TransactionDto dto)
         {
-            var created = _service.Add(transaction);
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            var created = _service.Add(dto);
             return CreatedAtAction(nameof(GetById), new { id = created.TransactionId }, created);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, Transaction transaction)
+        public IActionResult Update(int id, [FromBody] TransactionDto dto)
         {
-            var updated = _service.Update(id, transaction);
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            var updated = _service.Update(id, dto);
             if (updated == null) return NotFound();
             return Ok(updated);
         }
@@ -44,8 +56,8 @@ namespace BankingApp.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var deleted = _service.Delete(id);
-            if (!deleted) return NotFound();
+            var success = _service.Delete(id);
+            if (!success) return NotFound();
             return NoContent();
         }
     }

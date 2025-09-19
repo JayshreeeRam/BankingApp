@@ -1,14 +1,13 @@
 ﻿using BankingApp.Models;
 
-
-namespace BeneficiaryingApp.Repositories
+namespace BankingApp.Repository
 {
     public interface IBeneficiaryRepository
     {
         IEnumerable<Beneficiary> GetAll();
-        Beneficiary GetById(int id);
-        Beneficiary Add(Beneficiary Beneficiary);
-        Beneficiary Update(Beneficiary Beneficiary);
-        void Delete(int id);
+        Beneficiary? GetById(int id);
+        Beneficiary Add(Beneficiary beneficiary);
+        Beneficiary Update(int id, Beneficiary beneficiary);
+        bool Delete(int id);
     }
 }

@@ -9,23 +9,30 @@ namespace BankingApp.Models
         [Key]
         public int PaymentId { get; set; }
 
-        // FK → Client
+        // FK → Client (who initiates the payment)
+        [Required]
         public int ClientId { get; set; }
         [ForeignKey(nameof(ClientId))]
         public Client Client { get; set; } = null!;
 
-        // FK → Beneficiary (nullable if you want SET NULL)
-        public int? BeneficiaryId { get; set; }
+        // FK → Beneficiary (nullable if direct debit or self-payment)
+        [Required]
+        public int BeneficiaryId { get; set; }
         [ForeignKey(nameof(BeneficiaryId))]
-        public Beneficiary? Beneficiary { get; set; }
+        public Beneficiary Beneficiary { get; set; }
 
         [Required]
         public decimal Amount { get; set; }
 
         [Required]
-        public DateTime PaymentDate { get; set; } = DateTime.Now.Date;
+        public DateTime PaymentDate { get; set; }  
 
-      public PaymentStatus PaymentStatus { get; set; } = PaymentStatus.Pending;
+        [Required]
+        public PaymentStatus PaymentStatus { get; set; } = PaymentStatus.Pending;
+
+      
+      
+
        
     }
 }

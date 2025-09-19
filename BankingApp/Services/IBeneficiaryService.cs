@@ -1,13 +1,13 @@
-﻿using BankingApp.Models;
+﻿using BankingApp.DTOs;
 
 namespace BankingApp.Services
 {
     public interface IBeneficiaryService
     {
-        IEnumerable<Beneficiary> GetAll();
-        Beneficiary GetById(int id);
-        Beneficiary Add(Beneficiary Beneficiary);
-        Beneficiary Update(Beneficiary Beneficiary);
-        void Delete(int id);
+        IEnumerable<BeneficiaryDto> GetAll();
+        BeneficiaryDto? GetById(int id);
+        BeneficiaryDto Add(BeneficiaryDto dto);
+        BeneficiaryDto? Update(int id, BeneficiaryDto dto);
+        bool Delete(int id);
     }
 }

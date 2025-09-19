@@ -1,8 +1,12 @@
-﻿using BankingApp.Models;
+﻿using System.Collections.Generic;
+using System.Linq;
+using BankingApp.Models;
+using BankingApp.Repositories;
+using Microsoft.EntityFrameworkCore;
 
-namespace BankingApp.Repositories
+namespace BankingApp.Repository
 {
-    public class EmployeeRepository:IEmployeeRepository
+    public class EmployeeRepository : IEmployeeRepository
     {
         private readonly BankingContext _context;
 
@@ -10,42 +14,46 @@ namespace BankingApp.Repositories
         {
             _context = context;
         }
-        Employee IEmployeeRepository.Add(Employee Employee)
+
+        public IEnumerable<Employee> GetAll()
         {
-            if (Employee.BankId.HasValue && !_context.Banks.Any(b => b.BankId == Employee.BankId))
-            {
-                throw new InvalidOperationException("The specified BankId does not exist.");
-            }
-            _context.Employees.Add(Employee);
-            _context.SaveChanges();
-            return Employee;
+            return _context.Employees
+                .Include(e => e.SalaryDisbursements) // Include salary info
+                .ToList();
         }
-        void IEmployeeRepository.Delete(int id)
+
+        public Employee? GetById(int id)
+        {
+            return _context.Employees
+                .Include(e => e.SalaryDisbursements)
+                .FirstOrDefault(e => e.EmployeeId == id);
+        }
+
+        public Employee Add(Employee employee)
+        {
+            _context.Employees.Add(employee);
+            _context.SaveChanges();
+            return employee;
+        }
+
+        public Employee? Update(int id, Employee employee)
+        {
+            var existing = _context.Employees.Find(id);
+            if (existing == null) return null;
+
+            _context.Entry(existing).CurrentValues.SetValues(employee);
+            _context.SaveChanges();
+            return existing;
+        }
+
+        public bool Delete(int id)
         {
             var employee = _context.Employees.Find(id);
-            if (employee != null)
-            {
-                _context.Employees.Remove(employee);
-                _context.SaveChanges();
-            }
-        }
-        IEnumerable<Employee> IEmployeeRepository.GetAll()
-        {
-            return _context.Employees.ToList();
-        }
-        Employee IEmployeeRepository.GetById(int id)
-        {
-            return _context.Employees.Find(id);
-        }
-        Employee IEmployeeRepository.Update(Employee Employee)
-        {
-            var existingEmployee = _context.Employees.Find(Employee.EmployeeId);
-            if (existingEmployee != null)
-            {
-                existingEmployee.Name = Employee.Name;
-                 _context.SaveChanges();
-            }
-            return existingEmployee;
+            if (employee == null) return false;
+
+            _context.Employees.Remove(employee);
+            _context.SaveChanges();
+            return true;
         }
     }
 }

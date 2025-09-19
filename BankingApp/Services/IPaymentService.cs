@@ -1,12 +1,14 @@
-﻿using BankingApp.Models;
+﻿using BankingApp.DTOs;
+using BankingApp.Models;
 
 namespace BankingApp.Services
 {
     public interface IPaymentService
     {
-        IEnumerable<Payment> GetAll();
-        Payment GetById(int id);
-        Payment Add(Payment Payment);
-       
+        IEnumerable<PaymentDto> GetAll();
+        PaymentDto? GetById(int id);
+        Payment Add(PaymentDto dto);
+        Payment? Update(int id, PaymentDto dto);
+        bool Delete(int id);
     }
 }

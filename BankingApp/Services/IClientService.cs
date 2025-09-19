@@ -1,13 +1,14 @@
-﻿using BankingApp.Models;
+﻿using BankingApp.DTOs;
+using BankingApp.Models;
 
 namespace BankingApp.Services
 {
     public interface IClientService
     {
-        IEnumerable<Client> GetAllClients();
-        Client GetClientById(int id);
-        Client CreateClient(Client client);
-        Client UpdateClient(int id, Client client);
-        bool DeleteClient(int id);
+        IEnumerable<ClientDto> GetAll();
+        ClientDto? GetById(int id);
+        ClientDto Add(CreateClientDto dto);
+        ClientDto? Update(int id, UpdateClientDto dto);
+        bool Delete(int id);
     }
 }

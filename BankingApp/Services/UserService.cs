@@ -1,35 +1,61 @@
-﻿using BankingApp.Models;
+﻿using System.Collections.Generic;
+using BankingApp.DTOs;
+using BankingApp.Models;
 using BankingApp.Repositories;
+using BankingApp.Repository;
 
 namespace BankingApp.Services
 {
     public class UserService : IUserService
     {
-        private readonly IUserRepository _userRepository;
-        public UserService(IUserRepository userRepository)
+        private readonly IUserRepository _repo;
+
+        public UserService(IUserRepository repo)
         {
-            _userRepository = userRepository;
-        }
-        public IEnumerable<User> GetAllUsers()
-        {
-            return _userRepository.GetAll();
-        }
-        public User GetUserById(int id)
-        {
-            return _userRepository.GetById(id);
-        }
-        public User CreateUser(User user)
-        {
-            return _userRepository.Add(user);
-        }
-        public User UpdateUser(int id, User user)
-        {
-            return _userRepository.Update(id, user);
+            _repo = repo;
         }
 
-        public bool DeleteUser(int id)
+        public IEnumerable<User> GetAll()
         {
-            return _userRepository.Delete(id);
+            return _repo.GetAll();
+        }
+
+        public User? GetById(int id)
+        {
+            return _repo.GetById(id);
+        }
+
+        public User Add(UserDto dto)
+        {
+            var user = new User
+            {
+                Username = dto.Username,
+                Password = dto.Password,
+                Email = dto.Email,
+                PhoneNumber = dto.PhoneNumber,
+                UserRole = dto.UserRole,
+               
+            };
+            return _repo.Add(user);
+        }
+
+        public User? Update(int id, UserDto dto)
+        {
+            var existing = _repo.GetById(id);
+            if (existing == null) return null;
+
+            existing.Username = dto.Username;
+            existing.Password = dto.Password;
+            existing.Email = dto.Email;
+            existing.PhoneNumber = dto.PhoneNumber;
+            existing.UserRole = dto.UserRole;
+
+            return _repo.Update(id, existing);
+        }
+
+        public bool Delete(int id)
+        {
+            return _repo.Delete(id);
         }
     }
 }

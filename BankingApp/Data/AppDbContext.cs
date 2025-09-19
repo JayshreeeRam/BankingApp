@@ -1,7 +1,6 @@
 ﻿using BankingApp.Enums;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace BankingApp.Models
 {
     public class BankingContext : DbContext
@@ -18,21 +17,19 @@ namespace BankingApp.Models
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Document> Documents { get; set; }
         public DbSet<Report> Reports { get; set; }
-
+        public DbSet<Account> Accounts { get; set; }
         public DbSet<SalaryDisbursement> SalaryDisbursements { get; set; }
-        // If you also have Transactions table
         public DbSet<Transaction> Transactions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // 🔹 UserRole enum stored as string
+            // -------------------- ENUM CONFIGURATIONS --------------------
             modelBuilder.Entity<User>()
                 .Property(u => u.UserRole)
                 .HasConversion<string>();
 
-            // 🔹 Client Enums
             modelBuilder.Entity<Client>()
                 .Property(c => c.VerificationStatus)
                 .HasConversion<string>();
@@ -41,13 +38,11 @@ namespace BankingApp.Models
                 .Property(c => c.AccountType)
                 .HasConversion<string>();
 
-
-            // 🔹 Payment Enums
             modelBuilder.Entity<Payment>()
                 .Property(p => p.PaymentStatus)
-                .HasConversion<string>();
+                .HasConversion<string>()
+                .HasDefaultValue(PaymentStatus.Pending);
 
-            // 🔹 Document Enums
             modelBuilder.Entity<Document>()
                 .Property(d => d.DocumentType)
                 .HasConversion<string>();
@@ -56,12 +51,10 @@ namespace BankingApp.Models
                 .Property(d => d.DocumentStatus)
                 .HasConversion<string>();
 
-            // 🔹 Report Enum
             modelBuilder.Entity<Report>()
                 .Property(r => r.ReportType)
                 .HasConversion<string>();
 
-            // 🔹 Transaction Enums
             modelBuilder.Entity<Transaction>()
                 .Property(t => t.TransactionType)
                 .HasConversion<string>();
@@ -70,13 +63,6 @@ namespace BankingApp.Models
                 .Property(t => t.TransactionStatus)
                 .HasConversion<string>();
 
-            // 🔹 Decimal precision for payment amount
-            modelBuilder.Entity<Payment>()
-                .Property(p => p.Amount)
-                .HasColumnType("decimal(18,2)");
-
-
-            // SalaryDisbursement
             modelBuilder.Entity<SalaryDisbursement>()
                 .Property(s => s.Status)
                 .HasConversion<string>();
@@ -85,63 +71,84 @@ namespace BankingApp.Models
                 .Property(s => s.Amount)
                 .HasColumnType("decimal(18,2)");
 
-            modelBuilder.Entity<SalaryDisbursement>()
-                .HasOne(s => s.Employee)
-                .WithMany()
-                .HasForeignKey(s => s.EmployeeId)
-                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Payment>()
+                .Property(p => p.Amount)
+                .HasColumnType("decimal(18,2)");
 
+            // -------------------- RELATIONSHIPS --------------------
 
-            // 🔹 Relationships
+            // Client ↔ Bank (required)
             modelBuilder.Entity<Client>()
                 .HasOne(c => c.Bank)
                 .WithMany(b => b.Clients)
                 .HasForeignKey(c => c.BankId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict); // prevent accidental bank deletion
 
-            modelBuilder.Entity<Client>()
-                .HasOne(c => c.User)
-                .WithMany(u => u.Clients)
-                .HasForeignKey(c => c.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
-
+            // Client ↔ User (required)
+           
+            // Beneficiary ↔ Client
             modelBuilder.Entity<Beneficiary>()
                 .HasOne(b => b.Client)
                 .WithMany(c => c.Beneficiaries)
                 .HasForeignKey(b => b.ClientId)
+                .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
 
+            // Employee ↔ Client
             modelBuilder.Entity<Employee>()
                 .HasOne(e => e.Client)
                 .WithMany(c => c.Employees)
                 .HasForeignKey(e => e.ClientId)
+                .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
 
+            // Payment ↔ Client
             modelBuilder.Entity<Payment>()
-                .HasOne(p => p.Client)
-                .WithMany(c => c.Payments)
-                .HasForeignKey(p => p.ClientId)
-                .OnDelete(DeleteBehavior.Cascade);
+     .HasOne(p => p.Client)
+     .WithMany(c => c.Payments)
+     .HasForeignKey(p => p.ClientId)
+     .OnDelete(DeleteBehavior.Cascade);  // keep cascade here
 
             modelBuilder.Entity<Payment>()
                 .HasOne(p => p.Beneficiary)
                 .WithMany()
                 .HasForeignKey(p => p.BeneficiaryId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Restrict); // 👈 prevent multiple cascade path
 
+            // Document ↔ User
             modelBuilder.Entity<Document>()
                 .HasOne(d => d.UploadedBy)
                 .WithMany(u => u.Documents)
                 .HasForeignKey(d => d.UploadedByUserId)
+                .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Report>(entity =>
-            {
-                entity.HasOne(r => r.GeneratedBy)
-                      .WithMany(u => u.Reports)
-                      .HasForeignKey(r => r.GeneratedByUserId)
-                      .OnDelete(DeleteBehavior.Cascade);
-            });
+            // Report ↔ User
+            modelBuilder.Entity<Report>()
+                .HasOne(r => r.GeneratedBy)
+                .WithMany(u => u.Reports)
+                .HasForeignKey(r => r.GeneratedByUserId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // SalaryDisbursement ↔ Employee
+            modelBuilder.Entity<SalaryDisbursement>()
+                .HasOne(s => s.Employee)
+                .WithMany(e => e.SalaryDisbursements)
+                .HasForeignKey(s => s.EmployeeId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Transaction ↔ Account
+            modelBuilder.Entity<Transaction>()
+                .HasOne(t => t.Account)
+                .WithMany(a => a.Transactions)
+                .HasForeignKey(t => t.AccountId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
         }
+
     }
 }
+

@@ -1,12 +1,25 @@
-﻿namespace BankingApp.DTOs
+﻿using BankingApp.Enums;
+using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace BankingApp.DTOs
 {
     public class TransactionDto
     {
-        public int TransactionId { get; set; }
+        [Required]
         public int AccountId { get; set; }
-        public string TransactionType { get; set; } = string.Empty;
+
+        [Required]
+        public TransactionType TransactionType { get; set; }
+
+        [Required]
         public decimal Amount { get; set; }
-        public string TransactionStatus { get; set; } = string.Empty;
-        public DateTime TransactionDate { get; set; }
+
+        public TransactionStatus TransactionStatus { get; set; } = TransactionStatus.Pending;
+
+        public DateTime TransactionDate { get; set; } = DateTime.UtcNow;
+
+        public string? ReferenceId { get; set; }
+        public string? Description { get; set; }
     }
 }

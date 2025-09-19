@@ -1,8 +1,12 @@
-﻿using BankingApp.Models;
+﻿using System.Collections.Generic;
+using System.Linq;
+using BankingApp.Models;
+using BankingApp.Repositories;
+using Microsoft.EntityFrameworkCore;
 
-namespace BankingApp.Repositories
+namespace BankingApp.Repository
 {
-    public class UserRepository:IUserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly BankingContext _context;
 
@@ -11,45 +15,48 @@ namespace BankingApp.Repositories
             _context = context;
         }
 
-        User IUserRepository.Add(User User)
+        public IEnumerable<User> GetAll()
         {
-                _context.Users.Add(User);
-            _context.SaveChanges();
-            return User;
+            return _context.Users
+                .Include(u => u.Documents)
+                .Include(u => u.Reports)
+                .ToList();
         }
 
-        bool IUserRepository.Delete(int id)
+        public User? GetById(int id)
+        {
+            return _context.Users
+                //.Include(u => u.Client)
+                .Include(u => u.Documents)
+                .Include(u => u.Reports)
+                .FirstOrDefault(u => u.UserId == id);
+        }
+
+        public User Add(User user)
+        {
+            _context.Users.Add(user);
+            _context.SaveChanges();
+            return user;
+        }
+
+        public User Update(int id, User user)
+        {
+            var existing = _context.Users.Find(id);
+            if (existing == null) return null!;
+
+            _context.Entry(existing).CurrentValues.SetValues(user);
+            _context.SaveChanges();
+            return existing;
+        }
+
+        public bool Delete(int id)
         {
             var user = _context.Users.Find(id);
-            if (user != null)
-            {
-                _context.Users.Remove(user);
-                _context.SaveChanges();
-                return true;
-            }
-            return false;
-        }
-        IEnumerable<User> IUserRepository.GetAll()
-        {
-            return _context.Users.ToList();
-        }
-        User IUserRepository.GetById(int id)
-        {
-            return _context.Users.Find(id);
-        }
-        User IUserRepository.Update(int id,User User)
-        {
-            var existingUser = _context.Users.Find(id);
-            if (existingUser != null)
-            {
-                existingUser.Username = User.Username;
-                existingUser.Password = User.Password;
-                existingUser.Email = User.Email;
-                existingUser.PhoneNumber = User.PhoneNumber;
-                _context.SaveChanges();
-            }
-            return existingUser;
-        }
+            if (user == null) return false;
 
+            _context.Users.Remove(user);
+            _context.SaveChanges();
+            return true;
+        }
     }
 }
