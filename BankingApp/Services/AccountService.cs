@@ -26,10 +26,13 @@ namespace BankingApp.Services
             return account == null ? null : MapToDto(account);
         }
 
-        public IEnumerable<AccountDto> GetByClientId(int clientId)
+        public AccountDto? GetByClientId(int clientId)
         {
-            return _repo.GetByClientId(clientId).Select(MapToDto).ToList();
+            var account = _repo.GetByClientId(clientId);
+            if (account == null) return null;
+            return MapToDto(account);
         }
+
 
         public AccountDto Add(CreateAccountDto dto)
         {

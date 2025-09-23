@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace BankingApp.Models
 {
@@ -17,11 +18,15 @@ namespace BankingApp.Models
         [ForeignKey(nameof(BankId))]
         public Bank? Bank { get; set; }
 
+        [Required]
+        public double Salary { get; set; }
+
         // FK → Client
         public int ClientId { get; set; }
         [ForeignKey(nameof(ClientId))]
         public Client? Client { get; set; }
 
+        [JsonIgnore]
         public ICollection<SalaryDisbursement>? SalaryDisbursements { get; set; }
     }
 }

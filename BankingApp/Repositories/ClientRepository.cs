@@ -7,16 +7,16 @@ namespace BankingApp.Repository
 {
     public class ClientRepository : IClientRepository
     {
-        private readonly BankingContext _context;
+        private readonly BankingContext _repo;
 
         public ClientRepository(BankingContext context)
         {
-            _context = context;
+            _repo = context;
         }
 
         public IEnumerable<Client> GetAll()
         {
-            return _context.Clients
+            return _repo.Clients
                 .Include(c => c.Bank)
                 .Include(c => c.User)
                 .Include(c => c.Beneficiaries)
@@ -26,7 +26,7 @@ namespace BankingApp.Repository
 
         public Client? GetById(int id)
         {
-            return _context.Clients
+            return _repo.Clients
                 .Include(c => c.Bank)
                 .Include(c => c.User)
                 .Include(c => c.Beneficiaries)
@@ -36,14 +36,14 @@ namespace BankingApp.Repository
 
         public Client Add(Client client)
         {
-            _context.Clients.Add(client);
-            _context.SaveChanges();
+            _repo.Clients.Add(client);
+            _repo.SaveChanges();
             return client;
         }
 
         public Client Update(int id, Client client)
         {
-            var existing = _context.Clients.Find(id);
+            var existing = _repo.Clients.Find(id);
             if (existing == null) return null!;
 
             // Update only the fields that are allowed to change
@@ -55,17 +55,17 @@ namespace BankingApp.Repository
             existing.VerificationStatus = client.VerificationStatus;
             existing.AccountType = client.AccountType;
 
-            _context.SaveChanges();
+            _repo.SaveChanges();
             return existing;
         }
 
         public bool Delete(int id)
         {
-            var client = _context.Clients.Find(id);
+            var client = _repo.Clients.Find(id);
             if (client == null) return false;
 
-            _context.Clients.Remove(client);
-            _context.SaveChanges();
+            _repo.Clients.Remove(client);
+            _repo.SaveChanges();
             return true;
         }
     }

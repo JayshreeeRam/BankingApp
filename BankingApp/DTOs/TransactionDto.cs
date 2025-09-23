@@ -19,7 +19,17 @@ namespace BankingApp.DTOs
 
         public DateTime TransactionDate { get; set; } = DateTime.UtcNow;
 
-        public string? ReferenceId { get; set; }
-        public string? Description { get; set; }
+      
+
+        // ✅ Instead of names/accounts, keep SenderId & ReceiverId
+        [Required]
+        public int SenderId { get; set; }
+
+        [Required]
+        public int ReceiverId { get; set; }
+
+        // ✅ Optional: Include names in DTO for API responses (not required in Add/Update requests)
+        public string? SenderName { get; set; }
+        public string? ReceiverName { get; set; }
     }
 }

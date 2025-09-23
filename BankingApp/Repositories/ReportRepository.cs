@@ -8,51 +8,51 @@ namespace BankingApp.Repository
 {
     public class ReportRepository : IReportRepository
     {
-        private readonly BankingContext _context;
+        private readonly BankingContext _repo;
 
         public ReportRepository(BankingContext context)
         {
-            _context = context;
+            _repo = context;
         }
 
         public IEnumerable<Report> GetAll()
         {
-            return _context.Reports
+            return _repo.Reports
                 .Include(r => r.GeneratedBy)
                 .ToList();
         }
 
         public Report? GetById(int id)
         {
-            return _context.Reports
+            return _repo.Reports
                 .Include(r => r.GeneratedBy)
                 .FirstOrDefault(r => r.ReportId == id);
         }
 
         public Report Add(Report report)
         {
-            _context.Reports.Add(report);
-            _context.SaveChanges();
+            _repo.Reports.Add(report);
+            _repo.SaveChanges();
             return report;
         }
 
         public Report Update(int id, Report report)
         {
-            var existing = _context.Reports.Find(id);
+            var existing = _repo.Reports.Find(id);
             if (existing == null) return null!;
 
-            _context.Entry(existing).CurrentValues.SetValues(report);
-            _context.SaveChanges();
+            _repo.Entry(existing).CurrentValues.SetValues(report);
+            _repo.SaveChanges();
             return existing;
         }
 
         public bool Delete(int id)
         {
-            var report = _context.Reports.Find(id);
+            var report = _repo.Reports.Find(id);
             if (report == null) return false;
 
-            _context.Reports.Remove(report);
-            _context.SaveChanges();
+            _repo.Reports.Remove(report);
+            _repo.SaveChanges();
             return true;
         }
     }

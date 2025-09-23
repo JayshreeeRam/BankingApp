@@ -1,22 +1,25 @@
-﻿using BankingApp.Enums;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+using BankingApp.Enums;
 using System;
-using System.ComponentModel.DataAnnotations;
+
 
 namespace BankingApp.DTOs
 {
     public class SalaryDisbursementDto
     {
-        [Required]
+        public int DisbursementId { get; set; }
         public int EmployeeId { get; set; }
+        public string EmployeeName { get; set; } = null!;
 
-        [Required]
-        public decimal Amount { get; set; }
+        public string SenderName { get; set; } = null!; // Client/Company sending salary
+        public int ClientId { get; set; }
+        public decimal Amount { get; set; } // Automatically fetched, not input by user
+        public DateTime Date { get; set; }
 
-        public DateTime Date { get; set; } = DateTime.UtcNow;
-
-        [Required]
-        public PaymentStatus Status { get; set; } = PaymentStatus.Pending;
-
-        public string? BatchId { get; set; }
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        public PaymentStatus Status { get; set; }
+        public int BatchId { get; set; }
     }
 }
+

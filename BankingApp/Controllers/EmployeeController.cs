@@ -19,14 +19,16 @@ namespace BankingApp.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Ok(_service.GetAll());
+            var employees = _service.GetAll();
+            return Ok(employees);
         }
 
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
             var employee = _service.GetById(id);
-            return employee == null ? NotFound() : Ok(employee);
+            if (employee == null) return NotFound();
+            return Ok(employee);
         }
 
         [HttpPost]
@@ -42,14 +44,16 @@ namespace BankingApp.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             var updated = _service.Update(id, dto);
-            return updated == null ? NotFound() : Ok(updated);
+            if (updated == null) return NotFound();
+            return Ok(updated);
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _service.Delete(id); // Call the method without assigning to a variable
-            return NoContent(); // Return NoContent directly
+            bool success = _service.Delete(id);
+            if (!success) return NotFound();
+            return NoContent();
         }
     }
 }

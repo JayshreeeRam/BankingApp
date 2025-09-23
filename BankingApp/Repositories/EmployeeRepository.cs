@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using BankingApp.Models;
-using BankingApp.Repositories;
+﻿using BankingApp.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace BankingApp.Repository
+namespace BankingApp.Repositories
 {
     public class EmployeeRepository : IEmployeeRepository
     {
@@ -18,14 +17,20 @@ namespace BankingApp.Repository
         public IEnumerable<Employee> GetAll()
         {
             return _context.Employees
-                .Include(e => e.SalaryDisbursements) // Include salary info
+                .Include(e => e.Client)
+                    .ThenInclude(c => c.User)  // fetch user for name
+                .Include(e => e.Bank)
+                .AsNoTracking()
                 .ToList();
         }
 
         public Employee? GetById(int id)
         {
             return _context.Employees
-                .Include(e => e.SalaryDisbursements)
+                .Include(e => e.Client)
+                    .ThenInclude(c => c.User)  // fetch user for name
+                .Include(e => e.Bank)
+                .AsNoTracking()
                 .FirstOrDefault(e => e.EmployeeId == id);
         }
 
@@ -41,7 +46,11 @@ namespace BankingApp.Repository
             var existing = _context.Employees.Find(id);
             if (existing == null) return null;
 
-            _context.Entry(existing).CurrentValues.SetValues(employee);
+            existing.Name = employee.Name;       // snapshot name
+            existing.Salary = employee.Salary;
+            existing.BankId = employee.BankId;
+            existing.ClientId = employee.ClientId;
+
             _context.SaveChanges();
             return existing;
         }

@@ -9,37 +9,39 @@ namespace BankingApp.Repository
 {
     public class SalaryDisbursementRepository : ISalaryDisbursementRepository
     {
-        private readonly BankingContext _context;
+        private readonly BankingContext _repo;
 
         public SalaryDisbursementRepository(BankingContext context)
         {
-            _context = context;
+            _repo = context;
         }
 
         public IEnumerable<SalaryDisbursement> GetAll()
         {
-            return _context.SalaryDisbursements
-                           .Include(s => s.Employee)
-                           .ToList();
+            return _repo.SalaryDisbursements
+                        .Include(s => s.Employee)
+                        .Where(s => s.EmployeeId != null) // Skip nulls
+                        .ToList();
         }
+
 
         public SalaryDisbursement? GetById(int id)
         {
-            return _context.SalaryDisbursements
+            return _repo.SalaryDisbursements
                            .Include(s => s.Employee)
                            .FirstOrDefault(s => s.DisbursementId == id);
         }
 
         public SalaryDisbursement Add(SalaryDisbursement salary)
         {
-            _context.SalaryDisbursements.Add(salary);
-            _context.SaveChanges();
+            _repo.SalaryDisbursements.Add(salary);
+            _repo.SaveChanges();
             return salary;
         }
 
         public SalaryDisbursement Update(int id, SalaryDisbursement salary)
         {
-            var existing = _context.SalaryDisbursements.Find(id);
+            var existing = _repo.SalaryDisbursements.Find(id);
             if (existing == null) return null!;
 
             existing.EmployeeId = salary.EmployeeId;
@@ -48,17 +50,17 @@ namespace BankingApp.Repository
             existing.Status = salary.Status;
             existing.BatchId = salary.BatchId;
 
-            _context.SaveChanges();
+            _repo.SaveChanges();
             return existing;
         }
 
         public bool Delete(int id)
         {
-            var salary = _context.SalaryDisbursements.Find(id);
+            var salary = _repo.SalaryDisbursements.Find(id);
             if (salary == null) return false;
 
-            _context.SalaryDisbursements.Remove(salary);
-            _context.SaveChanges();
+            _repo.SalaryDisbursements.Remove(salary);
+            _repo.SaveChanges();
             return true;
         }
     }

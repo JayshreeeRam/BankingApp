@@ -7,51 +7,51 @@ namespace BankingApp.Repository
 
     public class DocumentRepository : IDocumentRepository
     {
-        private readonly BankingContext _context;
+        private readonly BankingContext _repo;
 
         public DocumentRepository(BankingContext context)
         {
-            _context = context;
+            _repo = context;
         }
 
         public IEnumerable<Document> GetAll()
         {
-            return _context.Documents
+            return _repo.Documents
                 .Include(d => d.UploadedBy)
                 .ToList();
         }
 
         public Document? GetById(int id)
         {
-            return _context.Documents
+            return _repo.Documents
                 .Include(d => d.UploadedBy)
                 .FirstOrDefault(d => d.DocumentId == id);
         }
 
         public Document Add(Document document)
         {
-            _context.Documents.Add(document);
-            _context.SaveChanges();
+            _repo.Documents.Add(document);
+            _repo.SaveChanges();
             return document;
         }
 
         public Document? Update(int id, Document document)
         {
-            var existing = _context.Documents.Find(id);
+            var existing = _repo.Documents.Find(id);
             if (existing == null) return null;
 
-            _context.Entry(existing).CurrentValues.SetValues(document);
-            _context.SaveChanges();
+            _repo.Entry(existing).CurrentValues.SetValues(document);
+            _repo.SaveChanges();
             return existing;
         }
 
         public bool Delete(int id)
         {
-            var document = _context.Documents.Find(id);
+            var document = _repo.Documents.Find(id);
             if (document == null) return false;
 
-            _context.Documents.Remove(document);
-            _context.SaveChanges();
+            _repo.Documents.Remove(document);
+            _repo.SaveChanges();
             return true;
         }
     }

@@ -1409,17 +1409,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PaymentDto"
+                "$ref": "#/components/schemas/CreatePaymentDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/PaymentDto"
+                "$ref": "#/components/schemas/CreatePaymentDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/PaymentDto"
+                "$ref": "#/components/schemas/CreatePaymentDto"
               }
             }
           }
@@ -1453,7 +1453,7 @@
           }
         }
       },
-      "put": {
+      "delete": {
         "tags": [
           "Payment"
         ],
@@ -1468,32 +1468,15 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PaymentDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PaymentDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/PaymentDto"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK"
           }
         }
-      },
-      "delete": {
+      }
+    },
+    "/api/Payment/{id}/approve": {
+      "post": {
         "tags": [
           "Payment"
         ],
@@ -1702,8 +1685,10 @@
             "description": "OK"
           }
         }
-      },
-      "put": {
+      }
+    },
+    "/api/SalaryDisbursement/approve/{id}": {
+      "post": {
         "tags": [
           "SalaryDisbursement"
         ],
@@ -1718,38 +1703,21 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SalaryDisbursementDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SalaryDisbursementDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/SalaryDisbursementDto"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK"
           }
         }
-      },
-      "delete": {
+      }
+    },
+    "/api/SalaryDisbursement/approveBatch/{batchId}": {
+      "post": {
         "tags": [
           "SalaryDisbursement"
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "batchId",
             "in": "path",
             "required": true,
             "schema": {
@@ -2249,6 +2217,28 @@
         },
         "additionalProperties": false
       },
+      "CreatePaymentDto": {
+        "type": "object",
+        "properties": {
+          "clientId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "beneficiaryId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "paymentDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
       "DocumentDto": {
         "type": "object",
         "properties": {
@@ -2320,16 +2310,21 @@
             "type": "integer",
             "format": "int32"
           },
+          "bankName": {
+            "type": "string",
+            "nullable": true
+          },
           "clientId": {
             "type": "integer",
             "format": "int32"
           },
-          "salaryDisbursements": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SalaryDisbursementDto"
-            },
+          "clientName": {
+            "type": "string",
             "nullable": true
+          },
+          "salary": {
+            "type": "number",
+            "format": "double"
           }
         },
         "additionalProperties": false
@@ -2344,31 +2339,6 @@
           "password": {
             "type": "string",
             "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "PaymentDto": {
-        "type": "object",
-        "properties": {
-          "clientId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "beneficiaryId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "amount": {
-            "type": "number",
-            "format": "double"
-          },
-          "paymentDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "paymentStatus": {
-            "$ref": "#/components/schemas/PaymentStatus"
           }
         },
         "additionalProperties": false
@@ -2477,14 +2447,25 @@
         "format": "int32"
       },
       "SalaryDisbursementDto": {
-        "required": [
-          "amount",
-          "employeeId",
-          "status"
-        ],
         "type": "object",
         "properties": {
+          "disbursementId": {
+            "type": "integer",
+            "format": "int32"
+          },
           "employeeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "employeeName": {
+            "type": "string",
+            "nullable": true
+          },
+          "senderName": {
+            "type": "string",
+            "nullable": true
+          },
+          "clientId": {
             "type": "integer",
             "format": "int32"
           },
@@ -2500,8 +2481,8 @@
             "$ref": "#/components/schemas/PaymentStatus"
           },
           "batchId": {
-            "type": "string",
-            "nullable": true
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -2510,6 +2491,8 @@
         "required": [
           "accountId",
           "amount",
+          "receiverId",
+          "senderId",
           "transactionType"
         ],
         "type": "object",
@@ -2532,11 +2515,19 @@
             "type": "string",
             "format": "date-time"
           },
-          "referenceId": {
+          "senderId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "receiverId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "senderName": {
             "type": "string",
             "nullable": true
           },
-          "description": {
+          "receiverName": {
             "type": "string",
             "nullable": true
           }
@@ -2654,7 +2645,8 @@
         "enum": [
           0,
           1,
-          2
+          2,
+          3
         ],
         "type": "integer",
         "format": "int32"

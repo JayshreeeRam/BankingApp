@@ -83,10 +83,8 @@ namespace BankingApp.Models
                 .WithMany(b => b.Clients)
                 .HasForeignKey(c => c.BankId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict); // prevent accidental bank deletion
+                .OnDelete(DeleteBehavior.Restrict);
 
-            // Client ↔ User (required)
-           
             // Beneficiary ↔ Client
             modelBuilder.Entity<Beneficiary>()
                 .HasOne(b => b.Client)
@@ -105,16 +103,16 @@ namespace BankingApp.Models
 
             // Payment ↔ Client
             modelBuilder.Entity<Payment>()
-     .HasOne(p => p.Client)
-     .WithMany(c => c.Payments)
-     .HasForeignKey(p => p.ClientId)
-     .OnDelete(DeleteBehavior.Cascade);  // keep cascade here
+                .HasOne(p => p.Client)
+                .WithMany(c => c.Payments)
+                .HasForeignKey(p => p.ClientId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Payment>()
                 .HasOne(p => p.Beneficiary)
                 .WithMany()
                 .HasForeignKey(p => p.BeneficiaryId)
-                .OnDelete(DeleteBehavior.Restrict); // 👈 prevent multiple cascade path
+                .OnDelete(DeleteBehavior.Restrict);
 
             // Document ↔ User
             modelBuilder.Entity<Document>()
@@ -138,7 +136,7 @@ namespace BankingApp.Models
                 .WithMany(e => e.SalaryDisbursements)
                 .HasForeignKey(s => s.EmployeeId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             // Transaction ↔ Account
             modelBuilder.Entity<Transaction>()
@@ -146,7 +144,21 @@ namespace BankingApp.Models
                 .WithMany(a => a.Transactions)
                 .HasForeignKey(t => t.AccountId)
                 .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Transaction ↔ Sender (Client)
+            modelBuilder.Entity<Transaction>()
+                .HasOne(t => t.Sender)
+                .WithMany()
+                .HasForeignKey(t => t.SenderId)
+                .OnDelete(DeleteBehavior.Restrict);  // avoid multiple cascade path
+
+            // Transaction ↔ Receiver (Client)
+            modelBuilder.Entity<Transaction>()
+                .HasOne(t => t.Receiver)
+                .WithMany()
+                .HasForeignKey(t => t.ReceiverId)
+                .OnDelete(DeleteBehavior.Restrict);  // avoid multiple cascade path
         }
 
     }

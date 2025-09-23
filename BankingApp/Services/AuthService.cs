@@ -9,18 +9,18 @@ using Microsoft.IdentityModel.Tokens;
 
 public class AuthService : IAuthService
 {
-    private readonly BankingContext _context;
+    private readonly BankingContext _repo;
     private readonly IConfiguration _config;
 
     public AuthService(BankingContext context, IConfiguration config)
     {
-        _context = context;
+        _repo = context;
         _config = config;
     }
 
     public AuthResponseDto Register(RegisterDto dto)
     {
-        if (_context.Users.Any(u => u.Username == dto.Username))
+        if (_repo.Users.Any(u => u.Username == dto.Username))
             throw new Exception("Username already exists");
 
         // 🔹 Password hash (replace with proper hashing in production)
@@ -33,8 +33,8 @@ public class AuthService : IAuthService
             UserRole = dto.UserRole
         };
 
-        _context.Users.Add(user);
-        _context.SaveChanges();
+        _repo.Users.Add(user);
+        _repo.SaveChanges();
 
         return new AuthResponseDto
         {
@@ -46,7 +46,7 @@ public class AuthService : IAuthService
 
     public AuthResponseDto Login(LoginDto dto)
     {
-        var user = _context.Users.FirstOrDefault(u => u.Username == dto.Username);
+        var user = _repo.Users.FirstOrDefault(u => u.Username == dto.Username);
         if (user == null || user.Password != dto.Password)
             throw new UnauthorizedAccessException("Invalid credentials");
 

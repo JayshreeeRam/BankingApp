@@ -11,21 +11,28 @@ namespace BankingApp.Models
         public int DisbursementId { get; set; }
 
         [Required]
-        public int EmployeeId { get; set; }
-
+        public int EmployeeId { get; set; }  // Nullable
         [ForeignKey(nameof(EmployeeId))]
-        public Employee Employee { get; set; } = null!;  // Required, not nullable
+
+        
+        public Employee? Employee { get; set; }  // Nullable navigation
 
         [Required]
-        public PaymentStatus Status { get; set; } = PaymentStatus.Pending;
+        public int ClientId { get; set; }  // Nullable
+        [ForeignKey(nameof(ClientId))]
+        public Client? Client { get; set; }  // Nullable navigation
 
         [Required]
         public decimal Amount { get; set; }
 
         [Required]
+        public PaymentStatus Status { get; set; } = PaymentStatus.Pending;
+
+        [Required]
         public DateTime Date { get; set; } = DateTime.UtcNow;
 
-        [MaxLength(50)]
-        public string? BatchId { get; set; }  
+        [Required]
+        public int BatchId { get; set; }
     }
+
 }

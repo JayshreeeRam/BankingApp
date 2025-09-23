@@ -9,50 +9,55 @@ namespace BankingApp.Controllers
     [Route("api/[controller]")]
     public class SalaryDisbursementController : ControllerBase
     {
-        private readonly ISalaryDisbursementService _service;
+        private readonly ISalaryDisbursementService _salaryService;
 
-        public SalaryDisbursementController(ISalaryDisbursementService service)
+        public SalaryDisbursementController(ISalaryDisbursementService salaryService)
         {
-            _service = service;
+            _salaryService = salaryService;
         }
 
+        // Get all salary disbursements
         [HttpGet]
-        public IActionResult GetAll()
-        {
-            return Ok(_service.GetAll());
-        }
+        public IActionResult GetAll() => Ok(_salaryService.GetAll());
 
+        // Get by ID
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var salary = _service.GetById(id);
+            var salary = _salaryService.GetById(id);
             if (salary == null) return NotFound();
             return Ok(salary);
         }
 
+        // Add new salary disbursement
         [HttpPost]
-        public IActionResult Add([FromBody] SalaryDisbursementDto dto)
+        public IActionResult Add(SalaryDisbursementDto dto)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
-            var created = _service.Add(dto);
-            return CreatedAtAction(nameof(GetById), new { id = created.DisbursementId }, dto);
+            try
+            {
+                var result = _salaryService.Add(dto);
+                return Ok(result);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] SalaryDisbursementDto dto)
+        // Approve salary (and create Transaction with proper names)
+        [HttpPost("approve/{id}")]
+        public IActionResult ApproveSalary(int id)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
-            var updated = _service.Update(id, dto);
-            if (updated == null) return NotFound();
-            return Ok(updated);
+            var result = _salaryService.ApproveSalary(id);
+            if (result == null) return BadRequest("Cannot approve salary. Ensure employee and client exist and client has sufficient balance.");
+            return Ok(result);
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            var success = _service.Delete(id);
-            if (!success) return NotFound();
-            return NoContent();
-        }
+       
+
+        // Approve all salaries in a batch
+        [HttpPost("approveBatch/{batchId}")]
+        public IActionResult ApproveSalaryByBatch(int batchId)
+            => Ok(_salaryService.ApproveSalaryByBatch(batchId));
     }
 }

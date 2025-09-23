@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using BankingApp.Enums;
 
 namespace BankingApp.Models
@@ -39,9 +40,13 @@ namespace BankingApp.Models
         public AccountType AccountType { get; set; }
 
         // Navigation collections
+        [JsonIgnore]
         public ICollection<Beneficiary>? Beneficiaries { get; set; }
+        [JsonIgnore]
         public ICollection<Employee>? Employees { get; set; }
+        [JsonIgnore]
         public ICollection<Payment>? Payments { get; set; }
+        [JsonIgnore]
         public ICollection<SalaryDisbursement>? SalaryDisbursements { get; set; }
     }
 }

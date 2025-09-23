@@ -1,4 +1,5 @@
 using System.Text;
+using System.Text.Json.Serialization;
 using BankingApp.DTOs;
 using BankingApp.Models;
 using BankingApp.Repositories;
@@ -101,6 +102,14 @@ namespace BankingApp
                 cloudinary.Api.Secure = true;
                 return cloudinary;
             });
+
+            //For ignore circular error
+            builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    });
+
 
 
 

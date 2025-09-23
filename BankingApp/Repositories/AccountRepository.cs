@@ -7,39 +7,42 @@ namespace BankingApp.Repositories
 {
     public class AccountRepository : IAccountRepository
     {
-        private readonly BankingContext _context;
+        private readonly BankingContext _repo;
 
         public AccountRepository(BankingContext context)
         {
-            _context = context;
+            _repo = context;
         }
 
         public IEnumerable<Account> GetAll()
         {
-            return _context.Accounts.Include(a => a.Client).ToList();
+            return _repo.Accounts.Include(a => a.Client).ToList();
         }
 
         public Account? GetById(int id)
         {
-            return _context.Accounts.Include(a => a.Client)
+            return _repo.Accounts.Include(a => a.Client)
                                     .FirstOrDefault(a => a.AccountId == id);
         }
 
-        public IEnumerable<Account> GetByClientId(int clientId)
+        public Account? GetByClientId(int clientId)
         {
-            return _context.Accounts.Where(a => a.ClientId == clientId).ToList();
+            // Assuming one account per client
+            return _repo.Accounts.Include(a => a.Client)
+                                 .FirstOrDefault(a => a.ClientId == clientId);
         }
+
 
         public Account Add(Account account)
         {
-            _context.Accounts.Add(account);
-            _context.SaveChanges();
+            _repo.Accounts.Add(account);
+            _repo.SaveChanges();
             return account;
         }
 
         public Account? Update(int id, Account account)
         {
-            var existing = _context.Accounts.Find(id);
+            var existing = _repo.Accounts.Find(id);
             if (existing == null) return null;
 
             existing.AccountNumber = account.AccountNumber;
@@ -48,7 +51,7 @@ namespace BankingApp.Repositories
             existing.Balance = account.Balance;
             //existing.ClientId = account.ClientId;
 
-            _context.SaveChanges();
+            _repo.SaveChanges();
             return existing;
         }
 
@@ -57,11 +60,11 @@ namespace BankingApp.Repositories
 
         public bool Delete(int id)
         {
-            var account = _context.Accounts.Find(id);
+            var account = _repo.Accounts.Find(id);
             if (account == null) return false;
 
-            _context.Accounts.Remove(account);
-            _context.SaveChanges();
+            _repo.Accounts.Remove(account);
+            _repo.SaveChanges();
             return true;
         }
     }

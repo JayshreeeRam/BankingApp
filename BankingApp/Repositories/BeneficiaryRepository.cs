@@ -6,33 +6,33 @@ namespace BankingApp.Repository
 {
     public class BeneficiaryRepository : IBeneficiaryRepository
     {
-        private readonly BankingContext _context;
+        private readonly BankingContext _repo;
 
         public BeneficiaryRepository(BankingContext context)
         {
-            _context = context;
+            _repo = context;
         }
 
         public IEnumerable<Beneficiary> GetAll()
         {
-            return _context.Beneficiaries.AsNoTracking().ToList();
+            return _repo.Beneficiaries.AsNoTracking().ToList();
         }
 
         public Beneficiary? GetById(int id)
         {
-            return _context.Beneficiaries.Find(id);
+            return _repo.Beneficiaries.Find(id);
         }
 
         public Beneficiary Add(Beneficiary beneficiary)
         {
-            _context.Beneficiaries.Add(beneficiary);
-            _context.SaveChanges();
+            _repo.Beneficiaries.Add(beneficiary);
+            _repo.SaveChanges();
             return beneficiary;
         }
 
         public Beneficiary Update(int id, Beneficiary beneficiary)
         {
-            var existing = _context.Beneficiaries.Find(id);
+            var existing = _repo.Beneficiaries.Find(id);
             if (existing == null) return null!;
 
             existing.BankName = beneficiary.BankName;
@@ -40,17 +40,17 @@ namespace BankingApp.Repository
             existing.IFSCCode = beneficiary.IFSCCode;
             existing.ClientId = beneficiary.ClientId;
 
-            _context.SaveChanges();
+            _repo.SaveChanges();
             return existing;
         }
 
         public bool Delete(int id)
         {
-            var beneficiary = _context.Beneficiaries.Find(id);
+            var beneficiary = _repo.Beneficiaries.Find(id);
             if (beneficiary == null) return false;
 
-            _context.Beneficiaries.Remove(beneficiary);
-            _context.SaveChanges();
+            _repo.Beneficiaries.Remove(beneficiary);
+            _repo.SaveChanges();
             return true;
         }
     }
