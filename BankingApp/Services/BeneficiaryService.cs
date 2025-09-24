@@ -1,0 +1,104 @@
+﻿using BankingApp.DTOs;
+using BankingApp.Models;
+using BankingApp.Repositories;
+using BankingApp.Repository;
+
+namespace BankingApp.Services
+{
+    public class BeneficiaryService : IBeneficiaryService
+    {
+        private readonly IBeneficiaryRepository _beneficiaryRepo;
+        private readonly IClientRepository _clientRepo;
+        private readonly IBankRepository _bankRepo;
+
+        public BeneficiaryService(IBeneficiaryRepository beneficiaryRepo, IClientRepository clientRepo,IBankRepository bankRepo)
+        {
+            _beneficiaryRepo = beneficiaryRepo;
+            _clientRepo = clientRepo;
+            _bankRepo=bankRepo;
+        }
+
+        // Get all beneficiaries
+        public IEnumerable<BeneficiaryDto> GetAll()
+        {
+            return _beneficiaryRepo.GetAll().Select(MapToDto);
+        }
+
+        // Get by beneficiary Id
+        public BeneficiaryDto? GetById(int id)
+        {
+            var beneficiary = _beneficiaryRepo.GetById(id);
+            return beneficiary == null ? null : MapToDto(beneficiary);
+        }
+
+        // Add beneficiary using only clientId
+        public BeneficiaryDto Add(int clientId)
+        {
+            // Fetch client
+            var client = _clientRepo.GetById(clientId);
+            var BankName=_bankRepo.GetById(client.BankId);
+            Console.WriteLine("Bank Name is " + BankName.Name);
+            if (client == null)
+                throw new Exception("Client not found");
+
+            // Create Beneficiary entity using client info
+            var beneficiary = new Beneficiary
+            {
+                ClientId = client.ClientId,
+                BankName = BankName.Name,     // safeguard
+                AccountNo = client.Account?.AccountNumber,
+                IFSCCode = "SBIN001250" 
+              
+            };
+
+            // Save in repository
+            var created = _beneficiaryRepo.Add(beneficiary);
+
+            return MapToDto(created);
+        }
+
+        // Update beneficiary
+        public BeneficiaryDto? Update(int id, BeneficiaryDto dto)
+        {
+            
+            var client = _clientRepo.GetById(dto.ClientId);
+            var BankName = _bankRepo.GetById(client.BankId);
+            if (client == null)
+                throw new Exception("Client not found");
+
+            var beneficiary = new Beneficiary
+            {
+                BeneficiaryId = id,  // keep the same ID
+                ClientId = client.ClientId,
+                BankName = BankName.Name,           // always comes from client
+                AccountNo = client.Account?.AccountNumber,
+                IFSCCode = "SBIN001250",
+              
+            };
+
+            var updated = _beneficiaryRepo.Update(id, beneficiary);
+            return updated == null ? null : MapToDto(updated);
+        }
+
+        // Delete beneficiary
+        public bool Delete(int id)
+        {
+            return _beneficiaryRepo.Delete(id);
+        }
+
+        // Helper method to map entity → DTO
+        private BeneficiaryDto MapToDto(Beneficiary b)
+        {
+            return new BeneficiaryDto
+            {
+                BeneficiaryId = b.BeneficiaryId,
+                ClientId = b.ClientId,
+                ClientName = b.Client?.User.Username,
+                BankName = b.BankName,
+                AccountNo = b.AccountNo,
+                IFSCCode = b.IFSCCode
+               
+            };
+        }
+    }
+}

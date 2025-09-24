@@ -1,1 +1,79 @@
 ".vs/" 
+# ======================
+# .NET / Visual Studio
+# ======================
+
+# Build results
+bin/
+obj/
+out/
+
+# Visual Studio working folders
+.vs/
+.vscode/
+
+# User-specific files
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Logs
+*.log
+logs/
+
+# DotNet environment files
+*.launchSettings.json
+appsettings.Development.json
+appsettings.Local.json
+
+# EF Core Migrations cache
+*Migrations/*.Designer.cs
+*Migrations/*Snapshot.cs
+
+# NuGet packages
+*.nupkg
+packages/
+.nuget/
+
+# Cache / temp files
+*.tmp
+*.temp
+*.bak
+*.swp
+*.DS_Store
+Thumbs.db
+
+# Publish profiles
+Properties/PublishProfiles/
+
+# Secrets
+secrets.json
+
+# ======================
+# Angular / Node
+# ======================
+
+node_modules/
+dist/
+.angular/
+
+# ======================
+# JetBrains IDEs
+# ======================
+.idea/
+
+# ======================
+# OS / Misc
+# ======================
+
+# macOS Finder metadata
+.DS_Store
+
+# Windows Thumbnails / Installer files
+Thumbs.db
+*.cab
+*.msi
+*.msm
+*.msp
