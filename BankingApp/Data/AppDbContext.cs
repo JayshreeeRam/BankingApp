@@ -93,13 +93,20 @@ namespace BankingApp.Models
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Employee ↔ Client
+
             modelBuilder.Entity<Employee>()
-                .HasOne(e => e.Client)
-                .WithMany(c => c.Employees)
-                .HasForeignKey(e => e.ClientId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
+                 .HasOne(e => e.EmployerClient)
+                 .WithMany(c => c.EmployeesPaid)
+                 .HasForeignKey(e => e.EmployerClientId)
+                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Employee>()
+                .HasOne(e => e.EmployeeClient)
+                .WithMany(c => c.EmployeesAsClient)
+                .HasForeignKey(e => e.EmployeeClientId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
 
             // Payment ↔ Client
             modelBuilder.Entity<Payment>()

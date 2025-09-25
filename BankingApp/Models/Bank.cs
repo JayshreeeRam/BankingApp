@@ -10,12 +10,14 @@ namespace BankingApp.Models
 
         [Required]
         [MaxLength(100)]
-        public string Name { get; set; } = null!;
+        public string Name { get;  set; } = null!;
 
         [MaxLength(200)]
         public string? Address { get; set; }
 
-       
+        [Required]
+        [MaxLength(100)]
+        public string IFSCCODE { get;  set; }
 
         // Relationships
         public ICollection<Client>? Clients { get; set; }

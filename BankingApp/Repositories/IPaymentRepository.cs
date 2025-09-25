@@ -8,6 +8,6 @@ namespace BankingApp.Repository
         Payment? GetById(int id);
         Payment Add(Payment payment);
         Payment Update(int id, Payment payment);
-        bool Delete(int id);
+        //bool Delete(int id);
     }
 }

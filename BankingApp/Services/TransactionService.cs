@@ -46,7 +46,7 @@ namespace BankingApp.Services
 
             var transaction = new Transaction
             {
-                TransactionId=dto.TransactionId,
+                TransactionId = dto.TransactionId,
                 AccountId = dto.AccountId,
                 TransactionType = dto.TransactionType,
                 Amount = dto.Amount,
@@ -62,29 +62,29 @@ namespace BankingApp.Services
             return MapToDto(saved);
         }
 
-        public TransactionDto? Update(int id, TransactionDto dto)
-        {
-            var transaction = _transactionRepo.GetById(id);
-            if (transaction == null) return null;
-            transaction.TransactionId = id;
-            transaction.AccountId = dto.AccountId;
-            transaction.TransactionType = dto.TransactionType;
-            transaction.Amount = dto.Amount;
-            transaction.TransactionStatus = dto.TransactionStatus;
-            transaction.TransactionDate = dto.TransactionDate;
-            transaction.SenderId = dto.SenderId;
-            transaction.ReceiverId = dto.ReceiverId;
-            transaction.SenderName = dto.SenderName ?? transaction.SenderName;
-            transaction.ReceiverName = dto.ReceiverName ?? transaction.ReceiverName;
+        //public TransactionDto? Update(int id, TransactionDto dto)
+        //{
+        //    var transaction = _transactionRepo.GetById(id);
+        //    if (transaction == null) return null;
+        //    transaction.TransactionId = id;
+        //    transaction.AccountId = dto.AccountId;
+        //    transaction.TransactionType = dto.TransactionType;
+        //    transaction.Amount = dto.Amount;
+        //    transaction.TransactionStatus = dto.TransactionStatus;
+        //    transaction.TransactionDate = dto.TransactionDate;
+        //    transaction.SenderId = dto.SenderId;
+        //    transaction.ReceiverId = dto.ReceiverId;
+        //    transaction.SenderName = dto.SenderName ?? transaction.SenderName;
+        //    transaction.ReceiverName = dto.ReceiverName ?? transaction.ReceiverName;
 
-            var updated = _transactionRepo.Update(id, transaction);
-            return updated == null ? null : MapToDto(updated);
-        }
+        //    var updated = _transactionRepo.Update(id, transaction);
+        //    return updated == null ? null : MapToDto(updated);
+        //}
 
-        public bool Delete(int id)
-        {
-            return _transactionRepo.Delete(id);
-        }
+        //public bool Delete(int id)
+        //{
+        //    return _transactionRepo.Delete(id);
+        //}
 
         public IEnumerable<TransactionDto> GetByAccount(int accountId)
         {

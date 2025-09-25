@@ -49,12 +49,12 @@ namespace BankingApp.Controllers
             return Ok(updated);
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            var success = _service.Delete(id);
-            if (!success) return NotFound();
-            return NoContent();
-        }
+        //[HttpDelete("{id}")]
+        //public IActionResult Delete(int id)
+        //{
+        //    var success = _service.Delete(id);
+        //    if (!success) return NotFound();
+        //    return NoContent();
+        //}
     }
 }

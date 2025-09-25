@@ -36,13 +36,13 @@ namespace BankingApp.Services
 
         public ClientDto Add(CreateClientDto dto)
         {
-            // Fetch user to get Name
+
             var user = _userRepository.GetById(dto.UserId);
             if (user == null) throw new Exception("User not found");
 
             var client = new Client
             {
-                Name = user.Username,        // Name comes from User
+                Name = user.Username,
                 Address = dto.Address,
                 BankId = dto.BankId,
                 UserId = dto.UserId,
@@ -58,11 +58,8 @@ namespace BankingApp.Services
         {
             var client = _repo.GetById(id);
             if (client == null) return null;
-
+            if (dto.Name != null) client.Name = dto.Name;
             if (dto.Address != null) client.Address = dto.Address;
-            if (dto.BankId.HasValue) client.BankId = dto.BankId.Value;
-            if (dto.AccountType.HasValue) client.AccountType = dto.AccountType.Value;
-            if (dto.VerificationStatus.HasValue) client.VerificationStatus = dto.VerificationStatus.Value;
 
             var updated = _repo.Update(id, client);
             return MapToDto(updated);
@@ -94,8 +91,8 @@ namespace BankingApp.Services
 
             var account = _accountService.AddAccount(accountDto);
 
-            // Link account to client (navigation property if exists)
-            // Optional if Client has AccountId FK
+            // Link account to client 
+
             _repo.Update(client.ClientId, client);
 
             return MapToDto(client);

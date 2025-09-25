@@ -36,30 +36,30 @@ namespace BankingApp.Controllers
             return Ok(_service.GetByAccount(accountId));
         }
 
-        [HttpPost]
-        public IActionResult Add([FromBody] TransactionDto dto)
-        {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
-            var created = _service.Add(dto);
-            return CreatedAtAction(nameof(GetById), new { id = created.TransactionId }, created);
-        }
+        //[HttpPost]
+        //public IActionResult Add([FromBody] TransactionDto dto)
+        //{
+        //    if (!ModelState.IsValid) return BadRequest(ModelState);
+        //    var created = _service.Add(dto);
+        //    return CreatedAtAction(nameof(GetById), new { id = created.TransactionId }, created);
+        //}
 
 
-        [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] TransactionDto dto)
-        {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
-            var updated = _service.Update(id, dto);
-            if (updated == null) return NotFound();
-            return Ok(updated);
-        }
+        //[HttpPut("{id}")]
+        //public IActionResult Update(int id, [FromBody] TransactionDto dto)
+        //{
+        //    if (!ModelState.IsValid) return BadRequest(ModelState);
+        //    var updated = _service.Update(id, dto);
+        //    if (updated == null) return NotFound();
+        //    return Ok(updated);
+        //}
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            var success = _service.Delete(id);
-            if (!success) return NotFound();
-            return NoContent();
-        }
+        //[HttpDelete("{id}")]
+        //public IActionResult Delete(int id)
+        //{
+        //    var success = _service.Delete(id);
+        //    if (!success) return NotFound();
+        //    return NoContent();
+        //}
     }
 }

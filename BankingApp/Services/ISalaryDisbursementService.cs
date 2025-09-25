@@ -8,7 +8,7 @@ namespace BankingApp.Services
     {
         IEnumerable<SalaryDisbursementDto> GetAll();
         SalaryDisbursementDto? GetById(int id);
-        SalaryDisbursementDto Add(SalaryDisbursementDto dto);
+        SalaryDisbursementDto Add(CreateSalaryDisbursementDto dto);
         SalaryDisbursementDto? Update(int id, SalaryDisbursementDto dto);
         bool Delete(int id);
 

@@ -35,9 +35,16 @@ namespace BankingApp.Models
         // Only generated after approval
         public Account? Account { get; set; }
 
-        [JsonIgnore] public ICollection<Beneficiary>? Beneficiaries { get; set; }
-        [JsonIgnore] public ICollection<Employee>? Employees { get; set; }
-        [JsonIgnore] public ICollection<Payment>? Payments { get; set; }
+        [JsonIgnore] 
+        public ICollection<Beneficiary>? Beneficiaries { get; set; }
+        [JsonIgnore]
+        public ICollection<Employee>? EmployeesPaid { get; set; }
+
+        [JsonIgnore]
+        public ICollection<Employee>? EmployeesAsClient { get; set; }
+
+        [JsonIgnore] 
+        public ICollection<Payment>? Payments { get; set; }
 
 
         [JsonIgnore] 

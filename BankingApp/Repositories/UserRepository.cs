@@ -49,14 +49,14 @@ namespace BankingApp.Repository
             return existing;
         }
 
-        public bool Delete(int id)
-        {
-            var user = _repo.Users.Find(id);
-            if (user == null) return false;
+        //public bool Delete(int id)
+        //{
+        //    var user = _repo.Users.Find(id);
+        //    if (user == null) return false;
 
-            _repo.Users.Remove(user);
-            _repo.SaveChanges();
-            return true;
-        }
+        //    _repo.Users.Remove(user);
+        //    _repo.SaveChanges();
+        //    return true;
+        //}
     }
 }

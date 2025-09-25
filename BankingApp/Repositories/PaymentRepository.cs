@@ -14,10 +14,9 @@ namespace BankingApp.Repository
 
         public IEnumerable<Payment> GetAll()
         {
-            // Return all payments including self-transfers (BeneficiaryId can be null)
-            return _repo.Payments
+             return _repo.Payments
                 .Include(p => p.Client)
-                .Include(p => p.Beneficiary) // EF will handle null automatically
+                .Include(p => p.Beneficiary) 
                 .ToList();
         }
 
@@ -31,9 +30,7 @@ namespace BankingApp.Repository
 
         public Payment Add(Payment payment)
         {
-            // Ensure BeneficiaryId is null if self-transfer
-           
-
+            
             _repo.Payments.Add(payment);
             _repo.SaveChanges();
             return payment;
@@ -44,22 +41,19 @@ namespace BankingApp.Repository
             var existing = _repo.Payments.Find(id);
             if (existing == null) return null!;
 
-            // Handle self-transfer update
-           
-
             _repo.Entry(existing).CurrentValues.SetValues(payment);
             _repo.SaveChanges();
             return existing;
         }
 
-        public bool Delete(int id)
-        {
-            var payment = _repo.Payments.Find(id);
-            if (payment == null) return false;
+        //public bool Delete(int id)
+        //{
+        //    var payment = _repo.Payments.Find(id);
+        //    if (payment == null) return false;
 
-            _repo.Payments.Remove(payment);
-            _repo.SaveChanges();
-            return true;
-        }
+        //    _repo.Payments.Remove(payment);
+        //    _repo.SaveChanges();
+        //    return true;
+        //}
     }
 }

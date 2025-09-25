@@ -17,8 +17,10 @@ namespace BankingApp.Repositories
         public IEnumerable<Employee> GetAll()
         {
             return _context.Employees
-                .Include(e => e.Client)
-                    .ThenInclude(c => c.User)  // fetch user for name
+                .Include(e => e.EmployerClient)
+                    .ThenInclude(c => c.User) // Employer’s User (company account)
+                .Include(e => e.EmployeeClient)
+                    .ThenInclude(c => c.User) // Employee’s User (personal account)
                 .Include(e => e.Bank)
                 .AsNoTracking()
                 .ToList();
@@ -27,7 +29,9 @@ namespace BankingApp.Repositories
         public Employee? GetById(int id)
         {
             return _context.Employees
-                .Include(e => e.Client)
+                .Include(e => e.EmployerClient)
+                    .ThenInclude(c => c.User)
+                .Include(e => e.EmployeeClient)
                     .ThenInclude(c => c.User)
                 .Include(e => e.Bank)
                 .AsNoTracking()
@@ -58,8 +62,11 @@ namespace BankingApp.Repositories
             if (employee.BankId != 0)
                 existing.BankId = employee.BankId;
 
-            if (employee.ClientId != 0)
-                existing.ClientId = employee.ClientId;
+            if (employee.EmployerClientId != 0)
+                existing.EmployerClientId = employee.EmployerClientId;
+
+            if (employee.EmployeeClientId != 0)
+                existing.EmployeeClientId = employee.EmployeeClientId;
 
             _context.SaveChanges();
             return existing;

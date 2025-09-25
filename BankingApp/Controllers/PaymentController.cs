@@ -43,13 +43,13 @@ namespace BankingApp.Controllers
 
         
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            bool success = _service.Delete(id);
-            if (!success) return NotFound();
-            return NoContent();
-        }
+        //[HttpDelete("{id}")]
+        //public IActionResult Delete(int id)
+        //{
+        //    bool success = _service.Delete(id);
+        //    if (!success) return NotFound();
+        //    return NoContent();
+        //}
 
         // ? New endpoint: approve payment & create transactions
         [HttpPost("{id}/approve")]

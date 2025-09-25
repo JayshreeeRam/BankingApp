@@ -11,41 +11,28 @@ namespace BankingApp.Services
     {
         private readonly IEmployeeRepository _repo;
         private readonly IClientRepository _clientRepo;
+        private readonly IBankRepository _bankRepo;
 
-        public EmployeeService(IEmployeeRepository repo, IClientRepository clientRepo)
+        public EmployeeService(IEmployeeRepository repo, IClientRepository clientRepo, IBankRepository bankRepo)
         {
             _repo = repo;
             _clientRepo = clientRepo;
+            _bankRepo = bankRepo;
         }
 
-        // Convert Employee entity → DTO
         private EmployeeDto ToDto(Employee e)
         {
-            // Fetch latest Client and Bank names
-            var clientName = e.Client?.User?.Username ;
-            var bankName = e.Bank?.Name;
-
+            var bank = e.EmployeeClient != null ? _bankRepo.GetById(e.EmployeeClient.BankId) : null;
             return new EmployeeDto
             {
                 EmployeeId = e.EmployeeId,
-                Name = e.Name,
-                BankId = e.BankId,
-                BankName = bankName,
-                ClientId = e.ClientId,
-                ClientName = clientName,
+                EmployeeClientId = e.EmployeeClientId,
+                EmployeeName = e.EmployeeClient?.Name ?? e.EmployeeClient?.User?.Username,
+                BankId = e.EmployeeClient?.BankId ?? 0,
+                BankName = bank != null ? bank.Name : "Unknown",
+                SenderClientId = e.EmployerClientId,
+                SenderName = e.EmployerClient?.Name ?? e.EmployerClient?.User?.Username,
                 Salary = e.Salary
-            };
-        }
-
-        // Convert DTO → Employee entity (for Add/Update)
-        private Employee ToEntity(EmployeeDto dto)
-        {
-            return new Employee
-            {
-                Name = dto.Name,        // Employee's own name
-                BankId = dto.BankId,    // Only store the ID
-                ClientId = dto.ClientId,// Only store the ID
-                Salary = dto.Salary
             };
         }
 
@@ -60,26 +47,49 @@ namespace BankingApp.Services
             return emp == null ? null : ToDto(emp);
         }
 
-        public EmployeeDto Add(EmployeeDto dto)
+        public EmployeeDto Add(CreateEmployeeDto dto)
         {
-            var entity = ToEntity(dto);
-            var emp = _repo.Add(entity);
-            return ToDto(emp);
+            var employeeClient = _clientRepo.GetById(dto.EmployeeClientId);
+            var senderClient = _clientRepo.GetById(dto.SenderClientId);
+
+            if (employeeClient == null) throw new KeyNotFoundException("Employee client not found.");
+            if (senderClient == null) throw new KeyNotFoundException("Sender client not found.");
+
+            var employee = new Employee
+            {
+                EmployeeClientId = employeeClient.ClientId,
+                EmployerClientId = senderClient.ClientId,
+                Salary = dto.Salary,
+                BankId = employeeClient.BankId,
+                Name = employeeClient.Name 
+            };
+
+            var added = _repo.Add(employee);
+            return ToDto(added);
         }
 
-        public EmployeeDto? Update(int id, EmployeeDto dto)
+
+        public EmployeeDto? Update(int id, UpdateEmployeeDto dto)
         {
             var existing = _repo.GetById(id);
             if (existing == null) return null;
 
-            existing.Name = dto.Name;
-            existing.BankId = dto.BankId;
-            existing.ClientId = dto.ClientId;
+            var employeeClient = _clientRepo.GetById(dto.EmployeeClientId);
+            var senderClient = _clientRepo.GetById(dto.SenderClientId);
+
+            if (employeeClient == null) throw new KeyNotFoundException("Employee client not found.");
+            if (senderClient == null) throw new KeyNotFoundException("Sender client not found.");
+
+            existing.EmployeeClientId = employeeClient.ClientId;
+            existing.EmployerClientId = senderClient.ClientId;
             existing.Salary = dto.Salary;
+            existing.BankId = employeeClient.BankId;
+            existing.Name = employeeClient.Name; 
 
             var updated = _repo.Update(id, existing);
             return updated == null ? null : ToDto(updated);
         }
+
 
         public bool Delete(int id)
         {

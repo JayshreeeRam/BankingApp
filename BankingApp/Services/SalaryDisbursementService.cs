@@ -42,8 +42,8 @@ namespace BankingApp.Services
                     DisbursementId = s.DisbursementId,
                     EmployeeId = s.EmployeeId,
                     ClientId = s.ClientId,
-                    EmployeeName = emp?.Name,
-                    SenderName = emp?.Client?.User?.Username,
+                    EmployeeName = emp?.EmployeeClient?.User?.Username,
+                    SenderName = emp?.EmployerClient?.User?.Username,
                     Amount = s.Amount,
                     Date = s.Date,
                     Status = s.Status,
@@ -63,8 +63,8 @@ namespace BankingApp.Services
                 DisbursementId = s.DisbursementId,
                 EmployeeId = s.EmployeeId,
                 ClientId = s.ClientId,
-                EmployeeName = emp?.Name,
-                SenderName = emp?.Client?.User?.Username ,
+                EmployeeName = emp?.EmployeeClient?.User?.Username,
+                SenderName = emp?.EmployerClient?.User?.Username,
                 Amount = s.Amount,
                 Date = s.Date,
                 Status = s.Status,
@@ -72,19 +72,22 @@ namespace BankingApp.Services
             };
         }
 
-        public SalaryDisbursementDto Add(SalaryDisbursementDto dto)
+        public SalaryDisbursementDto Add(CreateSalaryDisbursementDto dto)
         {
             var emp = _employeeRepo.GetById(dto.EmployeeId);
             if (emp == null) throw new KeyNotFoundException("Employee not found.");
 
+            if (emp.EmployeeClient == null)
+                throw new Exception("Employee is not linked to any client.");
+
             var salary = new SalaryDisbursement
             {
                 EmployeeId = emp.EmployeeId,
-                ClientId = dto.ClientId,
-                Amount = (decimal)emp.Salary,
+                ClientId = emp.EmployerClientId,            
+                Amount = (decimal)emp.Salary,       
                 Date = DateTime.UtcNow,
                 Status = PaymentStatus.Pending,
-                BatchId = dto.BatchId
+                BatchId = dto.BatchId               
             };
 
             var added = _repo.Add(salary);
@@ -94,14 +97,16 @@ namespace BankingApp.Services
                 DisbursementId = added.DisbursementId,
                 EmployeeId = added.EmployeeId,
                 ClientId = added.ClientId,
-                EmployeeName = emp.Name,
-                SenderName = emp.Client?.User?.Username,
+                EmployeeName = emp?.EmployeeClient?.User?.Username,
+                SenderName = emp?.EmployerClient?.User?.Username,
                 Amount = added.Amount,
                 Date = added.Date,
                 Status = added.Status,
                 BatchId = added.BatchId
             };
         }
+
+
 
         public SalaryDisbursementDto? Update(int id, SalaryDisbursementDto dto)
         {
@@ -118,8 +123,8 @@ namespace BankingApp.Services
                 DisbursementId = salary.DisbursementId,
                 EmployeeId = salary.EmployeeId,
                 ClientId = salary.ClientId,
-                EmployeeName = emp?.Name,
-                SenderName = emp?.Client?.User?.Username ,
+                EmployeeName = emp?.EmployeeClient?.User?.Username,
+                SenderName = emp?.EmployerClient?.User?.Username,
                 Amount = salary.Amount,
                 Date = salary.Date,
                 Status = salary.Status,
@@ -146,17 +151,18 @@ namespace BankingApp.Services
             salary.Status = PaymentStatus.Approved;
             _repo.Update(salary.DisbursementId, salary);
 
+            // Correct ReceiverId here
             var transaction = new Transaction
             {
                 AccountId = clientAccount.AccountId,
-                SenderId = salary.ClientId,
-                ReceiverId = emp.EmployeeId,
+                SenderId = salary.ClientId,               // employer client
+                ReceiverId = emp.EmployeeClientId,       // employee client
                 Amount = salary.Amount,
-             TransactionDate = DateTime.UtcNow.ToLocalTime(),
+                TransactionDate = DateTime.UtcNow,
                 TransactionType = TransactionType.Credit,
                 TransactionStatus = TransactionStatus.Success,
-                SenderName = clientAccount.Client?.User?.Username,
-                ReceiverName = emp.Name
+                ReceiverName = emp?.EmployeeClient?.User?.Username,
+                SenderName = emp?.EmployerClient?.User?.Username,
             };
             _transactionRepo.Add(transaction);
 
@@ -165,15 +171,14 @@ namespace BankingApp.Services
                 DisbursementId = salary.DisbursementId,
                 EmployeeId = salary.EmployeeId,
                 ClientId = salary.ClientId,
-                EmployeeName = emp.Name,
-                SenderName = clientAccount.Client?.User?.Username,
+                EmployeeName = emp?.EmployeeClient?.User?.Username,
+                SenderName = emp?.EmployerClient?.User?.Username,
                 Amount = salary.Amount,
                 Date = salary.Date,
                 Status = salary.Status,
                 BatchId = salary.BatchId
             };
         }
-
 
         public IEnumerable<SalaryDisbursementDto> ApproveSalaryByBatch(int batchId)
         {
@@ -189,28 +194,25 @@ namespace BankingApp.Services
                 var clientAccount = _accountRepo.GetByClientId(salary.ClientId);
 
                 if (emp == null || clientAccount == null || clientAccount.Balance < salary.Amount)
-                    continue; // skip if not enough balance or invalid
+                    continue;
 
-                // Deduct amount
                 clientAccount.Balance -= salary.Amount;
                 _accountRepo.Update(clientAccount.AccountId, clientAccount);
 
-                // Approve salary
                 salary.Status = PaymentStatus.Approved;
                 _repo.Update(salary.DisbursementId, salary);
 
-                // Create transaction
                 var transaction = new Transaction
                 {
                     AccountId = clientAccount.AccountId,
-                    SenderId = salary.ClientId,
-                    ReceiverId = emp.EmployeeId,
+                    SenderId = salary.ClientId,               // employer client
+                    ReceiverId = emp.EmployeeClientId,       // employee client
                     Amount = salary.Amount,
                     TransactionDate = DateTime.UtcNow,
                     TransactionType = TransactionType.Credit,
                     TransactionStatus = TransactionStatus.Success,
-                    SenderName = clientAccount.Client?.User?.Username,
-                    ReceiverName = emp.Name
+                    ReceiverName = emp?.EmployeeClient?.User?.Username,
+                    SenderName = emp?.EmployerClient?.User?.Username,
                 };
                 _transactionRepo.Add(transaction);
 
@@ -219,8 +221,8 @@ namespace BankingApp.Services
                     DisbursementId = salary.DisbursementId,
                     EmployeeId = emp.EmployeeId,
                     ClientId = salary.ClientId,
-                    EmployeeName = emp.Name,
-                    SenderName = clientAccount.Client?.User?.Username,
+                    EmployeeName = emp?.EmployeeClient?.User?.Username,
+                    SenderName = emp?.EmployerClient?.User?.Username,
                     Amount = salary.Amount,
                     Date = salary.Date,
                     Status = salary.Status,

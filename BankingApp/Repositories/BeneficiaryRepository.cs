@@ -38,19 +38,19 @@ namespace BankingApp.Repository
             return beneficiary;
         }
 
-        public Beneficiary Update(int id, Beneficiary beneficiary)
-        {
-            var existing = _repo.Beneficiaries.Find(id);
-            if (existing == null) return null!;
+        //public Beneficiary Update(int id, Beneficiary beneficiary)
+        //{
+        //    var existing = _repo.Beneficiaries.Find(id);
+        //    if (existing == null) return null!;
 
-            existing.BankName = beneficiary.BankName;
-            existing.AccountNo = beneficiary.AccountNo;
-            existing.IFSCCode = beneficiary.IFSCCode;
-            existing.ClientId = beneficiary.ClientId;
+        //    existing.BankName = beneficiary.BankName;
+        //    existing.AccountNo = beneficiary.AccountNo;
+        //    existing.IFSCCode = beneficiary.IFSCCode;
+        //    existing.ClientId = beneficiary.ClientId;
 
-            _repo.SaveChanges();
-            return existing;
-        }
+        //    _repo.SaveChanges();
+        //    return existing;
+        //}
 
         public bool Delete(int id)
         {

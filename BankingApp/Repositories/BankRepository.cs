@@ -29,26 +29,28 @@ namespace BankingApp.Repository
             return bank;
         }
 
-        public Bank Update(int id, Bank bank)
-        {
-            var existing = _repo.Banks.Find(id);
-            if (existing == null) return null!;
+        //public Bank Update(int id, Bank bank)
+        //{
+        //    var existing = _repo.Banks.Find(id);
+        //    if (existing == null) return null!;
 
-            existing.Name = bank.Name;
-            existing.Address = bank.Address;
+        //    existing.Name = bank.Name;
+        //    existing.Address = bank.Address;
+        //    existing.IFSCCODE = bank.IFSCCODE; // ✅ update IFSC too
 
-            _repo.SaveChanges();
-            return existing;
-        }
+        //    _repo.SaveChanges();
+        //    return existing;
+        //}
 
-        public bool Delete(int id)
-        {
-            var bank = _repo.Banks.Find(id);
-            if (bank == null) return false;
 
-            _repo.Banks.Remove(bank);
-            _repo.SaveChanges();
-            return true;
-        }
+        //public bool Delete(int id)
+        //{
+        //    var bank = _repo.Banks.Find(id);
+        //    if (bank == null) return false;
+
+        //    _repo.Banks.Remove(bank);
+        //    _repo.SaveChanges();
+        //    return true;
+        //}
     }
 }

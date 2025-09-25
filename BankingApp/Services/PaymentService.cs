@@ -60,7 +60,7 @@ namespace BankingApp.Services
             // Get sender's account
             var senderAccount = _accountRepo.GetByClientId(payment.ClientId);
             if (senderAccount == null || senderAccount.Balance < payment.Amount)
-                return null; // insufficient funds or no account
+                return null; 
 
             // Get receiver's account
             var receiverAccount = _accountRepo.GetByClientId(payment.BeneficiaryId);
@@ -129,10 +129,10 @@ namespace BankingApp.Services
             return MapToDto(updated);
         }
 
-        public bool Delete(int id)
-        {
-            return _paymentRepo.Delete(id);
-        }
+        //public bool Delete(int id)
+        //{
+        //    return _paymentRepo.Delete(id);
+        //}
 
         private PaymentDto MapToDto(Payment p)
         {

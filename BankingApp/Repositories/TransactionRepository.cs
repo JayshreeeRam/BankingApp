@@ -1,75 +1,95 @@
-﻿
-using BankingApp.Models;
+﻿using BankingApp.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace BankingApp.Repository
 {
-   
-
     public class TransactionRepository : ITransactionRepository
     {
-        private readonly BankingContext _repo;
+        private readonly BankingContext _context;
 
         public TransactionRepository(BankingContext context)
         {
-            _repo = context;
+            _context = context;
         }
 
         public IEnumerable<Transaction> GetAll()
         {
-            return _repo.Transactions
-                        .Include(t => t.Account)
-                        .Include(t => t.Sender)
-                        .Include(t => t.Receiver)
-                        .ToList();
+            return _context.Transactions
+                           .AsNoTracking()
+                           .OrderByDescending(t => t.TransactionDate)
+                           .ToList();
         }
 
         public Transaction? GetById(int id)
         {
-            return _repo.Transactions
-                        .Include(t => t.Account)
-                        .Include(t => t.Sender)
-                        .Include(t => t.Receiver)
-                        .FirstOrDefault(t => t.TransactionId == id);
+            return _context.Transactions
+                           .AsNoTracking()
+                           .FirstOrDefault(t => t.TransactionId == id);
         }
 
         public Transaction Add(Transaction transaction)
         {
-            _repo.Transactions.Add(transaction);
-            _repo.SaveChanges();
+            _context.Transactions.Add(transaction);
+            _context.SaveChanges(); // ensure immediate persistence
             return transaction;
         }
 
         public Transaction? Update(int id, Transaction transaction)
         {
-            var existing = _repo.Transactions.Find(id);
+            var existing = _context.Transactions.Find(id);
             if (existing == null) return null;
 
-            _repo.Entry(existing).CurrentValues.SetValues(transaction);
-            _repo.SaveChanges();
+            existing.AccountId = transaction.AccountId;
+            existing.TransactionType = transaction.TransactionType;
+            existing.Amount = transaction.Amount;
+            existing.TransactionStatus = transaction.TransactionStatus;
+            existing.TransactionDate = transaction.TransactionDate;
+            existing.SenderId = transaction.SenderId;
+            existing.ReceiverId = transaction.ReceiverId;
+            existing.SenderName = transaction.SenderName;
+            existing.ReceiverName = transaction.ReceiverName;
+
+            _context.SaveChanges();
             return existing;
         }
 
         public bool Delete(int id)
         {
-            var transaction = _repo.Transactions.Find(id);
+            var transaction = _context.Transactions.Find(id);
             if (transaction == null) return false;
 
-            _repo.Transactions.Remove(transaction);
-            _repo.SaveChanges();
+            _context.Transactions.Remove(transaction);
+            _context.SaveChanges();
             return true;
         }
 
         public IEnumerable<Transaction> GetByAccount(int accountId)
         {
-            return _repo.Transactions
-                        .Where(t => t.AccountId == accountId)
-                        .Include(t => t.Account)
-                        .Include(t => t.Sender)
-                        .Include(t => t.Receiver)
-                        .ToList();
+            return _context.Transactions
+                           .AsNoTracking()
+                           .Where(t => t.AccountId == accountId)
+                           .OrderByDescending(t => t.TransactionDate)
+                           .ToList();
+        }
+
+        public IEnumerable<Transaction> GetByClientId(int clientId)
+        {
+            return _context.Transactions
+                           .AsNoTracking()
+                           .Where(t => t.SenderId == clientId || t.ReceiverId == clientId)
+                           .OrderByDescending(t => t.TransactionDate)
+                           .ToList();
+        }
+
+        public IEnumerable<Transaction> GetByEmployeeId(int employeeId)
+        {
+            return _context.Transactions
+                           .AsNoTracking()
+                           .Where(t => t.ReceiverId == employeeId)
+                           .OrderByDescending(t => t.TransactionDate)
+                           .ToList();
         }
     }
 }

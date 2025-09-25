@@ -63,9 +63,9 @@ namespace BankingApp.Services
             return _repo.Update(id, existing);
         }
 
-        public bool Delete(int id)
-        {
-            return _repo.Delete(id);
-        }
+        //public bool Delete(int id)
+        //{
+        //    return _repo.Delete(id);
+        //}
     }
 }

@@ -7,7 +7,7 @@ namespace BankingApp.Services
         IEnumerable<BeneficiaryDto> GetAll();
         BeneficiaryDto? GetById(int id);
         BeneficiaryDto Add(int id);
-        BeneficiaryDto? Update(int id, BeneficiaryDto dto);
+        //BeneficiaryDto? Update(int id, BeneficiaryDto dto);
         bool Delete(int id);
     }
 }

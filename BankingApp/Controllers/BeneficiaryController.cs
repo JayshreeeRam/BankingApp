@@ -51,22 +51,22 @@ namespace BankingApp.Controllers
         }
 
         // PUT: api/Beneficiary/5
-        [HttpPut("{id}")]
-        public ActionResult<BeneficiaryDto> Update(int id, [FromBody] BeneficiaryDto dto)
-        {
-            try
-            {
-                var updated = _service.Update(id, dto);
-                if (updated == null)
-                    return NotFound();
+        //[HttpPut("{id}")]
+        //public ActionResult<BeneficiaryDto> Update(int id, [FromBody] BeneficiaryDto dto)
+        //{
+        //    try
+        //    {
+        //        var updated = _service.Update(id, dto);
+        //        if (updated == null)
+        //            return NotFound();
 
-                return Ok(updated);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
-        }
+        //        return Ok(updated);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(new { message = ex.Message });
+        //    }
+        //}
 
         // DELETE: api/Beneficiary/5
         [HttpDelete("{id}")]

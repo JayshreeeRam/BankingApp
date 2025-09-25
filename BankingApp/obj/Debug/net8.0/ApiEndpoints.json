@@ -226,7 +226,7 @@
     "Parameters": [
       {
         "Name": "bankDto",
-        "Type": "BankingApp.DTOs.BankDto",
+        "Type": "BankingApp.DTOs.CreateBankDto",
         "IsRequired": true
       }
     ],
@@ -267,53 +267,6 @@
         "StatusCode": 200
       }
     ]
-  },
-  {
-    "ContainingType": "BankingApp.Controllers.BankController",
-    "Method": "Update",
-    "RelativePath": "api/Bank/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "bankDto",
-        "Type": "BankingApp.DTOs.BankDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "BankingApp.DTOs.BankDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "BankingApp.Controllers.BankController",
-    "Method": "Delete",
-    "RelativePath": "api/Bank/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
   },
   {
     "ContainingType": "BankingApp.Controllers.BeneficiaryController",
@@ -372,37 +325,6 @@
       {
         "Name": "id",
         "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "BankingApp.DTOs.BeneficiaryDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "BankingApp.Controllers.BeneficiaryController",
-    "Method": "Update",
-    "RelativePath": "api/Beneficiary/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "dto",
-        "Type": "BankingApp.DTOs.BeneficiaryDto",
         "IsRequired": true
       }
     ],
@@ -617,7 +539,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "BankingApp.DTOs.EmployeeDto",
+        "Type": "BankingApp.DTOs.CreateEmployeeDto",
         "IsRequired": true
       }
     ],
@@ -654,7 +576,7 @@
       },
       {
         "Name": "dto",
-        "Type": "BankingApp.DTOs.EmployeeDto",
+        "Type": "BankingApp.DTOs.UpdateEmployeeDto",
         "IsRequired": true
       }
     ],
@@ -707,22 +629,6 @@
     "Method": "GetById",
     "RelativePath": "api/Payment/{id}",
     "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "BankingApp.Controllers.PaymentController",
-    "Method": "Delete",
-    "RelativePath": "api/Payment/{id}",
-    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -849,7 +755,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "BankingApp.DTOs.SalaryDisbursementDto",
+        "Type": "BankingApp.DTOs.CreateSalaryDisbursementDto",
         "IsRequired": true
       }
     ],
@@ -915,62 +821,9 @@
   },
   {
     "ContainingType": "BankingApp.Controllers.TransactionController",
-    "Method": "Add",
-    "RelativePath": "api/Transaction",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "dto",
-        "Type": "BankingApp.DTOs.TransactionDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "BankingApp.Controllers.TransactionController",
     "Method": "GetById",
     "RelativePath": "api/Transaction/{id}",
     "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "BankingApp.Controllers.TransactionController",
-    "Method": "Update",
-    "RelativePath": "api/Transaction/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "dto",
-        "Type": "BankingApp.DTOs.TransactionDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "BankingApp.Controllers.TransactionController",
-    "Method": "Delete",
-    "RelativePath": "api/Transaction/{id}",
-    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -1056,22 +909,6 @@
       {
         "Name": "dto",
         "Type": "BankingApp.DTOs.UserDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "BankingApp.Controllers.UserController",
-    "Method": "Delete",
-    "RelativePath": "api/User/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

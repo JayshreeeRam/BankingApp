@@ -6,9 +6,9 @@ namespace BankingApp.Services
     {
         IEnumerable<TransactionDto> GetAll();
         TransactionDto? GetById(int id);
-        TransactionDto Add(TransactionDto dto);
-        TransactionDto? Update(int id, TransactionDto dto);
-        bool Delete(int id);
+        //TransactionDto Add(TransactionDto dto);
+        //TransactionDto? Update(int id, TransactionDto dto);
+        //bool Delete(int id);
         IEnumerable<TransactionDto> GetByAccount(int accountId);
     }
 }

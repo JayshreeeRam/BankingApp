@@ -11,11 +11,11 @@ namespace BankingApp.Services
         private readonly IClientRepository _clientRepo;
         private readonly IBankRepository _bankRepo;
 
-        public BeneficiaryService(IBeneficiaryRepository beneficiaryRepo, IClientRepository clientRepo,IBankRepository bankRepo)
+        public BeneficiaryService(IBeneficiaryRepository beneficiaryRepo, IClientRepository clientRepo, IBankRepository bankRepo)
         {
             _beneficiaryRepo = beneficiaryRepo;
             _clientRepo = clientRepo;
-            _bankRepo=bankRepo;
+            _bankRepo = bankRepo;
         }
 
         // Get all beneficiaries
@@ -36,7 +36,7 @@ namespace BankingApp.Services
         {
             // Fetch client
             var client = _clientRepo.GetById(clientId);
-            var BankName=_bankRepo.GetById(client.BankId);
+            var BankName = _bankRepo.GetById(client.BankId);
             Console.WriteLine("Bank Name is " + BankName.Name);
             if (client == null)
                 throw new Exception("Client not found");
@@ -45,10 +45,10 @@ namespace BankingApp.Services
             var beneficiary = new Beneficiary
             {
                 ClientId = client.ClientId,
-                BankName = BankName.Name,     // safeguard
+                BankName = BankName.Name,
                 AccountNo = client.Account?.AccountNumber,
-                IFSCCode = "SBIN001250" 
-              
+                IFSCCode = BankName.IFSCCODE,
+
             };
 
             // Save in repository
@@ -58,27 +58,27 @@ namespace BankingApp.Services
         }
 
         // Update beneficiary
-        public BeneficiaryDto? Update(int id, BeneficiaryDto dto)
-        {
-            
-            var client = _clientRepo.GetById(dto.ClientId);
-            var BankName = _bankRepo.GetById(client.BankId);
-            if (client == null)
-                throw new Exception("Client not found");
+        //public BeneficiaryDto? Update(int id, BeneficiaryDto dto)
+        //{
 
-            var beneficiary = new Beneficiary
-            {
-                BeneficiaryId = id,  // keep the same ID
-                ClientId = client.ClientId,
-                BankName = BankName.Name,           // always comes from client
-                AccountNo = client.Account?.AccountNumber,
-                IFSCCode = "SBIN001250",
-              
-            };
+        //    var client = _clientRepo.GetById(dto.ClientId);
+        //    var BankName = _bankRepo.GetById(client.BankId);
+        //    if (client == null)
+        //        throw new Exception("Client not found");
 
-            var updated = _beneficiaryRepo.Update(id, beneficiary);
-            return updated == null ? null : MapToDto(updated);
-        }
+        //    var beneficiary = new Beneficiary
+        //    {
+        //        BeneficiaryId = id,
+        //        ClientId = client.ClientId,
+        //        BankName = BankName.Name,
+        //        AccountNo = client.Account?.AccountNumber,
+        //        IFSCCode = BankName.IFSCCODE,
+
+        //    };
+
+        //    var updated = _beneficiaryRepo.Update(id, beneficiary);
+        //    return updated == null ? null : MapToDto(updated);
+        //}
 
         // Delete beneficiary
         public bool Delete(int id)
@@ -97,7 +97,7 @@ namespace BankingApp.Services
                 BankName = b.BankName,
                 AccountNo = b.AccountNo,
                 IFSCCode = b.IFSCCode
-               
+
             };
         }
     }

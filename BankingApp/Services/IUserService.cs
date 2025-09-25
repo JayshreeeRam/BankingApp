@@ -9,6 +9,6 @@ namespace BankingApp.Services
         User? GetById(int id);
         User Add(UserDto dto);
         User? Update(int id, UserDto dto);
-        bool Delete(int id);
+        //bool Delete(int id);
     }
 }

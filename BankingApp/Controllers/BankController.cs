@@ -34,28 +34,28 @@ namespace BankingApp.Controllers
 
         // POST: api/bank
         [HttpPost]
-        public ActionResult<BankDto> Create(BankDto bankDto)
+        public ActionResult<BankDto> Create(CreateBankDto bankDto)
         {
             var created = _service.Add(bankDto);
             return CreatedAtAction(nameof(GetById), new { id = created.BankId }, created);
         }
 
         // PUT: api/bank/{id}
-        [HttpPut("{id}")]
-        public ActionResult<BankDto> Update(int id, BankDto bankDto)
-        {
-            var updated = _service.Update(id, bankDto);
-            if (updated == null) return NotFound();
-            return Ok(updated);
-        }
+        //[HttpPut("{id}")]
+        //public ActionResult<BankDto> Update(int id, BankDto bankDto)
+        //{
+        //    var updated = _service.Update(id, bankDto);
+        //    if (updated == null) return NotFound();
+        //    return Ok(updated);
+        //}
 
         // DELETE: api/bank/{id}
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            var deleted = _service.Delete(id);
-            if (!deleted) return NotFound();
-            return NoContent();
-        }
+        //[HttpDelete("{id}")]
+        //public IActionResult Delete(int id)
+        //{
+        //    var deleted = _service.Delete(id);
+        //    if (!deleted) return NotFound();
+        //    return NoContent();
+        //}
     }
 }

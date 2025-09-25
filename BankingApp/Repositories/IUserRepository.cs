@@ -8,7 +8,7 @@ namespace BankingApp.Repositories
         User? GetById(int id);
         User Add(User user);
         User Update(int id, User user);
-        bool Delete(int id);
+        //bool Delete(int id);
 
 
 

@@ -31,16 +31,16 @@ namespace BankingApp.Controllers
             return Ok(employee);
         }
 
-        [HttpPost]
-        public IActionResult Add([FromBody] EmployeeDto dto)
-        {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
-            var created = _service.Add(dto);
-            return CreatedAtAction(nameof(GetById), new { id = created.EmployeeId }, created);
-        }
+            [HttpPost]
+            public IActionResult Add([FromBody] CreateEmployeeDto dto)
+            {
+                if (!ModelState.IsValid) return BadRequest(ModelState);
+                var created = _service.Add(dto);
+                return CreatedAtAction(nameof(GetById), new { id = created.EmployeeId }, created);
+            }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] EmployeeDto dto)
+        public IActionResult Update(int id, [FromBody] UpdateEmployeeDto dto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             var updated = _service.Update(id, dto);

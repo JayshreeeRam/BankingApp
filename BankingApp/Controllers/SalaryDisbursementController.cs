@@ -31,7 +31,7 @@ namespace BankingApp.Controllers
 
         // Add new salary disbursement
         [HttpPost]
-        public IActionResult Add(SalaryDisbursementDto dto)
+        public IActionResult Add(CreateSalaryDisbursementDto dto)
         {
             try
             {

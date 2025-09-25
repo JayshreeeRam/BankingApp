@@ -4,6 +4,7 @@ using BankingApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BankingApp.Migrations
 {
     [DbContext(typeof(BankingContext))]
-    partial class BankingContextModelSnapshot : ModelSnapshot
+    [Migration("20250925155127_Fifth")]
+    partial class Fifth
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -192,6 +195,37 @@ namespace BankingApp.Migrations
                     b.HasIndex("UploadedByUserId");
 
                     b.ToTable("Documents");
+                });
+
+            modelBuilder.Entity("BankingApp.Models.Employee", b =>
+                {
+                    b.Property<int>("EmployeeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmployeeId"));
+
+                    b.Property<int>("BankId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<double>("Salary")
+                        .HasColumnType("float");
+
+                    b.HasKey("EmployeeId");
+
+                    b.HasIndex("BankId");
+
+                    b.HasIndex("ClientId");
+
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("BankingApp.Models.Payment", b =>
@@ -383,42 +417,6 @@ namespace BankingApp.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Employee", b =>
-                {
-                    b.Property<int>("EmployeeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmployeeId"));
-
-                    b.Property<int>("BankId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EmployeeClientId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EmployerClientId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<double>("Salary")
-                        .HasColumnType("float");
-
-                    b.HasKey("EmployeeId");
-
-                    b.HasIndex("BankId");
-
-                    b.HasIndex("EmployeeClientId");
-
-                    b.HasIndex("EmployerClientId");
-
-                    b.ToTable("Employees");
-                });
-
             modelBuilder.Entity("BankingApp.Models.Account", b =>
                 {
                     b.HasOne("BankingApp.Models.Client", "Client")
@@ -471,6 +469,25 @@ namespace BankingApp.Migrations
                     b.Navigation("UploadedBy");
                 });
 
+            modelBuilder.Entity("BankingApp.Models.Employee", b =>
+                {
+                    b.HasOne("BankingApp.Models.Bank", "Bank")
+                        .WithMany()
+                        .HasForeignKey("BankId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BankingApp.Models.Client", "Client")
+                        .WithMany("Employees")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Bank");
+
+                    b.Navigation("Client");
+                });
+
             modelBuilder.Entity("BankingApp.Models.Payment", b =>
                 {
                     b.HasOne("BankingApp.Models.Beneficiary", "Beneficiary")
@@ -509,7 +526,7 @@ namespace BankingApp.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Employee", "Employee")
+                    b.HasOne("BankingApp.Models.Employee", "Employee")
                         .WithMany("SalaryDisbursements")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -547,33 +564,6 @@ namespace BankingApp.Migrations
                     b.Navigation("Sender");
                 });
 
-            modelBuilder.Entity("Employee", b =>
-                {
-                    b.HasOne("BankingApp.Models.Bank", "Bank")
-                        .WithMany()
-                        .HasForeignKey("BankId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BankingApp.Models.Client", "EmployeeClient")
-                        .WithMany("EmployeesAsClient")
-                        .HasForeignKey("EmployeeClientId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("BankingApp.Models.Client", "EmployerClient")
-                        .WithMany("EmployeesPaid")
-                        .HasForeignKey("EmployerClientId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Bank");
-
-                    b.Navigation("EmployeeClient");
-
-                    b.Navigation("EmployerClient");
-                });
-
             modelBuilder.Entity("BankingApp.Models.Account", b =>
                 {
                     b.Navigation("Transactions");
@@ -590,12 +580,15 @@ namespace BankingApp.Migrations
 
                     b.Navigation("Beneficiaries");
 
-                    b.Navigation("EmployeesAsClient");
-
-                    b.Navigation("EmployeesPaid");
+                    b.Navigation("Employees");
 
                     b.Navigation("Payments");
 
+                    b.Navigation("SalaryDisbursements");
+                });
+
+            modelBuilder.Entity("BankingApp.Models.Employee", b =>
+                {
                     b.Navigation("SalaryDisbursements");
                 });
 
@@ -604,11 +597,6 @@ namespace BankingApp.Migrations
                     b.Navigation("Documents");
 
                     b.Navigation("Reports");
-                });
-
-            modelBuilder.Entity("Employee", b =>
-                {
-                    b.Navigation("SalaryDisbursements");
                 });
 #pragma warning restore 612, 618
         }

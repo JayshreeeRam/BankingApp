@@ -19,7 +19,8 @@ namespace BankingApp.Services
             {
                 BankId = b.BankId,
                 Name = b.Name,
-                Address = b.Address
+                Address = b.Address,
+                IFSCCODE = b.IFSCCODE 
             });
         }
 
@@ -32,16 +33,25 @@ namespace BankingApp.Services
             {
                 BankId = bank.BankId,
                 Name = bank.Name,
-                Address = bank.Address
+                Address = bank.Address,
+                IFSCCODE = bank.IFSCCODE 
             };
         }
 
-        public BankDto Add(BankDto bankDto)
+        public BankDto Add(CreateBankDto bankDto)
         {
+            // Generate IFSC code
+            var prefix = bankDto.Name.Length >= 3
+                ? bankDto.Name.Substring(0, 3).ToUpper()
+                : bankDto.Name.ToUpper();
+            var random = new Random().Next(1000, 9999);
+            var ifsc = $"{prefix}{random}X";
+
             var bank = new Bank
             {
                 Name = bankDto.Name,
-                Address = bankDto.Address
+                Address = bankDto.Address,
+                IFSCCODE = ifsc
             };
 
             var created = _repo.Add(bank);
@@ -50,32 +60,37 @@ namespace BankingApp.Services
             {
                 BankId = created.BankId,
                 Name = created.Name,
-                Address = created.Address
+                Address = created.Address,
+                IFSCCODE = created.IFSCCODE
             };
         }
 
-        public BankDto? Update(int id, BankDto bankDto)
-        {
-            var bank = new Bank
-            {
-                Name = bankDto.Name,
-                Address = bankDto.Address
-            };
 
-            var updated = _repo.Update(id, bank);
-            if (updated == null) return null;
+        //public BankDto? Update(int id, BankDto bankDto)
+        //{
+        //    var bank = new Bank
+        //    {
+        //        Name = bankDto.Name,
+        //        Address = bankDto.Address,
+        //        IFSCCODE = bankDto.IFSCCODE 
+        //    };
 
-            return new BankDto
-            {
-                BankId = updated.BankId,
-                Name = updated.Name,
-                Address = updated.Address
-            };
-        }
+        //    var updated = _repo.Update(id, bank);
+        //    if (updated == null) return null;
 
-        public bool Delete(int id)
-        {
-            return _repo.Delete(id);
-        }
+        //    return new BankDto
+        //    {
+        //        BankId = updated.BankId,
+        //        Name = updated.Name,
+        //        Address = updated.Address,
+        //        IFSCCODE = updated.IFSCCODE
+        //    };
+        //}
+
+
+        //public bool Delete(int id)
+        //{
+        //    return _repo.Delete(id);
+        //}
     }
 }

@@ -7,7 +7,7 @@ namespace BankingApp.Repository
         IEnumerable<Beneficiary> GetAll();
         Beneficiary? GetById(int id);
         Beneficiary Add(Beneficiary beneficiary);
-        Beneficiary Update(int id, Beneficiary beneficiary);
+        //Beneficiary Update(int id, Beneficiary beneficiary);
         bool Delete(int id);
     }
 }

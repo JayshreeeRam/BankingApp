@@ -6,8 +6,8 @@ namespace BankingApp.Services
     {
         IEnumerable<EmployeeDto> GetAll();
         EmployeeDto? GetById(int id);
-        EmployeeDto Add(EmployeeDto dto);
-        EmployeeDto? Update(int id, EmployeeDto dto);
+        EmployeeDto Add(CreateEmployeeDto dto);
+        EmployeeDto? Update(int id, UpdateEmployeeDto dto);
         bool Delete(int id);
     }
 }
