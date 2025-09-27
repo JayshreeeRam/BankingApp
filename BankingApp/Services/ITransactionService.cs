@@ -9,6 +9,8 @@ namespace BankingApp.Services
         //TransactionDto Add(TransactionDto dto);
         //TransactionDto? Update(int id, TransactionDto dto);
         //bool Delete(int id);
+        IEnumerable<TransactionDto> GetByClientId(int clientId);
+
         IEnumerable<TransactionDto> GetByAccount(int accountId);
     }
 }

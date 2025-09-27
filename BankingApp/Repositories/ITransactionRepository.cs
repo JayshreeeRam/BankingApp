@@ -10,6 +10,8 @@ namespace BankingApp.Repository
         //Transaction? Update(int id, Transaction transaction);
         //bool Delete(int id);
         IEnumerable<Transaction> GetByAccount(int accountId);
+       IEnumerable<Transaction> GetByClientId(int userId);
+
     }
 
 }

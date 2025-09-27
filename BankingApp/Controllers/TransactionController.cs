@@ -1,7 +1,8 @@
+using System.Collections.Generic;
 using BankingApp.DTOs;
 using BankingApp.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace BankingApp.Controllers
 {
@@ -35,6 +36,14 @@ namespace BankingApp.Controllers
         {
             return Ok(_service.GetByAccount(accountId));
         }
+
+        [HttpGet("user/{userId}")]
+        public IActionResult GetTransactionsForUser(int userId)
+        {
+            var transactions = _service.GetByClientId(userId); // Normal function
+            return Ok(transactions);
+        }
+
 
         //[HttpPost]
         //public IActionResult Add([FromBody] TransactionDto dto)

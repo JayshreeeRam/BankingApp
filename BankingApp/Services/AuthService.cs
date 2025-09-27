@@ -4,6 +4,7 @@ using System.Text;
 using BankingApp.DTOs;
 using BankingApp.Models;
 using BankingApp.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
@@ -11,11 +12,13 @@ public class AuthService : IAuthService
 {
     private readonly BankingContext _repo;
     private readonly IConfiguration _config;
+    private readonly PasswordHasher<User> _passwordHasher;
 
     public AuthService(BankingContext context, IConfiguration config)
     {
         _repo = context;
         _config = config;
+        _passwordHasher = new PasswordHasher<User>();
     }
 
     public AuthResponseDto Register(RegisterDto dto)
@@ -47,7 +50,12 @@ public class AuthService : IAuthService
     public AuthResponseDto Login(LoginDto dto)
     {
         var user = _repo.Users.FirstOrDefault(u => u.Username == dto.Username);
-        if (user == null || user.Password != dto.Password)
+        if (user == null)
+            throw new UnauthorizedAccessException("Invalid credentials");
+
+        var result = _passwordHasher.VerifyHashedPassword(user, user.Password, dto.Password);
+
+        if (result != PasswordVerificationResult.Success)
             throw new UnauthorizedAccessException("Invalid credentials");
 
         return new AuthResponseDto
@@ -57,6 +65,24 @@ public class AuthService : IAuthService
             Role = user.UserRole.ToString()
         };
     }
+
+    //public AuthResponseDto Login(LoginDto dto)
+    //{
+    //    var user = _repo.Users.FirstOrDefault(u => u.Username == dto.Username);
+    //    if (user == null || user.Password != dto.Password || user.UserRole!=dto.UserRole)
+    //        throw new UnauthorizedAccessException("Invalid credentials");
+
+    //        Console.WriteLine($"Login attempt: Username={dto.Username}, Role={dto.UserRole}");
+    //    return new AuthResponseDto
+    //    {
+    //        Token = GenerateJwtToken(user),
+    //        Username = user.Username,
+    //        Role = user.UserRole.ToString()
+
+    //    };
+    //}
+
+
 
     private string GenerateJwtToken(User user)
     {

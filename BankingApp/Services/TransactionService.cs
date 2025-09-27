@@ -3,6 +3,7 @@ using BankingApp.Enums;
 using BankingApp.Models;
 using BankingApp.Repositories;
 using BankingApp.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace BankingApp.Services
 {
@@ -91,6 +92,11 @@ namespace BankingApp.Services
             return _transactionRepo.GetByAccount(accountId).Select(MapToDto).ToList();
         }
 
+        public IEnumerable<TransactionDto> GetByClientId(int clientId)
+        {
+            return _transactionRepo.GetByClientId(clientId).Select(MapToDto).ToList();
+        }
+
         private TransactionDto MapToDto(Transaction t)
         {
             return new TransactionDto
@@ -107,5 +113,8 @@ namespace BankingApp.Services
                 ReceiverName = t.ReceiverName
             };
         }
+
+       
+
     }
 }

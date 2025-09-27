@@ -852,6 +852,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "BankingApp.Controllers.TransactionController",
+    "Method": "GetTransactionsForUser",
+    "RelativePath": "api/Transaction/user/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "BankingApp.Controllers.UserController",
     "Method": "GetAll",
     "RelativePath": "api/User",

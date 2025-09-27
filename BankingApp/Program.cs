@@ -8,9 +8,7 @@ using BankingApp.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.Extensions.Options;
 using CloudinaryDotNet;
-
 
 namespace BankingApp
 {
@@ -91,22 +89,25 @@ namespace BankingApp
 
             // Cloudinary settings
             builder.Services.Configure<CloudinarySettings>(
-      builder.Configuration.GetSection("CloudinarySettings")
-  );
+                builder.Configuration.GetSection("CloudinarySettings")
+            );
 
             // Register DocumentService with DI
             builder.Services.AddScoped<IDocumentService, DocumentService>();
             builder.Services.AddScoped<IDocumentRepository, DocumentRepository>();
 
-
-            // Optionally, register Cloudinary itself as singleton if you want to inject it directly
-            //builder.Services.AddSingleton(x =>
-            //{
-            //    var config = builder.Configuration.GetSection("CloudinarySettings").Get<CloudinarySettings>();
-            //    var account = new CloudinaryDotNet.Account(config.CloudName, config.ApiKey, config.ApiSecret);
-            //    var cloudinary = new Cloudinary(account) { Api = { Secure = true } };
-            //    return cloudinary;
-            //});
+            // ?? Add CORS
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAngularApp",
+                    policy =>
+                    {
+                        policy.WithOrigins("http://localhost:4200") // Angular dev server
+                              .AllowAnyHeader()
+                              .AllowAnyMethod()
+                              .AllowCredentials();
+                    });
+            });
 
             var app = builder.Build();
 
@@ -118,6 +119,8 @@ namespace BankingApp
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("AllowAngularApp"); // ?? Apply CORS before auth
 
             app.UseAuthentication(); // must come BEFORE UseAuthorization
             app.UseAuthorization();
