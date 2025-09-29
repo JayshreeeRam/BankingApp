@@ -22,7 +22,7 @@ namespace BankingApp.Models
         public string? IFSCCode { get; set; } = "SBIN001250";
 
 
-        // FK → Client
+        
         public int ClientId { get; set; }
         [ForeignKey(nameof(ClientId))]
         public Client? Client { get; set; }

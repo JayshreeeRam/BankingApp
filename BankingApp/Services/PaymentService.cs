@@ -57,16 +57,16 @@ namespace BankingApp.Services
             var payment = _paymentRepo.GetById(id);
             if (payment == null) return null;
 
-            // Get sender's account
+            
             var senderAccount = _accountRepo.GetByClientId(payment.ClientId);
             if (senderAccount == null || senderAccount.Balance < payment.Amount)
                 return null; 
 
-            // Get receiver's account
+          
             var receiverAccount = _accountRepo.GetByClientId(payment.BeneficiaryId);
             if (receiverAccount == null) return null;
 
-            // Deduct & credit
+            
             senderAccount.Balance -= payment.Amount;
             receiverAccount.Balance += payment.Amount;
 
@@ -76,11 +76,11 @@ namespace BankingApp.Services
             payment.PaymentStatus = PaymentStatus.Approved;
             _paymentRepo.Update(payment.PaymentId, payment);
 
-            // Fetch clients for names
+          
             var sender = _clientRepo.GetById(payment.ClientId);
             var receiver = _clientRepo.GetById(payment.BeneficiaryId);
 
-            // Create debit transaction
+          
             _transactionRepo.Add(new Transaction
             {
                 AccountId = senderAccount.AccountId,

@@ -15,7 +15,7 @@ namespace BankingApp.Models
         [ForeignKey(nameof(ClientId))]
         public Client Client { get; set; } = null!;
 
-        // FK → Beneficiary (nullable if direct debit or self-payment)
+        // FK → Beneficiary(who gets the payment)
         [Required]
         public int BeneficiaryId { get; set; }
         [ForeignKey(nameof(BeneficiaryId))]

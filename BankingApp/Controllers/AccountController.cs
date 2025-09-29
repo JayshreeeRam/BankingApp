@@ -1,5 +1,6 @@
 ﻿using BankingApp.DTOs;
 using BankingApp.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BankingApp.Controllers
@@ -16,18 +17,22 @@ namespace BankingApp.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public ActionResult<IEnumerable<AccountDto>> GetAll()
         {
             return Ok(_service.GetAll());
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public ActionResult<AccountDto> GetById(int id)
         {
             var account = _service.GetById(id);
             if (account == null) return NotFound();
             return Ok(account);
         }
+
+        [Authorize(Roles = "Admin,SuperAdmin")]
 
         [HttpGet("client/{clientId}")]
         public ActionResult<IEnumerable<AccountDto>> GetByClientId(int clientId)
@@ -36,6 +41,7 @@ namespace BankingApp.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "User,Admin")]
         public ActionResult<AccountDto> Create(CreateAccountDto accountDto)
         {
             var created = _service.Add(accountDto);
@@ -43,6 +49,7 @@ namespace BankingApp.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public ActionResult<AccountDto> Update(int id, UpdateAccountDto accountDto)
         {
             var updated = _service.Update(id, accountDto);
@@ -51,6 +58,7 @@ namespace BankingApp.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public IActionResult Delete(int id)
         {
             var deleted = _service.Delete(id);

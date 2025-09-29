@@ -1,7 +1,8 @@
+using System.Collections.Generic;
 using BankingApp.DTOs;
 using BankingApp.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
 namespace BankingApp.Controllers
 {
@@ -17,6 +18,7 @@ namespace BankingApp.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public IActionResult GetAll()
         {
             var employees = _service.GetAll();
@@ -24,6 +26,7 @@ namespace BankingApp.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public IActionResult GetById(int id)
         {
             var employee = _service.GetById(id);
@@ -32,7 +35,8 @@ namespace BankingApp.Controllers
         }
 
             [HttpPost]
-            public IActionResult Add([FromBody] CreateEmployeeDto dto)
+        [Authorize(Roles = "User,Client")]
+        public IActionResult Add([FromBody] CreateEmployeeDto dto)
             {
                 if (!ModelState.IsValid) return BadRequest(ModelState);
                 var created = _service.Add(dto);
@@ -40,6 +44,7 @@ namespace BankingApp.Controllers
             }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "User,Client")]
         public IActionResult Update(int id, [FromBody] UpdateEmployeeDto dto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -49,6 +54,7 @@ namespace BankingApp.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin,superAdmin")]
         public IActionResult Delete(int id)
         {
             bool success = _service.Delete(id);

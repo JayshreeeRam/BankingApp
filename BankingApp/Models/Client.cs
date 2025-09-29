@@ -27,12 +27,10 @@ namespace BankingApp.Models
         public User User { get; set; } = null!;
 
         [Required]
-        public AccountStatus VerificationStatus { get; set; } // Pending / Approved / Rejected
-
+        public AccountStatus VerificationStatus { get; set; } 
         [Required]
         public AccountType AccountType { get; set; }
 
-        // Only generated after approval
         public Account? Account { get; set; }
 
         [JsonIgnore] 

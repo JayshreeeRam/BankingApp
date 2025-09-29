@@ -11,6 +11,6 @@ namespace BankingApp.DTOs
         public DateTime GeneratedDate { get; set; }
         public string? FilePath { get; set; }
         public int GeneratedByUserId { get; set; }
-        public string? GeneratedByUsername { get; set; }  // optional
+        public string? GeneratedByUsername { get; set; } 
     }
 }

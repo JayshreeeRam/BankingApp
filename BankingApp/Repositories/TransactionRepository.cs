@@ -32,7 +32,7 @@ namespace BankingApp.Repository
         public Transaction Add(Transaction transaction)
         {
             _context.Transactions.Add(transaction);
-            _context.SaveChanges(); // ensure immediate persistence
+            _context.SaveChanges(); 
             return transaction;
         }
 

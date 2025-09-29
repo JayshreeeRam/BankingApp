@@ -26,7 +26,6 @@ public class AuthService : IAuthService
         if (_repo.Users.Any(u => u.Username == dto.Username))
             throw new Exception("Username already exists");
 
-        // 🔹 Password hash (replace with proper hashing in production)
         var user = new User
         {
             Username = dto.Username,
@@ -49,22 +48,39 @@ public class AuthService : IAuthService
 
     public AuthResponseDto Login(LoginDto dto)
     {
-        var user = _repo.Users.FirstOrDefault(u => u.Username == dto.Username);
-        if (user == null)
-            throw new UnauthorizedAccessException("Invalid credentials");
-
-        var result = _passwordHasher.VerifyHashedPassword(user, user.Password, dto.Password);
-
-        if (result != PasswordVerificationResult.Success)
-            throw new UnauthorizedAccessException("Invalid credentials");
-
-        return new AuthResponseDto
+        try
         {
-            Token = GenerateJwtToken(user),
-            Username = user.Username,
-            Role = user.UserRole.ToString()
-        };
+            var user = _repo.Users.FirstOrDefault(u => u.Username == dto.Username);
+            if (user == null)
+                throw new UnauthorizedAccessException("Invalid credentials");
+
+            var result = _passwordHasher.VerifyHashedPassword(user, user.Password, dto.Password);
+
+            if (result != PasswordVerificationResult.Success)
+                throw new UnauthorizedAccessException("Invalid credentials");
+
+            Console.WriteLine("User found:");
+            Console.WriteLine($"Username: {user.Username}");
+            Console.WriteLine($"UserRole: {user.UserRole}");
+            Console.WriteLine($"UserId: {user.UserId}");
+
+            var token = GenerateJwtToken(user);
+
+            return new AuthResponseDto
+            {
+                Token = token,
+                Username = user.Username,
+                Role = user.UserRole.ToString()
+            };
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("💥 Login failed:");
+            Console.WriteLine(ex.ToString());
+            throw; 
+        }
     }
+
 
     //public AuthResponseDto Login(LoginDto dto)
     //{
@@ -84,16 +100,48 @@ public class AuthService : IAuthService
 
 
 
+    //private string GenerateJwtToken(User user)
+    //{
+    //    var claims = new[]
+    //    {
+    //        new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
+    //        new Claim(ClaimTypes.Name, user.Username),
+    //        new Claim(ClaimTypes.Role, user.UserRole.ToString())
+    //    };
+
+    //    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]!));
+    //    var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+    //    var token = new JwtSecurityToken(
+    //        issuer: _config["Jwt:Issuer"],
+    //        audience: _config["Jwt:Audience"],
+    //        claims: claims,
+    //        expires: DateTime.UtcNow.AddHours(1),
+    //        signingCredentials: creds
+    //    );
+
+    //    return new JwtSecurityTokenHandler().WriteToken(token);
+    //}
+
     private string GenerateJwtToken(User user)
     {
-        var claims = new[]
-        {
-            new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
-            new Claim(ClaimTypes.Name, user.Username),
-            new Claim(ClaimTypes.Role, user.UserRole.ToString())
-        };
+        if (user == null)
+            throw new ArgumentNullException(nameof(user));
 
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]!));
+        var claims = new List<Claim>
+    {
+        new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString() ?? "0"),
+        new Claim(ClaimTypes.Name, user.Username ?? "UnknownUser"),
+        new Claim(ClaimTypes.Role, user.UserRole.ToString())
+
+    };
+
+
+        var keyString = _config["Jwt:Key"];
+        if (string.IsNullOrEmpty(keyString))
+            throw new InvalidOperationException("JWT Key is not configured.");
+
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(keyString));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
         var token = new JwtSecurityToken(
@@ -106,4 +154,5 @@ public class AuthService : IAuthService
 
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
+
 }

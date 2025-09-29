@@ -11,16 +11,16 @@ namespace BankingApp.Models
         public int DisbursementId { get; set; }
 
         [Required]
-        public int EmployeeId { get; set; }  // Nullable
+        public int EmployeeId { get; set; }  
         [ForeignKey(nameof(EmployeeId))]
 
         
-        public Employee? Employee { get; set; }  // Nullable navigation
+        public Employee? Employee { get; set; } 
 
         [Required]
-        public int ClientId { get; set; }  // Nullable
+        public int ClientId { get; set; }  
         [ForeignKey(nameof(ClientId))]
-        public Client? Client { get; set; }  // Nullable navigation
+        public Client? Client { get; set; }  
 
         [Required]
         public decimal Amount { get; set; }

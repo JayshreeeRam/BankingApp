@@ -5,10 +5,11 @@ using BankingApp.Models;
 using BankingApp.Repositories;
 using BankingApp.Repository;
 using BankingApp.Services;
+using CloudinaryDotNet;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using CloudinaryDotNet;
+using Microsoft.OpenApi.Models;
 
 namespace BankingApp
 {
@@ -29,7 +30,35 @@ namespace BankingApp
 
             // Swagger/OpenAPI
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+
+            //builder.Services.AddSwaggerGen();
+             builder.Services.AddSwaggerGen(c =>
+            {               
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+
+                // JWT Authorization header in Swagger
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "Enter 'Bearer {token}' to authenticate"
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
+            },
+            Array.Empty<string>()
+        }
+    });
+            });
+
 
             // Database
             builder.Services.AddDbContext<BankingContext>(options =>
@@ -92,11 +121,11 @@ namespace BankingApp
                 builder.Configuration.GetSection("CloudinarySettings")
             );
 
-            // Register DocumentService with DI
+           
             builder.Services.AddScoped<IDocumentService, DocumentService>();
             builder.Services.AddScoped<IDocumentRepository, DocumentRepository>();
 
-            // ?? Add CORS
+            //  Add CORS
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAngularApp",
@@ -120,7 +149,7 @@ namespace BankingApp
 
             app.UseHttpsRedirection();
 
-            app.UseCors("AllowAngularApp"); // ?? Apply CORS before auth
+            app.UseCors("AllowAngularApp"); //  Apply CORS before auth
 
             app.UseAuthentication(); // must come BEFORE UseAuthorization
             app.UseAuthorization();

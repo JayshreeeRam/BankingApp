@@ -18,6 +18,7 @@ namespace BankingApp.Controllers
         }
 
         [HttpGet]
+        //[Authorize(Roles = "Admin,SuperAdmin")]
         public IActionResult GetAll()
         {
             var docs = _documentService.GetAll();
@@ -25,6 +26,7 @@ namespace BankingApp.Controllers
         }
 
         [HttpGet("{id}")]
+
         public IActionResult GetById(int id)
         {
             var doc = _documentService.GetById(id);
@@ -33,7 +35,7 @@ namespace BankingApp.Controllers
         }
 
         [HttpPost("upload")]
-        //[Authorize] // optional
+        [Authorize(Roles = "User")]
         public IActionResult UploadDocument([FromForm] DocumentUploadDto dto)
         {
             Console.WriteLine("Received DTO:", dto.File);

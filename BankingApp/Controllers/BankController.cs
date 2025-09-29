@@ -1,5 +1,6 @@
 using BankingApp.DTOs;
 using BankingApp.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BankingApp.Controllers
@@ -17,6 +18,7 @@ namespace BankingApp.Controllers
 
         // GET: api/bank
         [HttpGet]
+        [Authorize(Roles = "SuperAdmin")]
         public ActionResult<IEnumerable<BankDto>> GetAll()
         {
             var banks = _service.GetAll();
@@ -25,6 +27,7 @@ namespace BankingApp.Controllers
 
         // GET: api/bank/{id}
         [HttpGet("{id}")]
+        [Authorize(Roles = "SuperAdmin")]
         public ActionResult<BankDto> GetById(int id)
         {
             var bank = _service.GetById(id);
@@ -34,6 +37,7 @@ namespace BankingApp.Controllers
 
         // POST: api/bank
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin")]
         public ActionResult<BankDto> Create(CreateBankDto bankDto)
         {
             var created = _service.Add(bankDto);

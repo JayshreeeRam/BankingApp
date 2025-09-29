@@ -36,7 +36,7 @@ namespace BankingApp.Repository
 
         //    existing.Name = bank.Name;
         //    existing.Address = bank.Address;
-        //    existing.IFSCCODE = bank.IFSCCODE; // ✅ update IFSC too
+        //    existing.IFSCCODE = bank.IFSCCODE; 
 
         //    _repo.SaveChanges();
         //    return existing;

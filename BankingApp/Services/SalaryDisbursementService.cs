@@ -155,8 +155,8 @@ namespace BankingApp.Services
             var transaction = new Transaction
             {
                 AccountId = clientAccount.AccountId,
-                SenderId = salary.ClientId,               // employer client
-                ReceiverId = emp.EmployeeClientId,       // employee client
+                SenderId = salary.ClientId,               
+                ReceiverId = emp.EmployeeClientId,       
                 Amount = salary.Amount,
                 TransactionDate = DateTime.UtcNow,
                 TransactionType = TransactionType.Credit,
@@ -205,8 +205,8 @@ namespace BankingApp.Services
                 var transaction = new Transaction
                 {
                     AccountId = clientAccount.AccountId,
-                    SenderId = salary.ClientId,               // employer client
-                    ReceiverId = emp.EmployeeClientId,       // employee client
+                    SenderId = salary.ClientId,              
+                    ReceiverId = emp.EmployeeClientId,      
                     Amount = salary.Amount,
                     TransactionDate = DateTime.UtcNow,
                     TransactionType = TransactionType.Credit,

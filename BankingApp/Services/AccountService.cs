@@ -44,7 +44,7 @@ namespace BankingApp.Services
             var account = new Account(accountNumber)
             {
 
-                AccountType = dto.AccountType.HasValue ? dto.AccountType.Value : default, // updated to handle nullable
+                AccountType = dto.AccountType.HasValue ? dto.AccountType.Value : default, 
                 AccountStatus = AccountStatus.Active,
                 Balance = dto.Balance,
                 ClientId = dto.ClientId
@@ -115,8 +115,8 @@ namespace BankingApp.Services
 
             do
             {
-                accountNumber = random.Next(0, 999999999).ToString("D9"); // 9 digits
-                accountNumber = "1" + accountNumber + random.Next(0, 9).ToString(); // 11 digits
+                accountNumber = random.Next(0, 999999999).ToString("D9"); 
+                accountNumber = "1" + accountNumber + random.Next(0, 9).ToString(); 
             }
             while (_repo.AccountNumberExists(accountNumber));
 

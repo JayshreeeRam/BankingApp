@@ -44,7 +44,7 @@ namespace BankingApp.Controllers
             }
         }
 
-        // Approve salary (and create Transaction with proper names)
+        // Approve salary 
         [HttpPost("approve/{id}")]
         public IActionResult ApproveSalary(int id)
         {

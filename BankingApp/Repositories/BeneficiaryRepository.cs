@@ -17,7 +17,7 @@ namespace BankingApp.Repository
         {
             return _repo.Beneficiaries
                         .Include(b => b.Client)
-                            .ThenInclude(c => c.User)   // include User for username
+                            .ThenInclude(c => c.User)   
                         .AsNoTracking()
                         .ToList();
         }
@@ -26,7 +26,7 @@ namespace BankingApp.Repository
         {
             return _repo.Beneficiaries
                         .Include(b => b.Client)
-                            .ThenInclude(c => c.User)   // include User for username
+                            .ThenInclude(c => c.User)   
                         .FirstOrDefault(b => b.BeneficiaryId == id);
         }
 

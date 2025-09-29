@@ -19,7 +19,7 @@ namespace BankingApp.Models
         [MaxLength(100)]
         public string IFSCCODE { get;  set; }
 
-        // Relationships
+      
         public ICollection<Client>? Clients { get; set; }
         //public ICollection<Employee>? Employees { get; set; }
     }

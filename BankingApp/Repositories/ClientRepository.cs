@@ -15,9 +15,9 @@ namespace BankingApp.Repositories
         public IEnumerable<Client> GetAll()
         {
             return _context.Clients
-                .Include(c => c.Account)   // eager load account
-                .Include(c => c.User)      // ✅ load User as well
-                .AsNoTracking()            // better performance for read-only
+                .Include(c => c.Account)   
+                .Include(c => c.User)     
+                .AsNoTracking()           
                 .ToList();
         }
 
@@ -25,7 +25,7 @@ namespace BankingApp.Repositories
         {
             return _context.Clients
                 .Include(c => c.Account)
-                .Include(c => c.User)      // ✅ include User
+                .Include(c => c.User)     
                 .FirstOrDefault(c => c.ClientId == id);
         }
 
@@ -44,7 +44,7 @@ namespace BankingApp.Repositories
 
             if (existing == null) return null!;
 
-            // Update only fields that are safe
+           
             existing.Name = client.Name;
             existing.Address = client.Address;
             existing.BankId = client.BankId;
@@ -52,7 +52,7 @@ namespace BankingApp.Repositories
             existing.VerificationStatus = client.VerificationStatus;
             existing.AccountType = client.AccountType;
 
-            // If account exists, update reference
+            
             if (client.Account != null)
                 existing.Account = client.Account;
 

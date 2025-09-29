@@ -77,7 +77,7 @@ namespace BankingApp.Models
 
             // -------------------- RELATIONSHIPS --------------------
 
-            // Client ↔ Bank (required)
+            // Client - Bank (required)
             modelBuilder.Entity<Client>()
                 .HasOne(c => c.Bank)
                 .WithMany(b => b.Clients)
@@ -85,7 +85,7 @@ namespace BankingApp.Models
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Beneficiary ↔ Client
+            // Beneficiary - Client
             modelBuilder.Entity<Beneficiary>()
                 .HasOne(b => b.Client)
                 .WithMany(c => c.Beneficiaries)
@@ -108,7 +108,7 @@ namespace BankingApp.Models
 
 
 
-            // Payment ↔ Client
+            // Payment - Client
             modelBuilder.Entity<Payment>()
                 .HasOne(p => p.Client)
                 .WithMany(c => c.Payments)
@@ -121,7 +121,7 @@ namespace BankingApp.Models
                 .HasForeignKey(p => p.BeneficiaryId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Document ↔ User
+            // Document - User
             modelBuilder.Entity<Document>()
                 .HasOne(d => d.UploadedBy)
                 .WithMany(u => u.Documents)
@@ -129,7 +129,7 @@ namespace BankingApp.Models
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Report ↔ User
+            // Report - User
             modelBuilder.Entity<Report>()
                 .HasOne(r => r.GeneratedBy)
                 .WithMany(u => u.Reports)
@@ -137,7 +137,7 @@ namespace BankingApp.Models
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // SalaryDisbursement ↔ Employee
+            // SalaryDisbursement - Employee
             modelBuilder.Entity<SalaryDisbursement>()
                 .HasOne(s => s.Employee)
                 .WithMany(e => e.SalaryDisbursements)
@@ -148,7 +148,7 @@ namespace BankingApp.Models
             modelBuilder.Entity<Account>()
                .HasIndex(a => a.AccountNumber)
                .IsUnique();
-            // Transaction ↔ Account
+            // Transaction - Account
             modelBuilder.Entity<Transaction>()
                 .HasOne(t => t.Account)
                 .WithMany(a => a.Transactions)
@@ -156,19 +156,19 @@ namespace BankingApp.Models
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Transaction ↔ Sender (Client)
+            // Transaction - Sender (Client)
             modelBuilder.Entity<Transaction>()
                 .HasOne(t => t.Sender)
                 .WithMany()
                 .HasForeignKey(t => t.SenderId)
-                .OnDelete(DeleteBehavior.Restrict);  // avoid multiple cascade path
+                .OnDelete(DeleteBehavior.Restrict); 
 
-            // Transaction ↔ Receiver (Client)
+            // Transaction - Receiver (Client)
             modelBuilder.Entity<Transaction>()
                 .HasOne(t => t.Receiver)
                 .WithMany()
                 .HasForeignKey(t => t.ReceiverId)
-                .OnDelete(DeleteBehavior.Restrict);  // avoid multiple cascade path
+                .OnDelete(DeleteBehavior.Restrict);  
         }
 
     }

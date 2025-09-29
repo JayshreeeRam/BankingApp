@@ -1,5 +1,6 @@
 using BankingApp.DTOs;
 using BankingApp.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BankingApp.Controllers
@@ -17,6 +18,7 @@ namespace BankingApp.Controllers
 
         // GET: api/Beneficiary
         [HttpGet]
+       
         public ActionResult<IEnumerable<BeneficiaryDto>> GetAll()
         {
             var beneficiaries = _service.GetAll();
@@ -37,6 +39,7 @@ namespace BankingApp.Controllers
         // POST: api/Beneficiary
         // Create using only clientId
         [HttpPost]
+        [Authorize(Roles = "User")]
         public ActionResult<BeneficiaryDto> Create([FromBody] CreateBeneficiaryDto dto)
         {
             try
@@ -70,6 +73,7 @@ namespace BankingApp.Controllers
 
         // DELETE: api/Beneficiary/5
         [HttpDelete("{id}")]
+       
         public ActionResult Delete(int id)
         {
             var deleted = _service.Delete(id);

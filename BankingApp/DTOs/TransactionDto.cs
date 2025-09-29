@@ -24,14 +24,13 @@ namespace BankingApp.DTOs
 
       
 
-        // ✅ Instead of names/accounts, keep SenderId & ReceiverId
+        
         [Required]
         public int SenderId { get; set; }
 
         [Required]
         public int ReceiverId { get; set; }
 
-        // ✅ Optional: Include names in DTO for API responses (not required in Add/Update requests)
         public string? SenderName { get; set; }
         public string? ReceiverName { get; set; }
     }

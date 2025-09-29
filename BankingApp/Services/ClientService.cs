@@ -81,7 +81,6 @@ namespace BankingApp.Services
             // Approve client
             client.VerificationStatus = AccountStatus.Active;
 
-            // Create account using AccountService
             var accountDto = new CreateAccountDto
             {
                 ClientId = client.ClientId,
@@ -91,8 +90,7 @@ namespace BankingApp.Services
 
             var account = _accountService.AddAccount(accountDto);
 
-            // Link account to client 
-
+            
             _repo.Update(client.ClientId, client);
 
             return MapToDto(client);

@@ -17,7 +17,7 @@ namespace BankingApp.DTOs
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public DocumentStatus DocumentStatus { get; set; }
         public int UploadedByUserId { get; set; }
-        public string? UploadedByUsername { get; set; } // optional
+        public string? UploadedByUsername { get; set; } 
         public string? PublicId { get; set; }
     }
 }

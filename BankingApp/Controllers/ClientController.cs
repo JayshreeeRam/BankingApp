@@ -1,5 +1,6 @@
 using BankingApp.DTOs;
 using BankingApp.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BankingApp.Controllers
@@ -16,6 +17,7 @@ namespace BankingApp.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles ="Admin,superAdmin")]
         public IActionResult GetAll()
         {
             var clients = _service.GetAll();
@@ -23,6 +25,7 @@ namespace BankingApp.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin,superAdmin")]
         public IActionResult GetById(int id)
         {
             var client = _service.GetById(id);
@@ -31,6 +34,7 @@ namespace BankingApp.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "User")]
         public IActionResult Create([FromBody] CreateClientDto dto)
         {
             var client = _service.Add(dto);
@@ -38,6 +42,7 @@ namespace BankingApp.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "User,Admin")]
         public IActionResult Update(int id, [FromBody] UpdateClientDto dto)
         {
             var client = _service.Update(id, dto);
@@ -46,6 +51,7 @@ namespace BankingApp.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "superAdmin")]
         public IActionResult Delete(int id)
         {
             var result = _service.Delete(id);
@@ -53,8 +59,9 @@ namespace BankingApp.Controllers
             return NoContent();
         }
 
-        // ? Approve client endpoint
+        //  Approve client endpoint
         [HttpPost("{id}/approve")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Approve(int id)
         {
             try

@@ -9,5 +9,5 @@ public class ClientDto
     public int UserId { get; set; }
     public AccountStatus VerificationStatus { get; set; }
     public AccountType AccountType { get; set; }
-    public string? AccountNo { get; set; }    // mapped from enum
+    public string? AccountNo { get; set; }   
 }

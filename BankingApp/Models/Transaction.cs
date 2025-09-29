@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization; // for JsonIgnore
+using System.Text.Json.Serialization; 
 using BankingApp.Enums;
 
 namespace BankingApp.Models
@@ -13,7 +13,7 @@ namespace BankingApp.Models
 
         [Required]
         public int AccountId { get; set; }
-        public Account? Account { get; set; }  // Navigation property
+        public Account? Account { get; set; } 
 
         [Required]
         public TransactionType TransactionType { get; set; }
@@ -25,7 +25,7 @@ namespace BankingApp.Models
         public int SenderId { get; set; }
 
         [ForeignKey(nameof(SenderId))]
-        [JsonIgnore]  // prevent circular JSON serialization
+        [JsonIgnore]  
         public Client? Sender { get; set; } = null!;
 
         [Required]
@@ -37,11 +37,11 @@ namespace BankingApp.Models
 
         [Required]
         [MaxLength(100)]
-        public string SenderName { get; set; } = null!;    // store sender name
+        public string SenderName { get; set; } = null!;    
 
         [Required]
         [MaxLength(100)]
-        public string ReceiverName { get; set; } = null!;  // store receiver name
+        public string ReceiverName { get; set; } = null!;  
 
         public TransactionStatus TransactionStatus { get; set; }
 

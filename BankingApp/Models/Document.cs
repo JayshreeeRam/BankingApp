@@ -29,12 +29,12 @@ namespace BankingApp.Models
         public DocumentStatus DocumentStatus { get; set; }
 
         
-        // FK → User
+        
         [Required]
         public int UploadedByUserId { get; set; }
 
         [ForeignKey(nameof(UploadedByUserId))]
-        [JsonIgnore] // Prevent cycles during serialization
+        [JsonIgnore] 
         public User? UploadedBy { get; set; } 
     }
 }

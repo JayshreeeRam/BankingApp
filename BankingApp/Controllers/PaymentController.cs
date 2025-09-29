@@ -1,7 +1,8 @@
+using System.Collections.Generic;
 using BankingApp.DTOs;
 using BankingApp.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
 namespace BankingApp.Controllers
 {
@@ -17,6 +18,7 @@ namespace BankingApp.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public IActionResult GetAll()
         {
             var payments = _service.GetAll();
@@ -31,8 +33,9 @@ namespace BankingApp.Controllers
             return Ok(payment);
         }
 
-        // ?? Use CreatePaymentDto for request
+        // Use CreatePaymentDto for request
         [HttpPost]
+        [Authorize(Roles = "Admin,User,Client")]
         public IActionResult Add([FromBody] CreatePaymentDto dto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -51,8 +54,9 @@ namespace BankingApp.Controllers
         //    return NoContent();
         //}
 
-        // ? New endpoint: approve payment & create transactions
+        // approve payment & create transactions
         [HttpPost("{id}/approve")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Approve(int id)
         {
             var approvedPayment = _service.ApprovePayment(id);

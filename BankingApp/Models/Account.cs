@@ -17,7 +17,7 @@ namespace BankingApp.Models
         public string AccountNumber { get; private set; } = null!;
 
         [Required]
-        public AccountType AccountType { get; set; }   // CURRENT / SAVINGS / SALARY
+        public AccountType AccountType { get; set; }  
 
         [Required]
         public AccountStatus AccountStatus { get; set; }
@@ -25,15 +25,13 @@ namespace BankingApp.Models
         [Column(TypeName = "decimal(18,2)")]
         public decimal Balance { get; set; }
 
-        // 🔹 Relationship with Client (account holder)
         [Required]
         public int ClientId { get; set; }
 
         [ForeignKey("ClientId")]
         public Client Client { get; set; } = null!;
 
-        // 🔹 Navigation property for transactions
-        public ICollection<Transaction>? Transactions { get; set; }
+       public ICollection<Transaction>? Transactions { get; set; }
 
         public Account(string accountNumber)
         {

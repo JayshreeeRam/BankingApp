@@ -20,7 +20,7 @@ namespace BankingApp.Repository
         {
             return _repo.SalaryDisbursements
                         .Include(s => s.Employee)
-                        .Where(s => s.EmployeeId != null) // Skip nulls
+                        .Where(s => s.EmployeeId != null) 
                         .ToList();
         }
 

@@ -12,9 +12,9 @@ namespace BankingApp.DTOs
         public int EmployeeId { get; set; }
         public string EmployeeName { get; set; } = null!;
 
-        public string SenderName { get; set; } = null!; // Client/Company sending salary
+        public string SenderName { get; set; } = null!; 
         public int ClientId { get; set; }
-        public decimal Amount { get; set; } // Automatically fetched, not input by user
+        public decimal Amount { get; set; } 
         public DateTime Date { get; set; }
 
         [JsonConverter(typeof(JsonStringEnumConverter))]

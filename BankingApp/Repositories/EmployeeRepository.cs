@@ -18,9 +18,9 @@ namespace BankingApp.Repositories
         {
             return _context.Employees
                 .Include(e => e.EmployerClient)
-                    .ThenInclude(c => c.User) // Employer’s User (company account)
+                    .ThenInclude(c => c.User) 
                 .Include(e => e.EmployeeClient)
-                    .ThenInclude(c => c.User) // Employee’s User (personal account)
+                    .ThenInclude(c => c.User) 
                 .Include(e => e.Bank)
                 .AsNoTracking()
                 .ToList();
@@ -52,7 +52,7 @@ namespace BankingApp.Repositories
 
             if (existing == null) return null;
 
-            // Update fields safely
+            
             if (!string.IsNullOrWhiteSpace(employee.Name))
                 existing.Name = employee.Name;
 
