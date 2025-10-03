@@ -18,7 +18,7 @@ namespace BankingApp.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin,SuperAdmin")]
+        //[Authorize(Roles = "Admin,SuperAdmin")]
         public IActionResult GetAll()
         {
             var employees = _service.GetAll();

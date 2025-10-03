@@ -28,6 +28,8 @@ namespace BankingApp.Repository
                 .FirstOrDefault(p => p.PaymentId == id);
         }
 
+
+
         public Payment Add(Payment payment)
         {
             
@@ -36,15 +38,34 @@ namespace BankingApp.Repository
             return payment;
         }
 
+        //public Payment Update(int id, Payment payment)
+        //{
+        //    var existing = _repo.Payments.Find(id);
+        //    if (existing == null) return null!;
+
+        //    _repo.Entry(existing).CurrentValues.SetValues(payment);
+        //    _repo.SaveChanges();
+        //    return existing;
+        //}
+
         public Payment Update(int id, Payment payment)
         {
-            var existing = _repo.Payments.Find(id);
+            var existing = _repo.Payments
+                .Include(p => p.Client)
+                .Include(p => p.Beneficiary)
+                .FirstOrDefault(p => p.PaymentId == id);
+
             if (existing == null) return null!;
 
             _repo.Entry(existing).CurrentValues.SetValues(payment);
-            _repo.SaveChanges();
+            _repo.SaveChanges();  // << This should already save changes
             return existing;
         }
+
+
+
+
+
 
         //public bool Delete(int id)
         //{

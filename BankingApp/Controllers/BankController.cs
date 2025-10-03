@@ -18,7 +18,7 @@ namespace BankingApp.Controllers
 
         // GET: api/bank
         [HttpGet]
-        [Authorize(Roles = "SuperAdmin")]
+        //[Authorize(Roles = "SuperAdmin")]
         public ActionResult<IEnumerable<BankDto>> GetAll()
         {
             var banks = _service.GetAll();

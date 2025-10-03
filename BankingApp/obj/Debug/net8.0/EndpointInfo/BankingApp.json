@@ -1059,7 +1059,7 @@
         }
       }
     },
-    "/api/Payment/{id}/approve": {
+    "/api/Payment/approve/{id}": {
       "post": {
         "tags": [
           "Payment"
@@ -1269,6 +1269,46 @@
             "description": "OK"
           }
         }
+      },
+      "put": {
+        "tags": [
+          "SalaryDisbursement"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SalaryDisbursementDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SalaryDisbursementDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SalaryDisbursementDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/api/SalaryDisbursement/approve/{id}": {
@@ -1302,6 +1342,29 @@
         "parameters": [
           {
             "name": "batchId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/SalaryDisbursement/reject/{id}": {
+      "post": {
+        "tags": [
+          "SalaryDisbursement"
+        ],
+        "parameters": [
+          {
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
@@ -1754,10 +1817,6 @@
       "CreatePaymentDto": {
         "type": "object",
         "properties": {
-          "paymentId": {
-            "type": "integer",
-            "format": "int32"
-          },
           "clientId": {
             "type": "integer",
             "format": "int32"
@@ -1817,6 +1876,17 @@
           }
         },
         "additionalProperties": false
+      },
+      "PaymentStatus": {
+        "enum": [
+          "Draft",
+          "Pending",
+          "Approved",
+          "Rejected",
+          "Processed",
+          "Failed"
+        ],
+        "type": "string"
       },
       "RegisterDto": {
         "type": "object",
@@ -1880,6 +1950,47 @@
           "Audit"
         ],
         "type": "string"
+      },
+      "SalaryDisbursementDto": {
+        "type": "object",
+        "properties": {
+          "disbursementId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "employeeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "employeeName": {
+            "type": "string",
+            "nullable": true
+          },
+          "senderName": {
+            "type": "string",
+            "nullable": true
+          },
+          "clientId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "$ref": "#/components/schemas/PaymentStatus"
+          },
+          "batchId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
       },
       "UpdateAccountDto": {
         "type": "object",

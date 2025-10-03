@@ -17,7 +17,7 @@ namespace BankingApp.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles ="Admin,superAdmin")]
+        //[Authorize(Roles ="User,Admin,superAdmin")]
         public IActionResult GetAll()
         {
             var clients = _service.GetAll();
@@ -34,7 +34,7 @@ namespace BankingApp.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "User")]
+        //[Authorize(Roles = "User")]
         public IActionResult Create([FromBody] CreateClientDto dto)
         {
             var client = _service.Add(dto);

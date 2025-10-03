@@ -643,7 +643,7 @@
   {
     "ContainingType": "BankingApp.Controllers.PaymentController",
     "Method": "Approve",
-    "RelativePath": "api/Payment/{id}/approve",
+    "RelativePath": "api/Payment/approve/{id}",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -779,6 +779,27 @@
   },
   {
     "ContainingType": "BankingApp.Controllers.SalaryDisbursementController",
+    "Method": "UpdateSalary",
+    "RelativePath": "api/SalaryDisbursement/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "BankingApp.DTOs.SalaryDisbursementDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BankingApp.Controllers.SalaryDisbursementController",
     "Method": "ApproveSalary",
     "RelativePath": "api/SalaryDisbursement/approve/{id}",
     "HttpMethod": "POST",
@@ -803,6 +824,22 @@
     "Parameters": [
       {
         "Name": "batchId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BankingApp.Controllers.SalaryDisbursementController",
+    "Method": "RejectSalary",
+    "RelativePath": "api/SalaryDisbursement/reject/{id}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
       }

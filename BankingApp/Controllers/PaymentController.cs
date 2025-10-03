@@ -18,7 +18,7 @@ namespace BankingApp.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin,SuperAdmin")]
+        //[Authorize(Roles = "Admin,SuperAdmin")]
         public IActionResult GetAll()
         {
             var payments = _service.GetAll();
@@ -35,7 +35,7 @@ namespace BankingApp.Controllers
 
         // Use CreatePaymentDto for request
         [HttpPost]
-        [Authorize(Roles = "Admin,User,Client")]
+        //[Authorize(Roles = "Admin,User,Client")]
         public IActionResult Add([FromBody] CreatePaymentDto dto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -44,7 +44,7 @@ namespace BankingApp.Controllers
             return CreatedAtAction(nameof(GetById), new { id = created.ClientId }, created);
         }
 
-        
+
 
         //[HttpDelete("{id}")]
         //public IActionResult Delete(int id)
@@ -55,16 +55,52 @@ namespace BankingApp.Controllers
         //}
 
         // approve payment & create transactions
-        [HttpPost("{id}/approve")]
-        [Authorize(Roles = "Admin")]
+        //[HttpPost("{id}/approve")]
+        //[Authorize(Roles = "Admin")]
+        //public IActionResult Approve(int id)
+        //{
+        //    var approvedPayment = _service.ApprovePayment(id);
+
+        //    if (approvedPayment == null)
+        //    {
+        //        Console.WriteLine("Approval failed: payment not found or insufficient funds");
+
+        //        return BadRequest("Payment cannot be approved. Either not found or insufficient funds.");
+        //    }
+        //    return Ok(approvedPayment);
+        //}
+
+        [HttpPost("approve/{id}")]
+        //[Authorize(Roles = "Admin")]
         public IActionResult Approve(int id)
         {
-            var approvedPayment = _service.ApprovePayment(id);
+            try
+            {
+                Console.WriteLine($"[Controller] Approving id: {id}");
 
-            if (approvedPayment == null)
-                return BadRequest("Payment cannot be approved. Either not found or insufficient funds.");
+                var approvedPayment = _service.ApprovePayment(id);
 
-            return Ok(approvedPayment);
+                Console.WriteLine($"[Approve] Payment with id {id} approved successfully in controller.");
+                return Ok(approvedPayment);
+            }
+            catch (ArgumentException ex)
+            {
+                // For not found scenarios
+                return NotFound(new { message = ex.Message });
+            }
+            catch (InvalidOperationException ex)
+            {
+                // For business rule violations
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                // For unexpected exceptions
+                Console.WriteLine($"[Approve] Unexpected error: {ex}");
+                return StatusCode(500, new { message = "An unexpected error occurred while approving the payment." });
+            }
         }
+
+
     }
 }

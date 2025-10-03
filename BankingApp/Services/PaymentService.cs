@@ -12,17 +12,20 @@ namespace BankingApp.Services
         private readonly IAccountRepository _accountRepo;
         private readonly ITransactionRepository _transactionRepo;
         private readonly IClientRepository _clientRepo;
+        private readonly IBeneficiaryRepository beneficiaryRepository;
 
         public PaymentService(
             IPaymentRepository paymentRepo,
             IAccountRepository accountRepo,
             ITransactionRepository transactionRepo,
-            IClientRepository clientRepo)
+            IClientRepository clientRepo,
+            IBeneficiaryRepository beneficiaryRepository)
         {
             _paymentRepo = paymentRepo;
             _accountRepo = accountRepo;
             _transactionRepo = transactionRepo;
             _clientRepo = clientRepo;
+            this.beneficiaryRepository = beneficiaryRepository;
         }
 
         public IEnumerable<PaymentDto> GetAll()
@@ -40,7 +43,7 @@ namespace BankingApp.Services
         {
             var payment = new Payment
             {
-                PaymentId = dto.PaymentId,
+                //PaymentId = dto.PaymentId,
                 ClientId = dto.ClientId,
                 BeneficiaryId = dto.BeneficiaryId,
                 Amount = dto.Amount,
@@ -52,35 +55,56 @@ namespace BankingApp.Services
             return MapToDto(created);
         }
 
-        public PaymentDto? ApprovePayment(int id)
+        public PaymentDto ApprovePayment(int id)
         {
             var payment = _paymentRepo.GetById(id);
-            if (payment == null) return null;
+            Console.WriteLine($"[Service] Approving payment with id: {id}");
 
-            
+            if (payment == null)
+            {
+                throw new ArgumentException($"Payment with id {id} not found.");
+            }
+            Console.WriteLine($"[Debug] Payment: ClientId={payment.ClientId}, BeneficiaryId={payment.BeneficiaryId}");
+            // Get the beneficiary to find the actual client ID
+            var beneficiary = beneficiaryRepository.GetById(payment.BeneficiaryId);
+            if (beneficiary == null)
+            {
+                throw new InvalidOperationException($"Beneficiary with id {payment.BeneficiaryId} not found.");
+            }
+
             var senderAccount = _accountRepo.GetByClientId(payment.ClientId);
-            if (senderAccount == null || senderAccount.Balance < payment.Amount)
-                return null; 
+            if (senderAccount == null)
+            {
+                throw new InvalidOperationException($"Sender account for client {payment.ClientId} not found.");
+            }
 
-          
-            var receiverAccount = _accountRepo.GetByClientId(payment.BeneficiaryId);
-            if (receiverAccount == null) return null;
+            if (senderAccount.Balance < payment.Amount)
+            {
+                throw new InvalidOperationException($"Insufficient funds. Balance: {senderAccount.Balance}, Required: {payment.Amount}");
+            }
 
-            
+            // Use the client ID from the beneficiary, not the beneficiary ID directly
+            var receiverAccount = _accountRepo.GetByClientId(beneficiary.ClientId);
+            if (receiverAccount == null)
+            {
+                throw new InvalidOperationException($"Receiver account for beneficiary {payment.BeneficiaryId} (client {beneficiary.ClientId}) not found.");
+            }
+
+            // Rest of your approval logic...
             senderAccount.Balance -= payment.Amount;
             receiverAccount.Balance += payment.Amount;
 
-            _accountRepo.Update(senderAccount.AccountId, senderAccount);
-            _accountRepo.Update(receiverAccount.AccountId, receiverAccount);
+            Console.WriteLine($"[ApprovePayment] Updated balances: Sender({senderAccount.AccountId})={senderAccount.Balance}, Receiver({receiverAccount.AccountId})={receiverAccount.Balance}");
 
             payment.PaymentStatus = PaymentStatus.Approved;
+            _accountRepo.Update(senderAccount.AccountId, senderAccount);
+            _accountRepo.Update(receiverAccount.AccountId, receiverAccount);
             _paymentRepo.Update(payment.PaymentId, payment);
 
-          
+            // Create transactions
             var sender = _clientRepo.GetById(payment.ClientId);
-            var receiver = _clientRepo.GetById(payment.BeneficiaryId);
+            var receiver = _clientRepo.GetById(beneficiary.ClientId); // Use beneficiary's client ID
 
-          
             _transactionRepo.Add(new Transaction
             {
                 AccountId = senderAccount.AccountId,
@@ -89,12 +113,11 @@ namespace BankingApp.Services
                 TransactionType = TransactionType.Debit,
                 TransactionStatus = TransactionStatus.Success,
                 SenderId = payment.ClientId,
-                ReceiverId = payment.BeneficiaryId,
+                ReceiverId = beneficiary.ClientId, // Use the actual client ID
                 SenderName = sender?.Name ?? "",
                 ReceiverName = receiver?.Name ?? ""
             });
 
-            // Create credit transaction
             _transactionRepo.Add(new Transaction
             {
                 AccountId = receiverAccount.AccountId,
@@ -103,13 +126,15 @@ namespace BankingApp.Services
                 TransactionType = TransactionType.Credit,
                 TransactionStatus = TransactionStatus.Success,
                 SenderId = payment.ClientId,
-                ReceiverId = payment.BeneficiaryId,
+                ReceiverId = beneficiary.ClientId, // Use the actual client ID
                 SenderName = sender?.Name ?? "",
                 ReceiverName = receiver?.Name ?? ""
             });
 
+            Console.WriteLine($"[ApprovePayment] Payment {id} approved successfully.");
             return MapToDto(payment);
         }
+
 
         public PaymentDto? Update(int id, PaymentDto dto)
         {
@@ -118,7 +143,7 @@ namespace BankingApp.Services
 
             if (payment.PaymentStatus == PaymentStatus.Approved)
                 throw new InvalidOperationException("Cannot update an approved payment.");
-            payment.PaymentId = dto.PaymentId;
+            //payment.PaymentId = dto.PaymentId;
             payment.ClientId = dto.ClientId;
             payment.BeneficiaryId = dto.BeneficiaryId;
             payment.Amount = dto.Amount;
@@ -126,6 +151,7 @@ namespace BankingApp.Services
             payment.PaymentStatus = dto.PaymentStatus;
 
             var updated = _paymentRepo.Update(id, payment);
+          
             return MapToDto(updated);
         }
 

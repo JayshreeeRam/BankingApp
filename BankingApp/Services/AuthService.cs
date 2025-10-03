@@ -35,6 +35,8 @@ public class AuthService : IAuthService
             UserRole = dto.UserRole
         };
 
+        user.Password = _passwordHasher.HashPassword(user, dto.Password);
+
         _repo.Users.Add(user);
         _repo.SaveChanges();
 
