@@ -2,6 +2,7 @@
 using BankingApp.Enums;
 using BankingApp.Models;
 using BankingApp.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace BankingApp.Services
 {
@@ -10,15 +11,17 @@ namespace BankingApp.Services
         private readonly IClientRepository _repo;
         private readonly IAccountService _accountService;
         private readonly IUserRepository _userRepository;
-
+        private readonly IEmailService _emailService;
         public ClientService(
             IClientRepository repo,
             IAccountService accountService,
-            IUserRepository userRepository)
+            IUserRepository userRepository,
+            IEmailService emailService)
         {
             _repo = repo;
             _accountService = accountService;
             _userRepository = userRepository;
+            _emailService = emailService;
         }
 
         public IEnumerable<ClientDto> GetAll()
@@ -95,7 +98,40 @@ namespace BankingApp.Services
 
             return MapToDto(client);
         }
+        public ClientDto RejectClient(int id, string remark)
+        {
+            try
+            {
+                // Get the client using repository
+                var client = _repo.GetById(id);
+                if (client == null)
+                    throw new ArgumentException($"Client with id {id} not found.");
 
+                // Check if client is in pending status - using VerificationStatus instead of Status
+                if (client.VerificationStatus != AccountStatus.Pending)
+                    throw new InvalidOperationException($"Cannot reject client with status {client.VerificationStatus}. Only pending clients can be rejected.");
+
+                // Update client status and rejection remark
+                client.VerificationStatus = AccountStatus.Frozen;
+                //(string clientEmail, string clientName, string remark)
+
+                _emailService.SendRejectionEmail(client.User?.Email, client.Name, remark);
+
+                // Update the client using repository
+                var updatedClient = _repo.Update(id, client);
+
+                // Map to DTO and return
+                return MapToDto(updatedClient);
+            }
+            catch (Exception ex)
+            {
+                // Log the error
+                Console.WriteLine($"Error in RejectClient: {ex.Message}");
+                throw;
+            }
+        }
+
+        
         private ClientDto MapToDto(Client client)
         {
             return new ClientDto
@@ -107,7 +143,8 @@ namespace BankingApp.Services
                 UserId = client.UserId,
                 VerificationStatus = client.VerificationStatus,
                 AccountType = client.AccountType,
-                AccountNo = client.Account != null ? client.Account.AccountNumber : null
+                AccountNo = client.Account != null ? client.Account.AccountNumber : null,
+                //RejectionRemark = client.,
             };
         }
     }

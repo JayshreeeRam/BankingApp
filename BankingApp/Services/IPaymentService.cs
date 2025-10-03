@@ -1,4 +1,5 @@
 ﻿using BankingApp.DTOs;
+using BankingApp.Models;
 
 public interface IPaymentService
 {
@@ -8,4 +9,5 @@ public interface IPaymentService
     PaymentDto? Update(int id, PaymentDto dto);
     //bool Delete(int id);
     PaymentDto? ApprovePayment(int id);
+    PaymentDto? RejectPayment(int id,string remark);
 }

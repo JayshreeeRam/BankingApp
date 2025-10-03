@@ -1,4 +1,5 @@
-﻿using BankingApp.DTOs;
+﻿using Azure.Core;
+using BankingApp.DTOs;
 using BankingApp.Models;
 
 namespace BankingApp.Services
@@ -11,5 +12,6 @@ namespace BankingApp.Services
         ClientDto? Update(int id, UpdateClientDto dto);
         bool Delete(int id);
         public ClientDto ApproveClient(int clientId);
+       public ClientDto RejectClient(int id, string Remark);
     }
 }

@@ -30,7 +30,7 @@ namespace BankingApp.Models
         [Required]
         public PaymentStatus PaymentStatus { get; set; } = PaymentStatus.Pending;
 
-      
+      public string ?remark { get; set; }
       
 
        

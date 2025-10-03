@@ -90,6 +90,7 @@ namespace BankingApp
             builder.Services.AddScoped<IReportService, ReportService>();
             //builder.Services.AddScoped<IDocumentService, DocumentService>();
             builder.Services.AddScoped<IAuthService, AuthService>();
+            builder.Services.AddScoped<IEmailService, EmailService>();
 
             // JWT Authentication
             var jwtKey = builder.Configuration["Jwt:Key"];

@@ -452,6 +452,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "BankingApp.Controllers.ClientController",
+    "Method": "Reject",
+    "RelativePath": "api/Client/{id}/reject",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "BankingApp.Controllers.RejectClientRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "BankingApp.Controllers.DocumentController",
     "Method": "GetAll",
     "RelativePath": "api/Document",
@@ -651,6 +672,27 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BankingApp.Controllers.PaymentController",
+    "Method": "Reject",
+    "RelativePath": "api/Payment/reject/{id}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "BankingApp.Controllers.PaymentController\u002BRejectRequest",
         "IsRequired": true
       }
     ],

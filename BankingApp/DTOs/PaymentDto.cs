@@ -15,6 +15,6 @@ namespace BankingApp.DTOs
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public PaymentStatus PaymentStatus { get; set; } = PaymentStatus.Pending;
       
-
+        public string? Remark { get; set; }
     }
 }

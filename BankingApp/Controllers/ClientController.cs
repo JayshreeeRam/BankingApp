@@ -10,10 +10,14 @@ namespace BankingApp.Controllers
     public class ClientController : ControllerBase
     {
         private readonly IClientService _service;
+        private readonly IEmailService _emailService;
+        private readonly IUserService _userService;
 
-        public ClientController(IClientService service)
+        public ClientController(IClientService service, IEmailService emailService, IUserService userService)
         {
             _service = service;
+            _emailService = emailService;
+            _userService = userService;
         }
 
         [HttpGet]
@@ -59,7 +63,7 @@ namespace BankingApp.Controllers
             return NoContent();
         }
 
-        //  Approve client endpoint
+        // Approve client endpoint
         [HttpPost("{id}/approve")]
         [Authorize(Roles = "Admin")]
         public IActionResult Approve(int id)
@@ -74,5 +78,55 @@ namespace BankingApp.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+
+        // Reject client endpoint with remark
+        [HttpPost("{id}/reject")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult Reject(int id, [FromBody] RejectClientRequest request)
+        {
+            try
+            {
+                var client = _service.RejectClient(id, request.Remark);
+
+                // Send rejection email using UserService to get email
+                if (client != null)
+                {
+                    // Get user email using UserService
+                    var user = _userService.GetById(client.UserId);
+                    if (user != null && !string.IsNullOrEmpty(user.Email))
+                    {
+                        var emailSent = _emailService.SendRejectionEmail(user.Email, client.Name, request.Remark);
+                        if (!emailSent)
+                        {
+                            // Log email failure but don't fail the request
+                            Console.WriteLine($"Failed to send rejection email to client {user.Email}");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine($"No email found for client {client.ClientId} with UserId {client.UserId}");
+                    }
+                }
+
+                return Ok(client);
+            }
+            catch (ArgumentException ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An unexpected error occurred while rejecting the client." });
+            }
+        }
+    }
+
+    public class RejectClientRequest
+    {
+        public string Remark { get; set; }
     }
 }

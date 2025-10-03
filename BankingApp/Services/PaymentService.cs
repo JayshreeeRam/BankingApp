@@ -3,6 +3,7 @@ using BankingApp.Enums;
 using BankingApp.Models;
 using BankingApp.Repositories;
 using BankingApp.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace BankingApp.Services
 {
@@ -54,7 +55,26 @@ namespace BankingApp.Services
             var created = _paymentRepo.Add(payment);
             return MapToDto(created);
         }
+        // In your service class
+        public PaymentDto RejectPayment(int id, string remark)
+        {
+            var payment = _paymentRepo.GetById(id);
 
+            if (payment == null)
+                throw new ArgumentException($"Payment with id {id} not found.");
+
+            if (payment.PaymentStatus != PaymentStatus.Pending)
+                throw new InvalidOperationException($"Cannot reject payment with status {payment.PaymentStatus}. Only pending payments can be rejected.");
+
+            payment.PaymentStatus = PaymentStatus.Rejected;
+            payment.remark = remark;
+            payment.PaymentDate = DateTime.UtcNow;
+
+            _paymentRepo.Update(payment.PaymentId, payment);
+            //_paymentRepo.SaveChanges();
+
+            return MapToDto(payment);
+        }
         public PaymentDto ApprovePayment(int id)
         {
             var payment = _paymentRepo.GetById(id);
@@ -149,6 +169,7 @@ namespace BankingApp.Services
             payment.Amount = dto.Amount;
             payment.PaymentDate = dto.PaymentDate;
             payment.PaymentStatus = dto.PaymentStatus;
+            payment.remark = dto.Remark;
 
             var updated = _paymentRepo.Update(id, payment);
           
@@ -169,7 +190,8 @@ namespace BankingApp.Services
                 BeneficiaryId = p.BeneficiaryId,
                 Amount = p.Amount,
                 PaymentDate = p.PaymentDate,
-                PaymentStatus = p.PaymentStatus
+                PaymentStatus = p.PaymentStatus,
+                Remark = p.remark
             };
         }
     }

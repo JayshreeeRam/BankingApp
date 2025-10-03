@@ -101,6 +101,37 @@ namespace BankingApp.Controllers
             }
         }
 
+        [HttpPost("reject/{id}")]
+        public IActionResult Reject(int id, [FromBody] RejectRequest request)
+        {
+            try
+            {
+                Console.WriteLine($"[Controller] Rejecting id: {id} with remark: {request.Remark}");
+
+                var rejectedPayment = _service.RejectPayment(id, request.Remark);
+
+                Console.WriteLine($"[Reject] Payment with id {id} rejected successfully.");
+                return Ok(rejectedPayment);
+            }
+            catch (ArgumentException ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[Reject] Unexpected error: {ex}");
+                return StatusCode(500, new { message = "An unexpected error occurred while rejecting the payment." });
+            }
+        }
+
+        public class RejectRequest
+        {
+            public string Remark { get; set; }
+        }
 
     }
 }

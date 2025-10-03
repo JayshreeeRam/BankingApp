@@ -10,4 +10,5 @@ public class ClientDto
     public AccountStatus VerificationStatus { get; set; }
     public AccountType AccountType { get; set; }
     public string? AccountNo { get; set; }   
+    public string? RejectionRemark { get; set; }
 }
