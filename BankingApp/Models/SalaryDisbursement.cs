@@ -32,7 +32,8 @@ namespace BankingApp.Models
         public DateTime Date { get; set; } = DateTime.UtcNow;
 
         [Required]
-        public int BatchId { get; set; }
+        [MaxLength(100)]
+        public string BatchId { get; set; } = string.Empty;
     }
 
 }

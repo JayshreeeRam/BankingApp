@@ -20,11 +20,19 @@ public class AuthService : IAuthService
         _config = config;
         _passwordHasher = new PasswordHasher<User>();
     }
-
     public AuthResponseDto Register(RegisterDto dto)
     {
+        // Check for duplicate username
         if (_repo.Users.Any(u => u.Username == dto.Username))
             throw new Exception("Username already exists");
+
+        // Check for duplicate email
+        if (_repo.Users.Any(u => u.Email == dto.Email))
+            throw new Exception("Email already exists");
+
+        // Check for duplicate phone number
+        if (_repo.Users.Any(u => u.PhoneNumber == dto.PhoneNumber))
+            throw new Exception("Phone number already exists");
 
         var user = new User
         {

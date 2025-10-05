@@ -78,7 +78,7 @@ namespace BankingApp.Services
         {
             var client = _repo.GetById(clientId);
             if (client == null) throw new Exception("Client not found");
-            if (client.VerificationStatus != AccountStatus.Pending)
+            if (client.VerificationStatus != AccountStatus.Pending && client.VerificationStatus != AccountStatus.Frozen)
                 throw new Exception("Client is not pending");
 
             // Approve client
@@ -108,8 +108,8 @@ namespace BankingApp.Services
                     throw new ArgumentException($"Client with id {id} not found.");
 
                 // Check if client is in pending status - using VerificationStatus instead of Status
-                if (client.VerificationStatus != AccountStatus.Pending)
-                    throw new InvalidOperationException($"Cannot reject client with status {client.VerificationStatus}. Only pending clients can be rejected.");
+                if (client.VerificationStatus != AccountStatus.Pending && client.VerificationStatus != AccountStatus.Frozen)
+                    throw new InvalidOperationException($"Cannot reject client with status {client.VerificationStatus}. Only pending or frozen clients can be rejected.");
 
                 // Update client status and rejection remark
                 client.VerificationStatus = AccountStatus.Frozen;

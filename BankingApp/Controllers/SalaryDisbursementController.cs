@@ -52,7 +52,7 @@ namespace BankingApp.Controllers
 
             try
             {
-                var result = _salaryService.Update(id, dto); // Your service logic
+                var result = _salaryService.Update(id, dto); 
                 return Ok(result);
             }
             catch (Exception ex)
@@ -76,7 +76,7 @@ namespace BankingApp.Controllers
 
         // Approve all salaries in a batch
         [HttpPost("approveBatch/{batchId}")]
-        public IActionResult ApproveSalaryByBatch(int batchId)
+        public IActionResult ApproveSalaryByBatch(string batchId)
             => Ok(_salaryService.ApproveSalaryByBatch(batchId));
 
 

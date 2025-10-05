@@ -32,7 +32,8 @@ namespace BankingApp.Services
                 BankName = bank != null ? bank.Name : "Unknown",
                 SenderClientId = e.EmployerClientId,
                 SenderName = e.EmployerClient?.Name ?? e.EmployerClient?.User?.Username,
-                Salary = e.Salary
+                Salary = e.Salary,
+                Department = e.Department
             };
         }
 
@@ -61,7 +62,8 @@ namespace BankingApp.Services
                 EmployerClientId = senderClient.ClientId,
                 Salary = dto.Salary,
                 BankId = employeeClient.BankId,
-                Name = employeeClient.Name 
+                Name = employeeClient.Name ,
+                Department = dto.Department
             };
 
             var added = _repo.Add(employee);
@@ -85,6 +87,7 @@ namespace BankingApp.Services
             existing.Salary = dto.Salary;
             existing.BankId = employeeClient.BankId;
             existing.Name = employeeClient.Name; 
+            existing.Department = dto.Department;
 
             var updated = _repo.Update(id, existing);
             return updated == null ? null : ToDto(updated);

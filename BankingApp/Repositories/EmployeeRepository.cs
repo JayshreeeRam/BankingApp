@@ -68,6 +68,9 @@ namespace BankingApp.Repositories
             if (employee.EmployeeClientId != 0)
                 existing.EmployeeClientId = employee.EmployeeClientId;
 
+            if (!string.IsNullOrWhiteSpace(employee.Department))
+                existing.Department = employee.Department;
+
             _context.SaveChanges();
             return existing;
         }

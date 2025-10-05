@@ -10,5 +10,6 @@
         public string? SenderName { get; set; }          
         public int EmployeeClientId { get; set; }       
         public double Salary { get; set; }
+        public string Department { get; set; } = null!;
     }
 }

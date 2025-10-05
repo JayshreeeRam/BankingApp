@@ -1429,8 +1429,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string"
             }
           }
         ],
@@ -1894,6 +1893,10 @@
           "salary": {
             "type": "number",
             "format": "double"
+          },
+          "department": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1924,10 +1927,6 @@
         "type": "object",
         "properties": {
           "employeeId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "batchId": {
             "type": "integer",
             "format": "int32"
           }
@@ -2090,8 +2089,8 @@
             "$ref": "#/components/schemas/PaymentStatus"
           },
           "batchId": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -2141,6 +2140,10 @@
           "salary": {
             "type": "number",
             "format": "double"
+          },
+          "department": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

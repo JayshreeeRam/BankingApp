@@ -31,6 +31,9 @@ public class Employee
     [ForeignKey(nameof(EmployeeClientId))]
     public Client? EmployeeClient { get; set; }
 
+    [Required]
+    public string Department { get; set; }
+
     [JsonIgnore]
     public ICollection<SalaryDisbursement>? SalaryDisbursements { get; set; }
 }

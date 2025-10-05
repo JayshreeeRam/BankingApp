@@ -37,7 +37,7 @@ namespace BankingApp.Controllers
 
         // POST: api/bank
         [HttpPost]
-        [Authorize(Roles = "SuperAdmin")]
+        //[Authorize(Roles = "SuperAdmin")]
         public ActionResult<BankDto> Create(CreateBankDto bankDto)
         {
             var created = _service.Add(bankDto);

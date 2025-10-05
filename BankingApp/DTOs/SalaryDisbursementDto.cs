@@ -19,7 +19,7 @@ namespace BankingApp.DTOs
 
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public PaymentStatus Status { get; set; }
-        public int BatchId { get; set; }
+        public string BatchId { get; set; } = string.Empty;
     }
 }
 

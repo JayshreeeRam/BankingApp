@@ -16,7 +16,7 @@ namespace BankingApp.Services
 
         // Add this new method to the interface
        
-        IEnumerable<SalaryDisbursementDto> ApproveSalaryByBatch(int batchId);
+        IEnumerable<SalaryDisbursementDto> ApproveSalaryByBatch(string batchId);
         
         IEnumerable<Transaction> GetTransactionHistoryForClient(int clientId);
         IEnumerable<Transaction> GetTransactionHistoryForEmployee(int employeeId);
